@@ -1,27 +1,43 @@
-# React + TypeScript + Vite
+# Presentation Maker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. **Презентация**
+   - Действия:
+      - Создание
+      - Сохранение
+      - Открытие существующей презентации
+      - Редактирование
+      - Удаление презентации
+      - Предпросмотр презентации
+      - Экспорт в формате PDF
 
-Currently, two official plugins are available:
+2. **Слайд**
+   - Действия:
+      - Добавление нового слайда
+      - Удаление слайда
+      - Изменение содержания слайда
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. **Объект на слайде**
+   - Объекты:
+      - Текст
+      - Картинка
+      - Примитив   
+   - Действия:
+      - Добавление объекта на слайд
+      - Редактирование содержания и стиля объекта
+      - Перемещение и изменение размера объекта
+        Удаление объекта.
 
-## Expanding the ESLint configuration
+5. **История команд**
+   - Действия:
+      - Запись команды в историю
+      - Вполнение команды Ctrl-Z (откат)
+      - Выполнение команды Ctrl-Y (повтор)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+6. **Операции**     
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Связи между сущностями:
+- Пользователь может создавать и редактировать презентации.
+- Презентация содержит слайды и историю команд.
+- Слайды содержат объекты, такие как текст, изображения и примитивы.
+- История команд записывает действия пользователя и может быть использована для отмены и восстановления изменений.
+- Презентацию можно сохранить и загрузить в локальной файловой системе или в облачных сервисах.
