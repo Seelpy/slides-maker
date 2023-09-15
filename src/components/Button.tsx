@@ -6,17 +6,11 @@ type ButtonProps = {
 }
 
 const Button = (props: ButtonProps) => {
-    const {
-        label,
-        onClick,
-    } = props
 
     return (
-        <button className={styles.button}
-                onClick={onClick}
-        >
+        <button className={styles.button} onClick={props.onClick}>
             <div>
-                {label}
+                {props.label}
             </div>
         </button>
     )

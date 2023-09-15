@@ -1,9 +1,13 @@
 import './App.css'
 import Counter from "./views/Counter.tsx";
+import {Provider} from "react-redux";
+import store from "./store/store.ts";
 
 function App() {
     return (
-        <Counter/>
+        <Provider store={store}>
+            <Counter/>
+        </Provider>
     )
 }
 
