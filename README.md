@@ -1,5 +1,7 @@
 # Presentation Maker
 
+![image](https://github.com/Seelpy/slides-maker/assets/71544630/8a462b21-7c63-4329-aa6f-e82e8361392d)
+
 1. **Презентация**
    - Действия:
       - Создание
