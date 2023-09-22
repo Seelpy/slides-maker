@@ -74,6 +74,8 @@ export {
 }
 
 export type {
+    Position,
+    Size,
     Char,
     SlideObject,
     TextObject,
