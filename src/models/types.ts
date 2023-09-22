@@ -7,6 +7,7 @@ enum SlideObjectType {
 enum PrimitiveType {
     Circle = "CIRCLE",
     Square = "SQUARE",
+    Triangle = "TRIANGLE",
 }
 
 type Position = {
@@ -33,6 +34,7 @@ type SlideObject = {
     id: string,
     position: Position,
     size: Size,
+    rotate: number;
 }
 
 type TextObject = SlideObject & {
@@ -42,11 +44,12 @@ type TextObject = SlideObject & {
 
 type ImageObject = SlideObject & {
     type: SlideObjectType.Image,
-    data: object,
+    data: string,
 }
 
 type PrimitiveObject = SlideObject & {
     type: SlideObjectType.Primitive,
+    color: string,
 }
 
 type CircleObject = PrimitiveObject & {
@@ -59,7 +62,12 @@ type SquareObject = PrimitiveObject & {
     data: object,
 }
 
-type Slide = Array<TextObject | ImageObject | CircleObject | SquareObject>
+type TriangleObject = PrimitiveObject & {
+    primitiveType: PrimitiveType.Triangle,
+    data: object,
+}
+
+type Slide = Array<TextObject | ImageObject | CircleObject | SquareObject | TriangleObject>
 
 type Presentaion = Array<Slide>
 
@@ -76,6 +84,7 @@ export type {
     PrimitiveObject,
     CircleObject,
     SquareObject,
+    TriangleObject,
     Slide,
     Presentaion,
 }
