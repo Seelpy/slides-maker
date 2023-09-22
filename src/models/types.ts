@@ -54,17 +54,14 @@ type PrimitiveObject = SlideObject & {
 
 type CircleObject = PrimitiveObject & {
     primitiveType: PrimitiveType.Circle,
-    data: object,
 }
 
 type SquareObject = PrimitiveObject & {
     primitiveType: PrimitiveType.Square,
-    data: object,
 }
 
 type TriangleObject = PrimitiveObject & {
     primitiveType: PrimitiveType.Triangle,
-    data: object,
 }
 
 type Slide = Array<TextObject | ImageObject | CircleObject | SquareObject | TriangleObject>
