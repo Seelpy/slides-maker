@@ -6,6 +6,7 @@
     "order/properties-order": ["width", "height"],
     "color-hex-case": "upper",
     "color-hex-length": "long",
-    "color-no-invalid-hex": true
+    "color-no-invalid-hex": true,
+    "prettier/prettier": true
   }
 }
