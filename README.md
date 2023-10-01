@@ -1,5 +1,8 @@
 # Presentation Maker
 
+**Ссылки на лабораторные:**
+   - lw-3 `https://github.com/Seelpy/slides-maker/tree/lw-3`
+
 https://drive.google.com/file/d/13UQ3CQuN2Lrg7DFaU4IznBSerCwVEPom/view?usp=sharing
 
 ![image](https://github.com/Seelpy/slides-maker/assets/71544630/aeb44ac1-2c15-424e-84b5-2b83c1c00c87)
