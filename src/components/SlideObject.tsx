@@ -1,18 +1,35 @@
 import styles from './SlideObject.module.css'
-import { SlideObject } from './../models/types.ts'
+import { ObjectType, SlideObjectType } from './../models/types.ts'
+import Primitive from './Primitive.tsx'
 
 type SlideObjectProps = {
-  data: SlideObject
+  data: ObjectType
 }
 
-const SlideObjectComponent = (props: SlideObjectProps) => {
+function getObject(data: ObjectType) {
+  switch (data.type) {
+    case SlideObjectType.Primitive:
+      return <Primitive data={data}></Primitive>
+    case SlideObjectType.Text:
+      return <div>{'hello'}</div>
+    case SlideObjectType.Image:
+      return <div />
+  }
+}
+
+const Object = (props: SlideObjectProps) => {
+  switch (props.data.type) {
+    case SlideObjectType.Primitive:
+  }
+  const style = {
+    left: props.data.position.x,
+    top: props.data.position.y,
+  }
   return (
-    <div className={styles.slideObject}>
-      <svg width="400" height="110">
-        <rect width={props.data.size.width} height={props.data.size.height} />
-      </svg>
+    <div style={style} className={styles.slideObject}>
+      {getObject(props.data)}
     </div>
   )
 }
 
-export default SlideObjectComponent
+export default Object
