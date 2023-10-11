@@ -43,7 +43,7 @@ function getSVGPrimitive(data: PrimType) {
   }
 }
 
-const Primitive = (props: PrimitiveProps) => {
+const SlidePrimitive = (props: PrimitiveProps) => {
   const style = {
     left: props.data.position.x,
     top: props.data.position.y,
@@ -53,4 +53,4 @@ const Primitive = (props: PrimitiveProps) => {
   return <svg style={style}>{getSVGPrimitive(props.data)}</svg>
 }
 
-export default Primitive
+export default SlidePrimitive
