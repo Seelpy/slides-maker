@@ -66,6 +66,9 @@ type TriangleObject = PrimitiveObject & {
 
 type Slide = Array<TextObject | ImageObject | CircleObject | SquareObject | TriangleObject>
 
+type ObjectType = TextObject | ImageObject | CircleObject | SquareObject | TriangleObject
+type PrimType = CircleObject | SquareObject | TriangleObject
+
 type Presentaion = Array<Slide>
 
 export {
@@ -86,4 +89,6 @@ export type {
     TriangleObject,
     Slide,
     Presentaion,
+    ObjectType,
+    PrimType,
 }
