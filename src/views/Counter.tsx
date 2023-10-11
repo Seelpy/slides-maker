@@ -1,19 +1,69 @@
-import { useState } from 'react'
-import Button from "./../components/Button.tsx"
-import TEXTS from "./../../i18n/Texts.ts"
-import styles from "./Counter.module.css"
+import styles from './Counter.module.css'
+import {
+  CircleObject,
+  PrimitiveType,
+  SlideObjectType,
+  SquareObject,
+  TriangleObject,
+} from '../models/types.ts'
+import Object from '../components/SlideObject.tsx'
 
 function Counter() {
-    const [count, setCount] = useState<number>(0)
+  const triangleObject: TriangleObject = {
+    id: 'c1',
+    type: SlideObjectType.Primitive,
+    primitiveType: PrimitiveType.Triangle,
+    color: '#EE4B2B',
+    position: {
+      x: 300,
+      y: 0,
+    },
+    size: {
+      width: 100,
+      height: 250,
+    },
+    rotate: 0,
+  }
 
-    return (
+  const squareObject: SquareObject = {
+    id: 'sq1',
+    type: SlideObjectType.Primitive,
+    primitiveType: PrimitiveType.Square,
+    color: '#222',
+    position: {
+      x: 0,
+      y: 0,
+    },
+    size: {
+      width: 150,
+      height: 150,
+    },
+    rotate: 90,
+  }
+
+  const circleObject: CircleObject = {
+    id: 'c1',
+    type: SlideObjectType.Primitive,
+    primitiveType: PrimitiveType.Circle,
+    color: '#BBB',
+    position: {
+      x: 300,
+      y: 300,
+    },
+    size: {
+      width: 100,
+      height: 100,
+    },
+    rotate: 0,
+  }
+
+  return (
     <div className={styles.counter}>
-        <Button label={TEXTS.APPLICATION_TITTLE} onClick={() => setCount(count + 1)}></Button>
-        <div>
-            {count}
-        </div>
+      <Object data={triangleObject}></Object>
+      <Object data={squareObject}></Object>
+      <Object data={circleObject}></Object>
     </div>
-    )
+  )
 }
 
 export default Counter
