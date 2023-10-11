@@ -1,6 +1,8 @@
 import styles from './SlideObject.module.css'
 import { ObjectType, SlideObjectType } from './../models/types.ts'
-import Primitive from './Primitive.tsx'
+import SlidePrimitive from './SlidePrimitive.tsx'
+import SlideText from './SlideText.tsx'
+import SlideImage from './SlideImage.tsx'
 
 type SlideObjectProps = {
   data: ObjectType
@@ -9,25 +11,23 @@ type SlideObjectProps = {
 function getObject(data: ObjectType) {
   switch (data.type) {
     case SlideObjectType.Primitive:
-      return <Primitive data={data}></Primitive>
+      return <SlidePrimitive data={data}></SlidePrimitive>
     case SlideObjectType.Text:
-      return <div>{'hello'}</div>
+      return <SlideText data={data}></SlideText>
     case SlideObjectType.Image:
-      return <div />
+      return <SlideImage data={data}></SlideImage>
   }
 }
 
 const Object = (props: SlideObjectProps) => {
-  switch (props.data.type) {
-    case SlideObjectType.Primitive:
-  }
+  const data = props.data
   const style = {
     left: props.data.position.x,
     top: props.data.position.y,
   }
   return (
     <div style={style} className={styles.slideObject}>
-      {getObject(props.data)}
+      {getObject(data)}
     </div>
   )
 }
