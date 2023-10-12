@@ -1,27 +1,51 @@
 import styles from './MenuBar.module.css'
 import MenuSection from '../components/MenuSection'
+import Button from './Button'
 
 const MenuBar = () => {
   return (
     <div className={styles.menuBar}>
-      <MenuSection name='Section1'>
-        <button>Save</button>
-        <button>Load</button>
-      </MenuSection>
-      <MenuSection name='Section2'>
+      <MenuSection name='Figures'>
         <div>
-          <button>Circle</button>
-          <button>Triangle</button>
-          <button>Square</button>
+          <Button width='2.5rem' height='2.5rem'>
+            <i className="fa-solid fa-circle fa-2xl" style={{color: `#4c88f0`}}/>
+          </Button>
+
+          <Button width='2.5rem' height='2.5rem'>
+            <i className="fa-solid fa-square fa-2xl" style={{color: `#4c88f0`}}/>
+          </Button>
         </div>
+
         <div>
-          <button>Ellipse</button>
-          <button>Triangle</button>
-          <button>Square</button>
-          <button>Ellipse</button>
-          <button>Triangle</button>
-          <button>Square</button>
-          <button>Ellipse</button>
+          <Button width='2.5rem' height='2.5rem'>
+            <i className="fa-solid fa-caret-up fa-2xl" style={{color: `#4c88f0`}}/>
+          </Button>
+        </div>
+      </MenuSection>
+
+      <MenuSection name='Text'>
+        <div>
+          Font:
+          <select>
+            <option value="Arial" selected>Arial</option>
+            <option value="Verdana" selected>Verdana</option>
+            <option value="Tahoma" selected>Tahoma</option>
+            <option value="Trebuchet MS" selected>Trebuchet MS</option>
+            <option value="Times New Roman" selected>Times New Roman</option>
+            <option value="Georgia" selected>Georgia</option>
+            <option value="Garamond" selected>Garamond</option>
+            <option value="Courier New" selected>Courier New</option>
+            <option value="Brush Script MT" selected>Brush Script MT</option>
+          </select>
+
+          Size:
+          <input type="number" defaultValue={14} style={{width: `2.5rem`}}/>
+        </div>
+
+        <div>
+          <Button> <i className="fa-solid fa-plus" style={{color: `#4c88f0`}}/> New Text </Button>
+          <Button> <em>italic</em> </Button>
+          <Button> <strong>Bold</strong> </Button>
         </div>
       </MenuSection>
     </div>
