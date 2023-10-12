@@ -1,4 +1,4 @@
-import styles from './Counter.module.css'
+import styles from './Presentation.module.css'
 import {
   Char,
   CircleObject,
@@ -13,7 +13,7 @@ import {
 } from '../models/types.ts'
 import Object from '../components/SlideObject.tsx'
 
-function Counter() {
+function Presentation() {
   const triangleObject: TriangleObject = {
     id: 'c1',
     type: SlideObjectType.Primitive,
@@ -161,7 +161,7 @@ function Counter() {
   }
 
   return (
-    <div className={styles.counter}>
+    <div className={styles.presentation}>
       <Object data={triangleObject}></Object>
       <Object data={squareObject}></Object>
       <Object data={circleObject}></Object>
@@ -172,4 +172,4 @@ function Counter() {
   )
 }
 
-export default Counter
+export default Presentation
