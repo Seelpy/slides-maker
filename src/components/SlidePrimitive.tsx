@@ -48,6 +48,7 @@ const SlidePrimitive = (props: PrimitiveProps) => {
     left: props.data.position.x,
     top: props.data.position.y,
     color: props.data.color,
+    transform: "rotate(" + props.data.rotate + "deg" + ")",
   }
 
   return <svg style={style}>{getSVGPrimitive(props.data)}</svg>

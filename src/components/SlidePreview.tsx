@@ -1,15 +1,15 @@
-import styles from './SlideEditor.module.css'
+import styles from './SlidePreview.module.css'
 import EditorObject from './SlideObject';
 import { ObjectType } from '../models/types';
 
 
-type SlideEditorProps = {
+type SlidePreviewrProps = {
   objects: ObjectType[]
 };
 
-const SlideEditor = (props: SlideEditorProps) => {
+const SlidePreview = (props: SlidePreviewrProps) => {
   return (
-    <div className={styles.slideEditor}>
+    <div className={styles.slidePreview}>
         {props.objects.map(function (obj) {
           return <>
             <EditorObject data={obj}></EditorObject>
@@ -19,4 +19,4 @@ const SlideEditor = (props: SlideEditorProps) => {
   )
 }
 
-export default SlideEditor
+export default SlidePreview
