@@ -51,8 +51,8 @@ const imageObject: ImageObject = {
     y: 20,
   },
   size: {
-    width: 100,
-    height: 100,
+    width: 25,
+    height: 25,
   },
   rotate: 0,
 }
@@ -105,6 +105,22 @@ const triangleObject: TriangleObject = {
   rotate: 0,
 }
 
+const triangle2Object: TriangleObject = {
+  id: 'c1',
+  type: SlideObjectType.Primitive,
+  primitiveType: PrimitiveType.Triangle,
+  color: '#158',
+  position: {
+    x: 150,
+    y: 200,
+  },
+  size: {
+    width: 55,
+    height: 33,
+  },
+  rotate: 0,
+}
+
 const slide1: Slide = [
   textObject,
   imageObject,
@@ -118,6 +134,10 @@ const slide2: Slide = [
   circleObject,
   squareObject,
   triangleObject,
+  triangle2Object
 ]
 
-const presentation: Presentaion = [slide1, slide2]
+const presentation: Presentaion = [slide1, slide2, slide2, slide2]
+
+export  default slide1
+export {presentation, slide1}

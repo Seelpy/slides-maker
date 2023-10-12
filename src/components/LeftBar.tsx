@@ -1,9 +1,22 @@
 import styles from './LeftBar.module.css'
+import { Slide } from '../models/types';
+import SlidePreview from './SlidePreview';
 
-const LeftBar = () => {
+type LeftBarProps = {
+  slides: Slide[]
+};
+
+
+const LeftBar = (props: LeftBarProps) => {
   return (
     <div className={styles.leftBar}>
-      
+      {
+       props.slides.map(function (slide) {
+        return <div className={styles.miniSlide}>
+          <SlidePreview objects={slide}></SlidePreview>
+        </div>
+       })
+      }
     </div>
   )
 }

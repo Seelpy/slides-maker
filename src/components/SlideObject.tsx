@@ -19,7 +19,7 @@ function getObject(data: ObjectType) {
   }
 }
 
-const Object = (props: SlideObjectProps) => {
+const EditorObject = (props: SlideObjectProps) => {
   const data = props.data
   const style = {
     left: props.data.position.x,
@@ -32,4 +32,4 @@ const Object = (props: SlideObjectProps) => {
   )
 }
 
-export default Object
+export default EditorObject
