@@ -3,8 +3,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: rgba(12, 12, 12, 255);
-  background-color: rgba(230, 230, 230, 255);
+  color: rgb(12, 12, 12);
+  background-color: rgb(230, 230, 230);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
