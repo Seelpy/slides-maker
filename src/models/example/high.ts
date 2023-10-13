@@ -139,5 +139,4 @@ const slide2: Slide = [
 
 const presentation: Presentaion = [slide1, slide2, slide2, slide2]
 
-export  default slide1
-export {presentation, slide1}
+export {presentation}
