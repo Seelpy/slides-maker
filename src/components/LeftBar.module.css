@@ -16,6 +16,7 @@
     width: 356px;
     height: 200px;
 
+    cursor: pointer;
     border: 1px solid rgba(24, 24, 24, 0.18);
     transition: border 300ms ease-in-out;
     transition: box-shadow 300ms ease-in-out;
