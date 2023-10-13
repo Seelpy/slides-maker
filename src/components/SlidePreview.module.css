@@ -1,9 +1,13 @@
 .slidePreview {
+    position: relative;
     box-sizing: border-box;
     margin: auto auto;
-    width: 140%;
-    height: 150%;
-    scale: 2;
 
-    border: 2px solid rgba(24, 24, 24, 0.18);
+    width: calc(100% / 0.3);
+    height: calc(100% / 0.3);
+
+    transform: scale(0.3, 0.3);
+    transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+
 }

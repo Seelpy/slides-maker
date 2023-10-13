@@ -4,16 +4,24 @@
     box-sizing: border-box;
 
     height: 100%;
-    min-width: 350px;
-    max-width: 15vw;
-    padding: 12px;
+    width: 404px;
+    padding: 24px;
+    gap: 12px;
     
     border-right: 1px solid rgba(24, 24, 24, 0.18);
 }
 
 .miniSlide {
+    box-sizing: border-box;
+    width: 356px;
     height: 200px;
-    width: 100%;
-    scale: 0.3;
 
+    border: 1px solid rgba(24, 24, 24, 0.18);
+    transition: border 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out;
+}
+
+.activeSlide {
+    border: 2px solid #4c88f0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 0 4px 4px;
 }

@@ -3,13 +3,14 @@ import EditorObject from './SlideObject';
 import { ObjectType } from '../models/types';
 
 
-type SlidePreviewrProps = {
-  objects: ObjectType[]
+type SlidePreviewProps = {
+  objects: ObjectType[];
+  onClick: () => void;
 };
 
-const SlidePreview = (props: SlidePreviewrProps) => {
+const SlidePreview = (props: SlidePreviewProps) => {
   return (
-    <div className={styles.slidePreview}>
+    <div className={styles.slidePreview} onClick={props.onClick}>
         {props.objects.map(function (obj) {
           return <>
             <EditorObject data={obj}></EditorObject>
