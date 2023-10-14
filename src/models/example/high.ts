@@ -86,7 +86,7 @@ const squareObject: SquareObject = {
     width: 15,
     height: 15,
   },
-  rotate: 90,
+  rotate: 0,
 }
 
 const triangleObject: TriangleObject = {
@@ -105,14 +105,15 @@ const triangleObject: TriangleObject = {
   rotate: 0,
 }
 
+
 const triangle2Object: TriangleObject = {
   id: 'c1',
   type: SlideObjectType.Primitive,
   primitiveType: PrimitiveType.Triangle,
   color: '#158',
   position: {
-    x: 150,
-    y: 200,
+    x: 10,
+    y: 10,
   },
   size: {
     width: 55,

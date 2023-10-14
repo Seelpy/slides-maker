@@ -25,6 +25,7 @@ const EditorObject = (props: SlideObjectProps) => {
     left: props.data.position.x,
     top: props.data.position.y,
   }
+
   return (
     <div style={style} className={styles.slideObject}>
       {getObject(data)}
