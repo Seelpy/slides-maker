@@ -9,10 +9,12 @@ type SlideEditorProps = {
 
 const SlideEditor = (props: SlideEditorProps) => {
   return (
-    <div className={styles.slideEditor}>
-        {props.objects.map((obj, i) => (
-          <EditorObject key={i} data={obj} isPreview={false}/>
-        ))}
+    <div className={styles.editorArea}>
+      <div className={styles.slideEditor}>
+          {props.objects.map((obj, i) => (
+            <EditorObject key={i} data={obj} isPreview={false}/>
+          ))}
+      </div>
     </div>
   )
 }
