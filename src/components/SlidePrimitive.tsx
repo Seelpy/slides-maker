@@ -32,8 +32,8 @@ function getSVGPrimitive(data: PrimType) {
     case PrimitiveType.Circle:
       return (
         <circle
-          cx={data.size.width}
-          cy={data.size.height}
+          cx={data.size.width / 2}
+          cy={data.size.height / 2}
           r={(data.size.height + data.size.width) / 4}
           fill={data.color}
         />
@@ -48,7 +48,8 @@ const SlidePrimitive = (props: PrimitiveProps) => {
     left: props.data.position.x,
     top: props.data.position.y,
     color: props.data.color,
-    transform: "rotate(" + props.data.rotate + "deg" + ")",
+    width: props.data.size.width,
+    height: props.data.size.height,
   }
 
   return <svg style={style}>{getSVGPrimitive(props.data)}</svg>

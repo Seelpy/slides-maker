@@ -22,8 +22,10 @@ function getObject(data: ObjectType) {
 const EditorObject = (props: SlideObjectProps) => {
   const data = props.data
   const style = {
-    left: props.data.position.x,
-    top: props.data.position.y,
+    left: data.position.x,
+    top: data.position.y,
+    transform: `rotate(${props.data.rotate}deg)`,
+    transformOrigin: `${(props.data.size.width)/2}px ${(props.data.size.height)/2}px`,
   }
 
   return (
