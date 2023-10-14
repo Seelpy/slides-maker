@@ -6,7 +6,10 @@ type ColorButtonProps = {
 
 const ColorButton = (props: ColorButtonProps) => {
   return (
-    <i className={styles.colorButton + " fa-sharp fa-solid fa-square"} style={{color: props.color, fontSize: `1.5rem`}}/>
+    <i 
+      className={styles.colorButton + " fa-sharp fa-solid fa-square"} 
+      style={{color: props.color, fontSize: `1.5rem`}}
+    />
   )
 }
 

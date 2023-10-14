@@ -1,7 +1,7 @@
 import { Char } from './../models/types.ts'
 
 type CharObjectProps = {
-  data: Char
+  data: Char;
 }
 
 const CharObject = (props: CharObjectProps) => {

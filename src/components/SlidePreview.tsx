@@ -28,11 +28,11 @@ function isNormalPosition(position: Position): boolean {
 const SlidePreview = (props: SlidePreviewProps) => {
   return (
     <div className={styles.slidePreview}>
-        {props.objects.map(function (obj) {
-          return <>
-            {isNormalPosition(obj.position) ? <EditorObject data={obj}></EditorObject> : null}
+        {props.objects.map((obj, i) => (
+          <>
+            {isNormalPosition(obj.position) ? <EditorObject key={i} data={obj} /> : null}
           </>
-        })}
+        ))}
     </div>
   )
 }

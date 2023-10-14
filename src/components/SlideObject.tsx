@@ -5,22 +5,24 @@ import SlideText from './SlideText.tsx'
 import SlideImage from './SlideImage.tsx'
 
 type SlideObjectProps = {
-  data: ObjectType
+  data: ObjectType;
 }
 
 function getObject(data: ObjectType) {
   switch (data.type) {
     case SlideObjectType.Primitive:
-      return <SlidePrimitive data={data}></SlidePrimitive>
+      return <SlidePrimitive data={data} />
+
     case SlideObjectType.Text:
-      return <SlideText data={data}></SlideText>
+      return <SlideText data={data} />
+
     case SlideObjectType.Image:
-      return <SlideImage data={data}></SlideImage>
+      return <SlideImage data={data} />
   }
 }
 
 const EditorObject = (props: SlideObjectProps) => {
-  const data = props.data
+  const data = props.data;
   const style = {
     left: data.position.x,
     top: data.position.y,

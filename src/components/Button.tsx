@@ -7,8 +7,8 @@ type ButtonProps = {
 }
 
 const Button = (props: ButtonProps) => {
-  const width = props.width || "auto";
-  const height = props.height || "auto";
+  const width = props.width ?? "auto";
+  const height = props.height ?? "auto";
 
   const buttonSizes = {
     width: width,

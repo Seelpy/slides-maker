@@ -1,7 +1,7 @@
 import { PrimType, PrimitiveType, Size } from './../models/types.ts'
 
 type PrimitiveProps = {
-  data: PrimType
+  data: PrimType;
 }
 
 function getTrianglePoints(size: Size): string {
@@ -19,6 +19,7 @@ function getTrianglePoints(size: Size): string {
     size.height.toString()
   )
 }
+
 function getSVGPrimitive(data: PrimType) {
   switch (data.primitiveType) {
     case PrimitiveType.Square:
