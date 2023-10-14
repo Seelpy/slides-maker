@@ -1,6 +1,7 @@
 import styles from './MenuBar.module.css'
 import MenuSection from '../components/MenuSection'
 import Button from './Button'
+import ColorButton from './ColorButton'
 
 const MenuBar = () => {
   return (
@@ -46,6 +47,29 @@ const MenuBar = () => {
           <Button> <i className="fa-solid fa-plus" style={{color: `#4c88f0`}}/> New Text </Button>
           <Button> <em>italic</em> </Button>
           <Button> <strong>Bold</strong> </Button>
+        </div>
+      </MenuSection>
+
+      <MenuSection name='Images'>
+        <div>
+          <Button>
+            <i className="fa-solid fa-file-image" style={{color: `#4c88f0`, fontSize: `1.5rem`}}/> <br/>
+            Upload <br/>
+            Image
+          </Button>
+        </div>
+      </MenuSection>
+
+      <MenuSection name='Colors'>
+        <div>
+          <ColorButton color='red' />
+          <ColorButton color='blue' />
+          <ColorButton color='cyan' />
+        </div>
+        <div>
+          <ColorButton color='red' />
+          <ColorButton color='blue' />
+          <ColorButton color='cyan' />
         </div>
       </MenuSection>
     </div>
