@@ -6,18 +6,19 @@ import SlideImage from './SlideImage.tsx'
 
 type SlideObjectProps = {
   data: ObjectType;
+  isPreview: boolean;
 }
 
-function getObject(data: ObjectType) {
+function getObject(data: ObjectType, isPreview: boolean) {
   switch (data.type) {
     case SlideObjectType.Primitive:
-      return <SlidePrimitive data={data} />
+      return <SlidePrimitive data={data} isPreview={isPreview}/>
 
     case SlideObjectType.Text:
-      return <SlideText data={data} />
+      return <SlideText data={data} isPreview={isPreview}/>
 
     case SlideObjectType.Image:
-      return <SlideImage data={data} />
+      return <SlideImage data={data} isPreview={isPreview}/>
   }
 }
 
@@ -32,7 +33,7 @@ const EditorObject = (props: SlideObjectProps) => {
 
   return (
     <div style={style} className={styles.slideObject}>
-      {getObject(data)}
+      {getObject(data, props.isPreview)}
     </div>
   )
 }
