@@ -2,7 +2,7 @@ import { ImageObject } from './../models/types.ts'
 import styles from './SlideText.module.css'
 
 type ImageObjectProps = {
-  data: ImageObject
+  data: ImageObject;
 }
 
 const SlideImage = (props: ImageObjectProps) => {
@@ -12,11 +12,11 @@ const SlideImage = (props: ImageObjectProps) => {
     left: data.position.x,
     top: data.position.y,
     width: data.size.width,
-    height:  data.size.height
+    height:  data.size.height,
   }
 
   return (
-    <div className={styles.text} style={style}>
+    <div className={styles.text}>
       <img style={style} src={data.data} />
     </div>
   )

@@ -9,13 +9,8 @@ type TextProps = {
 const SlideText = (props: TextProps) => {
   const data = props.data;
 
-  const style = {
-    left: data.position.x,
-    top: data.position.y,
-  }
-
   return (
-    <div className={styles.text} style={style}>
+    <div className={styles.text}>
       {data.chars.map((char) => (
           <Char data={char} />
       ))}

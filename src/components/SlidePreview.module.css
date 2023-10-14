@@ -3,11 +3,7 @@
     box-sizing: border-box;
     margin: auto auto;
 
-    width: calc(1280 / 0.3);
-    height: calc(720 / 0.3);
-
     transform: scale(0.3, 0.3);
     transform-origin: 0 0;
     -moz-transform-origin: 0 0;
-
 }

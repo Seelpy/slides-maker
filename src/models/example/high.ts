@@ -14,7 +14,7 @@ import {
 } from '../types.ts'
 
 const position: Position = {
-  x: 100,
+  x: -10,
   y: 100,
 }
 
@@ -37,7 +37,7 @@ const textObject: TextObject = {
   id: 't1',
   type: SlideObjectType.Text,
   position: position,
-  chars: [char],
+  chars: [char, char, char, char, char, char, char],
   size: size,
   rotate: 0,
 }
@@ -79,8 +79,8 @@ const circleObject: CircleObject = {
   primitiveType: PrimitiveType.Circle,
   color: '#FFF',
   position: {
-    x: 10,
-    y: 10,
+    x: -30,
+    y: -10,
   },
   size: {
     width: 100,
