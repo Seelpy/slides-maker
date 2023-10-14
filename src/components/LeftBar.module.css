@@ -13,17 +13,14 @@
 }
 
 .miniSlide {
-    box-sizing: border-box;
-    min-width: 356px;
-    min-height: 200px;
+    min-width: calc(1280px * 0.3);
+    min-height: calc(720px * 0.3);
 
     cursor: pointer;
-    border: 1px solid rgba(24, 24, 24, 0.18);
-    transition: border 300ms ease-in-out;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 0 4px 4px;
     transition: box-shadow 300ms ease-in-out;
 }
 
 .activeSlide {
-    border: 2px solid #4c88f0;
-    box-shadow: rgba(100, 100, 111, 0.2) 0 0 4px 4px;
+    box-shadow: #4c88f0 0 0 4px 4px;
 }

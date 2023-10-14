@@ -14,8 +14,8 @@ const LeftBar = (props: LeftBarProps) => {
     <div className={styles.leftBar}>
       {
        props.slides.map((slide, i) => (
-        <div className={styles.miniSlide + (i === props.activeSlideIndex ? ` ${styles.activeSlide}` : ``)}>
-          <SlidePreview key={i} objects={slide} onClick={() => props.setActiveSlideIndex(i)}></SlidePreview>
+        <div className={styles.miniSlide + (i === props.activeSlideIndex ? ` ${styles.activeSlide}` : ``)} onClick={() => props.setActiveSlideIndex(i)}>
+          <SlidePreview key={i} objects={slide}></SlidePreview>
         </div>
        ))
       }

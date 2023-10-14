@@ -5,7 +5,6 @@ import { ObjectType, Position } from '../models/types';
 
 type SlidePreviewProps = {
   objects: ObjectType[];
-  onClick: () => void;
 };
 
 const maxX = 1280
@@ -15,14 +14,11 @@ const minY = 0
 
 
 function isNormalPosition(position: Position): boolean {
-  
   if (position.x < minX || position.x > maxX) {
     return false 
   }
 
-
-  if (position.y < minY || position.y > maxY) {
-    
+  if (position.y < minY || position.y > maxY) {  
     return false 
   }
 
@@ -31,7 +27,7 @@ function isNormalPosition(position: Position): boolean {
 
 const SlidePreview = (props: SlidePreviewProps) => {
   return (
-    <div className={styles.slidePreview} onClick={props.onClick}>
+    <div className={styles.slidePreview}>
         {props.objects.map(function (obj) {
           return <>
             {isNormalPosition(obj.position) ? <EditorObject data={obj}></EditorObject> : null}

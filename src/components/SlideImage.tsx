@@ -14,12 +14,8 @@ const SlideImage = (props: ImageObjectProps) => {
   const style = {
     left: data.position.x,
     top: data.position.y,
-    transform:
-      'scale(' +
-      data.size.width / img.width +
-      ',' +
-      data.size.height / img.height +
-      ')',
+    width: data.size.width,
+    height:  data.size.height
   }
 
   return (
