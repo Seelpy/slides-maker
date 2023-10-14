@@ -1,7 +1,7 @@
 import styles from './Presentation.module.css'
-import MenuBar from '../components/MenuBar'
-import LeftBar from '../components/LeftBar'
-import SlideEditor from '../components/SlideEditor'
+import MenuBar from '../components/UI/MenuBar'
+import LeftBar from '../components/UI/LeftBar'
+import SlideEditor from '../components/Slide/SlideEditor'
 import { presentation } from '../models/example/high';
 import { useState } from 'react';
 

@@ -1,6 +1,6 @@
 import styles from './SlidePreview.module.css'
 import EditorObject from './SlideObject';
-import { ObjectType } from '../models/types';
+import { ObjectType } from '../../models/types';
 
 type SlidePreviewProps = {
   objects: ObjectType[];

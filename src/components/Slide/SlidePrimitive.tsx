@@ -1,4 +1,4 @@
-import { PrimType, PrimitiveType, Size } from './../models/types.ts'
+import { PrimType, PrimitiveType, Size } from '../../models/types.ts'
 import styles from './SlidePrimitive.module.css'
 
 type PrimitiveProps = {

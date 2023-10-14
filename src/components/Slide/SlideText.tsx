@@ -1,4 +1,4 @@
-import { TextObject } from './../models/types.ts'
+import { TextObject } from '../../models/types.ts'
 import Char from './Char.tsx'
 import styles from './SlideText.module.css'
 
@@ -16,8 +16,8 @@ const SlideText = (props: TextProps) => {
 
   return (
     <div className={styles.text} style={props.isPreview ? clipRect : {}}>
-      {data.chars.map((char) => (
-          <Char data={char} />
+      {data.chars.map((char, i) => (
+          <Char key={i} data={char} />
       ))}
     </div>
   )

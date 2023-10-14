@@ -1,6 +1,6 @@
 import styles from './SlideEditor.module.css'
 import EditorObject from './SlideObject';
-import { ObjectType } from '../models/types';
+import { ObjectType } from '../../models/types';
 
 
 type SlideEditorProps = {

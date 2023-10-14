@@ -1,5 +1,5 @@
 import styles from './MenuBar.module.css'
-import MenuSection from '../components/MenuSection'
+import MenuSection from './MenuSection'
 import Button from './Button'
 import ColorButton from './ColorButton'
 
@@ -27,16 +27,16 @@ const MenuBar = () => {
       <MenuSection name='Text'>
         <div>
           Font:
-          <select>
-            <option value="Arial" selected>Arial</option>
-            <option value="Verdana" selected>Verdana</option>
-            <option value="Tahoma" selected>Tahoma</option>
-            <option value="Trebuchet MS" selected>Trebuchet MS</option>
-            <option value="Times New Roman" selected>Times New Roman</option>
-            <option value="Georgia" selected>Georgia</option>
-            <option value="Garamond" selected>Garamond</option>
-            <option value="Courier New" selected>Courier New</option>
-            <option value="Brush Script MT" selected>Brush Script MT</option>
+          <select defaultValue={"Arial"}>
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Brush Script MT">Brush Script MT</option>
           </select>
 
           Size:

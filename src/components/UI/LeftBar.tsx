@@ -1,6 +1,6 @@
 import styles from './LeftBar.module.css'
-import { Slide } from '../models/types';
-import SlidePreview from './SlidePreview';
+import { Slide } from '../../models/types';
+import SlidePreview from '../Slide/SlidePreview';
 
 type LeftBarProps = {
   slides: Slide[];
@@ -14,10 +14,10 @@ const LeftBar = (props: LeftBarProps) => {
     <div className={styles.leftBar}>
       {
        props.slides.map((slide, i) => (
-        <div 
+        <div key={i}
           className={styles.miniSlide + (i === props.activeSlideIndex ? ` ${styles.activeSlide}` : ``)} 
           onClick={() => props.setActiveSlideIndex(i)}>
-          <SlidePreview key={i} objects={slide} />
+          <SlidePreview objects={slide} />
         </div>
        ))
       }

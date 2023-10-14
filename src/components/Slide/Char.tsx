@@ -1,4 +1,4 @@
-import { Char } from './../models/types.ts'
+import { Char } from '../../models/types.ts'
 
 type CharObjectProps = {
   data: Char;

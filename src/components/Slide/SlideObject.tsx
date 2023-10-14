@@ -1,5 +1,5 @@
 import styles from './SlideObject.module.css'
-import { ObjectType, SlideObjectType } from './../models/types.ts'
+import { ObjectType, SlideObjectType } from '../../models/types.ts'
 import SlidePrimitive from './SlidePrimitive.tsx'
 import SlideText from './SlideText.tsx'
 import SlideImage from './SlideImage.tsx'
