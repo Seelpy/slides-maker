@@ -137,6 +137,6 @@ const slide2: Slide = [
   triangle2Object
 ]
 
-const presentation: Presentaion = [slide1, slide2, slide2, slide2]
+const presentation: Presentaion = [slide1, slide2, slide2, slide2, slide2, slide2, slide2, slide2, slide2]
 
 export {presentation}
