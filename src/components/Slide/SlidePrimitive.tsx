@@ -3,7 +3,6 @@ import styles from './SlidePrimitive.module.css'
 
 type PrimitiveProps = {
   data: PrimType;
-  isPreview: boolean;
 }
 
 function getTrianglePoints(size: Size): string {
@@ -57,12 +56,8 @@ const SlidePrimitive = (props: PrimitiveProps) => {
     height: data.size.height,
   }
 
-  const clipRect = {
-    clip: `rect(${-data.position.y}px, ${-data.position.x+1280}px, ${-data.position.y+720}px, ${-data.position.x}px)`
-  }
-
   return (
-    <div className={styles.primitive} style={props.isPreview ? clipRect : {}}>
+    <div className={styles.primitive}>
       <svg style={style}>{getSVGPrimitive(props.data)}</svg>
     </div>
   )
