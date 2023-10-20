@@ -2,7 +2,7 @@ import styles from './Presentation.module.css'
 import MenuBar from '../components/UI/MenuBar'
 import LeftBar from '../components/UI/LeftBar'
 import SlideEditor from '../components/Slide/SlideEditor'
-import { presentation } from '../models/example/high';
+import { presentationInfo } from '../models/example/high';
 import { useState } from 'react';
 
 function Presentation() {
@@ -10,11 +10,11 @@ function Presentation() {
 
   return (
     <div className={styles.presentation}>
-      <MenuBar />
+      <MenuBar name={presentationInfo.name}/>
       
       <div className={styles.mainBlock}>
-        <LeftBar slides={presentation} activeSlideIndex={activeSlideIndex} setActiveSlideIndex={setActiveSlideIndex}/>
-        <SlideEditor objects={presentation[activeSlideIndex]}></SlideEditor>
+        <LeftBar slides={presentationInfo.presenation} activeSlideIndex={activeSlideIndex} setActiveSlideIndex={setActiveSlideIndex}/>
+        <SlideEditor objects={presentationInfo.presenation[activeSlideIndex]}></SlideEditor>
       </div>
     </div>
   )

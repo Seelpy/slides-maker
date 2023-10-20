@@ -71,6 +71,12 @@ type PrimType = CircleObject | SquareObject | TriangleObject
 
 type Presentaion = Array<Slide>
 
+type PresentationInfo = {
+    name: string
+    presenation: Presentaion
+}
+
+
 export {
     SlideObjectType,
     PrimitiveType,
@@ -89,6 +95,7 @@ export type {
     TriangleObject,
     Slide,
     Presentaion,
+    PresentationInfo,
     ObjectType,
     PrimType,
 }

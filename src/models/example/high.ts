@@ -11,6 +11,7 @@ import {
   Position,
   Size,
   Char,
+  PresentationInfo,
 } from '../types.ts'
 
 const position: Position = {
@@ -157,4 +158,9 @@ const slide2: Slide = [
 
 const presentation: Presentaion = [slide1, slide2, slide2, slide2, slide2, slide2, slide2, slide2, slide2]
 
-export {presentation}
+const presentationInfo: PresentationInfo = {
+  name: "presentation",
+  presenation: presentation,
+}
+
+export {presentationInfo}

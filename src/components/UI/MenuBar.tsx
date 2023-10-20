@@ -3,9 +3,20 @@ import MenuSection from './MenuSection'
 import Button from './Button'
 import ColorButton from './ColorButton'
 
-const MenuBar = () => {
+type MenuBarProps = {
+  name: string
+};``
+
+const MenuBar = (props: MenuBarProps) => {
   return (
     <div className={styles.menuBar}>
+      <MenuSection name='Name'>
+        <div>
+          <input value={props.name}>
+          </input>
+        </div>
+      </MenuSection>
+
       <MenuSection name='Figures'>
         <div>
           <Button width='2.5rem' height='2.5rem'>
