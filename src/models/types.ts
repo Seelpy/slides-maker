@@ -67,10 +67,15 @@ type TriangleObject = PrimitiveObject & {
 
 type Slide = Array<TextObject | ImageObject | CircleObject | SquareObject | TriangleObject>
 
+type SlideInfo = {
+    selected: boolean
+    slide: Slide
+}
+
 type ObjectType = TextObject | ImageObject | CircleObject | SquareObject | TriangleObject
 type PrimType = CircleObject | SquareObject | TriangleObject
 
-type Presentaion = Array<Slide>
+type Presentaion = Array<SlideInfo>
 
 type PresentationInfo = {
     name: string
@@ -99,4 +104,5 @@ export type {
     PresentationInfo,
     ObjectType,
     PrimType,
+    SlideInfo,
 }

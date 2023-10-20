@@ -163,7 +163,7 @@ const slide2: Slide = [
   triangle2Object
 ]
 
-const presentation: Presentaion = [slide1, slide2, slide2, slide2, slide2, slide2, slide2, slide2, slide2]
+const presentation: Presentaion = [{slide: slide1, selected: true}, {slide: slide2, selected: true}, {slide: slide2, selected: false}, {slide: slide2, selected: false}, {slide: slide2, selected: true}]
 
 const presentationInfo: PresentationInfo = {
   name: "presentation",

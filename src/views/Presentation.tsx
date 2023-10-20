@@ -14,7 +14,7 @@ function Presentation() {
       
       <div className={styles.mainBlock}>
         <LeftBar slides={presentationInfo.presenation} activeSlideIndex={activeSlideIndex} setActiveSlideIndex={setActiveSlideIndex}/>
-        <SlideEditor objects={presentationInfo.presenation[activeSlideIndex]}></SlideEditor>
+        <SlideEditor slideInfo={presentationInfo.presenation[activeSlideIndex]}></SlideEditor>
       </div>
     </div>
   )
