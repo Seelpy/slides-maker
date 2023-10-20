@@ -12,7 +12,7 @@ const SlideEditor = (props: SlideEditorProps) => {
     <div className={styles.editorArea}>
       <div className={styles.slideEditor}>
           {props.objects.map((obj, i) => (
-            <EditorObject key={i} data={obj}/>
+            <EditorObject key={i} data={obj} preview={false}/>
           ))}
       </div>
     </div>

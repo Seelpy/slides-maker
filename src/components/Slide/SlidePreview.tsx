@@ -10,7 +10,7 @@ const SlidePreview = (props: SlidePreviewProps) => {
   return (
     <div className={styles.slidePreview}>
         {props.objects.map((obj, i) => (
-          <EditorObject key={i} data={obj}/>
+          <EditorObject key={i} data={obj} preview={true}/>
         ))}
     </div>
   )

@@ -6,6 +6,7 @@ import SlideImage from './SlideImage.tsx'
 
 type SlideObjectProps = {
   data: ObjectType;
+  preview: boolean,
 }
 
 function getObject(data: ObjectType) {
@@ -26,12 +27,15 @@ const EditorObject = (props: SlideObjectProps) => {
   const style = {
     left: data.position.x,
     top: data.position.y,
+    width: data.size.width,
+    height: data.size.height,
     transform: `rotate(${props.data.rotate}deg)`,
     transformOrigin: `${(props.data.size.width)/2}px ${(props.data.size.height)/2}px`,
   }
 
+  console.log(props.data.selected, data.type)
   return (
-    <div style={style} className={styles.slideObject}>
+    <div style={style} className={styles.slideObject  + (props.data.selected && !props.preview? ` ${styles.activeObject}` : ``)}>
       {getObject(data)}
     </div>
   )

@@ -1,3 +1,7 @@
 .slideObject {
     position: absolute;
 }
+
+.activeObject {
+    box-shadow: #4c88f0 0 0 4px 4px;
+}

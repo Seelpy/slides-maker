@@ -34,7 +34,8 @@ type SlideObject = {
     id: string,
     position: Position,
     size: Size,
-    rotate: number;
+    rotate: number,
+    selected: boolean,
 }
 
 type TextObject = SlideObject & {

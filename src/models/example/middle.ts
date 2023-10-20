@@ -40,6 +40,7 @@ const textObject: TextObject = {
   chars: [char],
   size: size,
   rotate: 0,
+  selected: false,
 }
 
 const imageObject: ImageObject = {
@@ -55,6 +56,7 @@ const imageObject: ImageObject = {
     height: 100,
   },
   rotate: 0,
+  selected: false,
 }
 
 const circleObject: CircleObject = {
@@ -71,6 +73,7 @@ const circleObject: CircleObject = {
     height: 100,
   },
   rotate: 0,
+  selected: false,
 }
 
 const squareObject: SquareObject = {
@@ -87,6 +90,7 @@ const squareObject: SquareObject = {
     height: 15,
   },
   rotate: 90,
+  selected: false,
 }
 
 const triangleObject: TriangleObject = {
@@ -103,6 +107,7 @@ const triangleObject: TriangleObject = {
     height: 25,
   },
   rotate: 0,
+  selected: false,
 }
 
 const slide1: Slide = [textObject, imageObject]
