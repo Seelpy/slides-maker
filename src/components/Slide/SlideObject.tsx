@@ -33,7 +33,6 @@ const EditorObject = (props: SlideObjectProps) => {
     transformOrigin: `${(props.data.size.width)/2}px ${(props.data.size.height)/2}px`,
   }
 
-  console.log(props.data.selected, data.type)
   return (
     <div style={style} className={styles.slideObject  + (props.data.selected && !props.preview? ` ${styles.activeObject}` : ``)}>
       {getObject(data)}

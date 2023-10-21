@@ -12,7 +12,7 @@ const MenuBar = (props: MenuBarProps) => {
     <div className={styles.menuBar}>
       <MenuSection name='Name'>
         <div>
-          <input value={props.name}>
+          <input defaultValue={props.name}>
           </input>
         </div>
       </MenuSection>
