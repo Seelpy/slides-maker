@@ -5,7 +5,12 @@ class PresentaionConverter {
         return JSON.stringify(presentaion)
     }
     public ConvertFromJson(json: string): PresentationInfo {
-        const jsonObj = JSON.parse(json);
+        let jsonObj = {};
+        try {
+            jsonObj = JSON.parse(json);
+        } catch (e) {
+            console.error("Ошибка при загрузке JSON: " + e)
+        }
         return jsonObj as PresentationInfo
     }
 }
