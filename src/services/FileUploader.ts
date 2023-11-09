@@ -1,5 +1,4 @@
 class FileUploader {
-    private base64Prefix: string = "'data:application/json;base64,"
     private jsonFileType: string = ".json"
     private jsonType: string = "application/json"
 
@@ -9,13 +8,6 @@ class FileUploader {
         link.href = URL.createObjectURL(file);
         link.download = this.GenerateJsonFilename(filename)
         link.click()
-    }
-
-    private GenerateBase64(data: string): Promise<string> {
-        return new Promise((resolve) => {
-            const base64Data = btoa(data); // Используйте btoa для преобразования в base64
-            resolve(this.base64Prefix + base64Data);
-        });
     }
 
     private GenerateJsonFilename(filename: string): string {
