@@ -79,7 +79,7 @@ type Presentaion = Array<SlideInfo>
 
 type PresentationInfo = {
     name: string
-    presenation: Presentaion
+    presentation: Presentaion
 }
 
 

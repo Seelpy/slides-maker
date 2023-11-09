@@ -167,7 +167,7 @@ const presentation: Presentaion = [{slide: slide1, selected: true}, {slide: slid
 
 const presentationInfo: PresentationInfo = {
   name: "presentation",
-  presenation: presentation,
+  presentation: presentation,
 }
 
 export {presentationInfo}
