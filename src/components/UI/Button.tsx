@@ -3,12 +3,14 @@ import styles from './Button.module.css'
 type ButtonProps = {
   width?: string;
   height?: string;
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
 const Button = (props: ButtonProps) => {
   const width = props.width ?? "auto";
   const height = props.height ?? "auto";
+  const onClick = props.onClick;
 
   const buttonSizes = {
     width: width,
@@ -16,7 +18,7 @@ const Button = (props: ButtonProps) => {
   };
 
   return (
-    <button className={styles.button} style={buttonSizes}>
+    <button className={styles.button} style={buttonSizes} onClick={onClick}>
       {props.children}
     </button>
   )

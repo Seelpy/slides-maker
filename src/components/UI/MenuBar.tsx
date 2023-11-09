@@ -4,16 +4,22 @@ import Button from './Button'
 import ColorButton from './ColorButton'
 
 type MenuBarProps = {
-  name: string
-};``
+  name: string,
+  uploadOnClick(name: string): void
+};
 
-const MenuBar = (props: MenuBarProps) => {
+ const MenuBar = (props: MenuBarProps) => {
   return (
     <div className={styles.menuBar}>
       <MenuSection name='Name'>
         <div>
           <input defaultValue={props.name}>
           </input>
+        </div>
+        <div>
+          <Button width='5rem' height='2rem' onClick={() => props.uploadOnClick(props.name)}>
+            {"Save"}
+          </Button>
         </div>
       </MenuSection>
 
