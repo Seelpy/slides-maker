@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import styles from './MenuBar.module.css'
 import MenuSection from './MenuSection'
 import Button from './Button'
@@ -5,21 +6,33 @@ import ColorButton from './ColorButton'
 
 type MenuBarProps = {
   name: string,
-  uploadOnClick(name: string): void
+  onPresentationNameChange(event: React.ChangeEvent<HTMLInputElement>): void,
+  onImportJson(file: File): void,
+  onExportJson(name: string): void,
 };
 
- const MenuBar = (props: MenuBarProps) => {
+const MenuBar = (props: MenuBarProps) => {
+  const importJsonFile = useRef<HTMLInputElement | null>(null);
+
   return (
     <div className={styles.menuBar}>
       <MenuSection name='Name'>
         <div>
-          <input defaultValue={props.name}>
-          </input>
+          <input value={props.name} onChange={(e) => props.onPresentationNameChange(e)}/>
         </div>
         <div>
-          <Button width='5rem' height='2rem' onClick={() => props.uploadOnClick(props.name)}>
-            {"Save"}
+          <Button width='5.4rem' onClick={() => props.onExportJson(props.name)}>
+            {"Export json"}
           </Button>
+          <Button width='5.4rem' onClick={() => importJsonFile.current?.click()}>
+            {"Import json"}
+          </Button>
+          <input type='file' id='importJsonFile' ref={importJsonFile} style={{display: 'none'}} 
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const files = event.currentTarget.files;
+              if (files && files.length > 0) props.onImportJson(files[0]);
+            }}
+          />
         </div>
       </MenuSection>
 
