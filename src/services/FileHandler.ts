@@ -1,8 +1,8 @@
-class FileUploader {
+class FileHandler {
     private jsonFileType: string = ".json"
     private jsonType: string = "application/json"
 
-    public UploadPresentation(filename: string, data: string): void {
+    public ExportJson(filename: string, data: string) {
         const link = document.createElement("a")
         const file = new Blob([data], {type: this.jsonType});
         link.href = URL.createObjectURL(file);
@@ -10,9 +10,18 @@ class FileUploader {
         link.click()
     }
 
+    public ImportJson(file: File): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = reject;
+        });
+    }
+
     private GenerateJsonFilename(filename: string): string {
         return filename + this.jsonFileType
     }
 }
 
-export default new FileUploader
+export default new FileHandler
