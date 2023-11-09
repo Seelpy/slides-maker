@@ -13,7 +13,7 @@ const SectionInfo = (props: SectionInfoProps) => {
     const importJsonFile = useRef<HTMLInputElement | null>(null);
 
     return (
-        <MenuSection name='Name'>
+        <MenuSection name='Info'>
             <div>
                 <input value={props.name} onChange={(e) => props.onPresentationNameChange(e)}/>
             </div>
