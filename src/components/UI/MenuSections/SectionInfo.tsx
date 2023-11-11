@@ -27,7 +27,9 @@ const SectionInfo = (props: SectionInfoProps) => {
                 <input type='file' id='importJsonFile' ref={importJsonFile} style={{display: 'none'}} 
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const files = event.currentTarget.files;
+                        console.log("changed");
                         if (files && files.length > 0) props.onImportJson(files[0]);
+                        importJsonFile.current!.value = "";
                     }}
                 />
             </div>

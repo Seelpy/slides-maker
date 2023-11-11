@@ -11,7 +11,6 @@ import {
   Position,
   Size,
   Char,
-  PresentationInfo,
 } from '../types.ts'
 
 const position: Position = {
@@ -163,11 +162,9 @@ const slide2: Slide = [
   triangle2Object
 ]
 
-const presentation: Presentaion = [{slide: slide1, selected: true}, {slide: slide2, selected: true}, {slide: slide2, selected: false}, {slide: slide2, selected: false}, {slide: slide2, selected: true}]
-
-const presentationInfo: PresentationInfo = {
-  name: "presentation",
-  presentation: presentation,
+const presentation: Presentaion = {
+  name: 'presentation',
+  slides: [{slide: slide1, selected: true}, {slide: slide2, selected: true}, {slide: slide2, selected: false}, {slide: slide2, selected: false}, {slide: slide2, selected: true}]
 }
 
-export {presentationInfo}
+export {presentation}
