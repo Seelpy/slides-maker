@@ -5,7 +5,7 @@ import SlidePreview from '../Slide/SlidePreview';
 type LeftBarProps = {
   slides: SlideInfo[];
   activeSlideIndex: number;
-  setActiveSlideIndex: (i: number) => void;
+  setActiveIndexSlide: (i: number) => void;
 };
 
 
@@ -32,7 +32,7 @@ const LeftBar = (props: LeftBarProps) => {
        props.slides.map((slideInfo, i) => (
         <div key={i}
           className={styles.miniSlide + getCorrectBorder(i === props.activeSlideIndex, slideInfo.selected)} 
-          onClick={() => props.setActiveSlideIndex(i)}>
+          onClick={() => props.setActiveIndexSlide(i)}>
           <SlidePreview selected={slideInfo.selected} slide={slideInfo.slide}/>
         </div>
        ))

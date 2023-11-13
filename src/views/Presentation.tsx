@@ -2,22 +2,22 @@ import styles from './Presentation.module.css'
 import MenuBar from '../components/UI/MenuBar'
 import LeftBar from '../components/UI/LeftBar'
 import SlideEditor from '../components/Slide/SlideEditor'
-import { presentation as basePresentation } from '../models/example/high';
-import { useState } from 'react';
 import FileHandler from '../services/FileHandler';
 import PresentationConverter from '../services/PresentationConverter';
-import { Presentaion } from '../models/types';
+import { useAppSelector, useInterfaceActions, usePresentationActions } from '../hooks/redux';
 
 function Presentation() {
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [presentation, setPresentation] = useState<Presentaion>(basePresentation);
+  const activeSlideIndex = useAppSelector(state => state.interfaceReducer.activeIndexSlide)
+  const presentation = useAppSelector(state => state.presentationReducer);
+  const {setActiveIndexSlide} = useInterfaceActions();
+  const {importPresentation, changeName} = usePresentationActions();
 
   const onImportFromJson = (file: File) => {
     FileHandler.ImportJson(file).then((stringJson) => {
       const importedPresentation = PresentationConverter.ConvertFromJson(stringJson);
       if ("name" in importedPresentation && "slides" in importedPresentation)
       {
-        setPresentation(importedPresentation);
+        importPresentation(importedPresentation);
       }
       else
       {
@@ -26,24 +26,18 @@ function Presentation() {
     });
   };
 
-  const onPresentationNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newPresentation = JSON.parse(JSON.stringify(presentation));
-    newPresentation.name = event.target.value;
-    setPresentation(newPresentation);
-  };
-
   return (
     <div className={styles.presentation}>
       <MenuBar 
         name={presentation.name}
-        onPresentationNameChange={onPresentationNameChange}
+        onPresentationNameChange={(event) => changeName(event.target.value)}
         onImportJson={onImportFromJson}
         onExportJson={(filename: string) => FileHandler.ExportJson(filename, PresentationConverter.ConvertToJson(presentation))}
       />
 
       {presentation.slides.length > 0 && (
         <div className={styles.mainBlock}>
-          <LeftBar slides={presentation.slides} activeSlideIndex={activeSlideIndex} setActiveSlideIndex={setActiveSlideIndex}/>
+          <LeftBar slides={presentation.slides} activeSlideIndex={activeSlideIndex} setActiveIndexSlide={setActiveIndexSlide}/>
           <SlideEditor slideInfo={presentation.slides[activeSlideIndex]}></SlideEditor>
         </div>
       )}

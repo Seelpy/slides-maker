@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { changeName, createSlide, moveSlides, deleteSlides } from "../actions/presentationActions.ts"
+import { changeName, createSlide, moveSlides, deleteSlides, importPresentation } from "../actions/presentationActions.ts"
 import { presentation } from "../../models/example/high.ts";
 
 const presentationReducer = createReducer(presentation, (builder) => { builder
@@ -18,6 +18,7 @@ const presentationReducer = createReducer(presentation, (builder) => { builder
     .addCase(deleteSlides, (state, action) => {
         state.slides = state.slides.filter((slide) => !action.payload.includes(slide))
     })
+    .addCase(importPresentation, (_, action) => action.payload)
 });
 
 export default presentationReducer
