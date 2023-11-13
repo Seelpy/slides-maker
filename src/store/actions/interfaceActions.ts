@@ -7,5 +7,3 @@ enum interfaceActions {
 
 export const setDragSlides = createAction<boolean>(interfaceActions.setDragSlides);
 export const setDragObjects = createAction<boolean>(interfaceActions.setDragObjects);
-
-export default interfaceActions
