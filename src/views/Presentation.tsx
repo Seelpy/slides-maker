@@ -11,14 +11,14 @@ function Presentation() {
   const activeSlideIndex = useAppSelector(state => state.interfaceReducer.activeSlideIndex)
   const presentation = useAppSelector(state => state.presentationReducer);
   const {setDragObjects, setDragSlides} = useInterfaceActions();
-  const {importPresentation, changeName} = usePresentationActions();
+  const {updatePresentation, changeName} = usePresentationActions();
 
   const onImportFromJson = (file: File) => {
     FileHandler.ImportJson(file).then((stringJson) => {
       const importedPresentation = PresentationConverter.ConvertFromJson(stringJson);
       if ("name" in importedPresentation && "slides" in importedPresentation)
       {
-        importPresentation(importedPresentation);
+        updatePresentation(importedPresentation);
       }
       else
       {

@@ -7,7 +7,7 @@ enum presentationActions {
     moveSlides = "MOVE_SLIDES",
     deleteSlides = "DELETE_SLIDES",
     updateSlide = "UPDATE_SLIDE",
-    importPresentation = "IMPORT_PRESENTATION",
+    updatePresentation = "UPDATE_PRESENTATION",
 }
 
 type moveSlidesPayload = {
@@ -27,4 +27,4 @@ export const createSlide = createAction<SlideInfo>(presentationActions.createSli
 export const moveSlides = createAction<moveSlidesPayload>(presentationActions.moveSlides);
 export const deleteSlides = createAction<SlideInfo[]>(presentationActions.deleteSlides);
 export const updateSlide = createAction<updateSlidePayload>(presentationActions.updateSlide);
-export const importPresentation = createAction<Presentaion>(presentationActions.importPresentation);
+export const updatePresentation = createAction<Presentaion>(presentationActions.updatePresentation);
