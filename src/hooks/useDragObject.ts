@@ -29,12 +29,12 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
         else {
             isDraggingThis.current = false;
         }
-    }, [isDraggingObjects]);
+    }, [isDraggingObjects, elementRef, obj.id]);
 
     useEffect(() => {
         const element = elementRef.current;
         if (!element) throw new Error("Slide object is undefined!");
-
+        
         const area = element.parentElement;
         if (!area) throw new Error("Wrong slide object structure! Object doesn't have a parent-area");
 

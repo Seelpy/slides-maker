@@ -158,7 +158,7 @@ const triangle3Object: TriangleObject = {
     width: 110,
     height: 66,
   },
-  rotate: 45,
+  rotate: 0,
   selected: true,
 }
 
