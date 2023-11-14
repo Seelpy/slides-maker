@@ -30,7 +30,7 @@ type Char = {
     underline: boolean,
 }
 
-type SlideObject = {
+type BaseSlideObject = {
     id: string,
     position: Position,
     size: Size,
@@ -38,17 +38,17 @@ type SlideObject = {
     selected: boolean,
 }
 
-type TextObject = SlideObject & {
+type TextObject = BaseSlideObject & {
     type: SlideObjectType.Text,
     chars: Array<Char>,
 }
 
-type ImageObject = SlideObject & {
+type ImageObject = BaseSlideObject & {
     type: SlideObjectType.Image,
     data: string,
 }
 
-type PrimitiveObject = SlideObject & {
+type PrimitiveObject = BaseSlideObject & {
     type: SlideObjectType.Primitive,
     color: string,
 }
@@ -65,14 +65,15 @@ type TriangleObject = PrimitiveObject & {
     primitiveType: PrimitiveType.Triangle,
 }
 
-type Slide = Array<TextObject | ImageObject | CircleObject | SquareObject | TriangleObject>
+type SlideObject = TextObject | ImageObject | CircleObject | SquareObject | TriangleObject
+type Slide = Array<SlideObject>
 
 type SlideInfo = {
+    id: string;
     selected: boolean
     slide: Slide
 }
 
-type ObjectType = TextObject | ImageObject | CircleObject | SquareObject | TriangleObject
 type PrimType = CircleObject | SquareObject | TriangleObject
 
 type Presentaion = {
@@ -89,16 +90,16 @@ export type {
     Position,
     Size,
     Char,
-    SlideObject,
+    BaseSlideObject,
     TextObject,
     ImageObject,
     PrimitiveObject,
     CircleObject,
     SquareObject,
     TriangleObject,
+    SlideObject,
     Slide,
     Presentaion,
-    ObjectType,
     PrimType,
     SlideInfo,
 }

@@ -1,3 +1,12 @@
+.miniSlide {
+    min-width: calc(1280px * 0.3);
+    min-height: calc(720px * 0.3);
+
+    cursor: pointer;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 0 4px 4px;
+    transition: box-shadow 300ms ease-in-out;
+}
+
 .slidePreview {
     position: relative;
     box-sizing: border-box;
@@ -10,4 +19,16 @@
     transform: scale(0.3, 0.3);
     transform-origin: 0 0;
     -moz-transform-origin: 0 0;
+}
+
+.activeSlide {
+    box-shadow: rgba(100, 100, 111, 0.8) 0px 0px 5px 5px;
+}
+
+.selectedSlide {
+    box-shadow: #4c88f0 0 0 4px 4px;
+}
+
+.activeAndSelectedSlide {
+    box-shadow: rgba(59, 59, 194, 0.7) 0px 0px 5px 5px;
 }

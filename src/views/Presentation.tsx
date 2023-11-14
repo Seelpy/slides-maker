@@ -5,11 +5,12 @@ import SlideEditor from '../components/Slide/SlideEditor'
 import FileHandler from '../services/FileHandler';
 import PresentationConverter from '../services/PresentationConverter';
 import { useAppSelector, useInterfaceActions, usePresentationActions } from '../hooks/redux';
+import { useEffect } from 'react';
 
 function Presentation() {
-  const activeSlideIndex = useAppSelector(state => state.interfaceReducer.activeIndexSlide)
+  const activeSlideIndex = useAppSelector(state => state.interfaceReducer.activeSlideIndex)
   const presentation = useAppSelector(state => state.presentationReducer);
-  const {setActiveIndexSlide} = useInterfaceActions();
+  const {setDragObjects, setDragSlides} = useInterfaceActions();
   const {importPresentation, changeName} = usePresentationActions();
 
   const onImportFromJson = (file: File) => {
@@ -26,6 +27,13 @@ function Presentation() {
     });
   };
 
+  useEffect(() => {
+    window.onmouseup = () => {
+      setDragObjects(false);
+      setDragSlides(false);
+    }
+  }, []);
+
   return (
     <div className={styles.presentation}>
       <MenuBar 
@@ -37,7 +45,7 @@ function Presentation() {
 
       {presentation.slides.length > 0 && (
         <div className={styles.mainBlock}>
-          <LeftBar slides={presentation.slides} activeSlideIndex={activeSlideIndex} setActiveIndexSlide={setActiveIndexSlide}/>
+          <LeftBar/>
           <SlideEditor slideInfo={presentation.slides[activeSlideIndex]}></SlideEditor>
         </div>
       )}

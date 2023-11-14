@@ -17,7 +17,7 @@ const SlideImage = (props: ImageObjectProps) => {
   
   return (
     <div className={styles.image}>
-      <img style={style} src={data.data} />
+      <img style={style} src={data.data} onDragStart={(e) => e.preventDefault()}/>
     </div>
   )
 }
