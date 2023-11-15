@@ -30,7 +30,7 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
         const element = elementRef.current;
         if (!element) throw new Error("Slide object is undefined!");
         
-        const area = element.parentElement;
+        const area = element.parentElement?.parentElement;
         if (!area) throw new Error("Wrong slide object structure! Object doesn't have a parent-area");
 
         const onMouseDown = () => {
