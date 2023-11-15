@@ -8,7 +8,7 @@ enum interfaceActions {
     setMovedSlides = "SET_MOVED_SLIDES",
 }
 
-export const setActiveSlide = createAction<SlideInfo>(interfaceActions.setActiveSlide);
+export const setActiveSlide = createAction<SlideInfo | undefined>(interfaceActions.setActiveSlide);
 export const setDragSlides = createAction<boolean>(interfaceActions.setDragSlides);
 export const setDragObjects = createAction<boolean>(interfaceActions.setDragObjects);
 export const setMovedSlides = createAction<boolean>(interfaceActions.setMovedSlides);
