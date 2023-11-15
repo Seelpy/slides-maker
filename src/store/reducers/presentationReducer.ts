@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { changeName, createSlide, moveSlides, deleteSlides, updatePresentation, updateSlide } from "../actions/presentationActions.ts"
+import { changeName, createSlide, moveSlide, deleteSlides, updatePresentation, updateSlide } from "../actions/presentationActions.ts"
 import { presentation } from "../../models/example/high.ts";
 
 const presentationReducer = createReducer(presentation, (builder) => { builder
@@ -9,11 +9,24 @@ const presentationReducer = createReducer(presentation, (builder) => { builder
     .addCase(createSlide, (state, action) => {
         state.slides.push(action.payload)
     })
-    .addCase(moveSlides, (state, action) => {
-        action.payload.slides.map((slide) => {
-            const oldIndex = state.slides.findIndex(s => s.id === slide.id);
-            state.slides.splice(oldIndex - action.payload.moveBy, 0, state.slides.splice(oldIndex, 1)[0]);
-        })
+    .addCase(moveSlide, (state, action) => {
+        const oldIndex = state.slides.findIndex(s => s.id === action.payload.slide.id);
+        const minMove = -oldIndex;
+        const maxMove = state.slides.length - oldIndex - 1;
+        const moveBy = Math.min(Math.max(action.payload.moveBy, minMove), maxMove);
+
+        // Проверяем, есть ли смысл двигать слайды (есть ли невыделенные слайды выше/ниже)
+        let shouldMove = false;
+        for (let i = moveBy > 0 ? (oldIndex + 1) : 0; moveBy > 0 ? i < state.slides.length : i < oldIndex; i++) {
+            if (!state.slides[i].selected) {
+                shouldMove = true;
+                break;
+            }
+        }
+
+        if (shouldMove) {
+            state.slides.splice(oldIndex + moveBy, 0, state.slides.splice(oldIndex, 1)[0]);
+        }
     })
     .addCase(deleteSlides, (state, action) => {
         state.slides = state.slides.filter((slide) => !action.payload.includes(slide))
