@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { changeName, createSlide, moveSlide, deleteSlides, updatePresentation, updateSlide } from "../actions/presentationActions.ts"
+import { changeName, createSlide, moveSlides, deleteSlides, updatePresentation, updateSlide } from "../actions/presentationActions.ts"
 import { presentation } from "../../models/example/high.ts";
 
 const presentationReducer = createReducer(presentation, (builder) => { builder
@@ -9,9 +9,16 @@ const presentationReducer = createReducer(presentation, (builder) => { builder
     .addCase(createSlide, (state, action) => {
         state.slides.push(action.payload)
     })
-    .addCase(moveSlide, (state, action) => {
-        const oldIndex = state.slides.findIndex(s => s.id === action.payload.slide.id);
-        state.slides.splice(oldIndex + action.payload.moveBy, 0, state.slides.splice(oldIndex, 1)[0]);
+    .addCase(moveSlides, (state, action) => {
+        const moveSlideIds = action.payload.slides.map(s => s.id);
+        let offset = 0;
+
+        for (let i = 0; i < action.payload.pasteIndex - 1; i++) {
+            if (moveSlideIds.includes(state.slides[i].id)) offset++;
+        }
+
+        state.slides = state.slides.filter(s => !moveSlideIds.includes(s.id));
+        state.slides.splice(action.payload.pasteIndex - offset, 0, ...action.payload.slides);
     })
     .addCase(deleteSlides, (state, action) => {
         state.slides = state.slides.filter((slide) => !action.payload.includes(slide))

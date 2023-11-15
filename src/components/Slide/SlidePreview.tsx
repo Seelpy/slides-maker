@@ -2,7 +2,6 @@ import styles from './SlidePreview.module.css'
 import EditorObject from './SlideObject';
 import { SlideInfo } from '../../models/types';
 import { useRef } from 'react';
-import { useInterfaceActions } from '../../hooks/redux';
 import useDragSlide from '../../hooks/useDragSlide';
 
 type SlidePreviewProps = {
@@ -30,8 +29,7 @@ function getCorrectBorder(active: boolean, selected: boolean) {
 
 const SlidePreview = (props: SlidePreviewProps) => {
   const slideRef = useRef<HTMLDivElement | null>(null);
-  const {setDragSlides} = useInterfaceActions();
-  useDragSlide(slideRef, props.slideInfo, setDragSlides);
+  useDragSlide(slideRef, props.slideInfo);
 
   return (
     <div ref={slideRef} data-selected={props.selected ? `true` : `false`} onClick={props.setActiveSlide} className={styles.miniSlide + getCorrectBorder(props.active, props.selected)}>
