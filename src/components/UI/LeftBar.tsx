@@ -14,7 +14,6 @@ const LeftBar = () => {
     // dragSlidesOrigin нужен, чтобы после перетаскивания не срабатывал случайный клик
     if (dragSlidesOrigin === undefined) {
       setActiveSlide(slide);
-      console.log("update");
     }
     else {
       setDragSlidesOrigin(undefined);
@@ -42,16 +41,13 @@ const LeftBar = () => {
             break;
           }
         }
-        if (shouldMove) {
-          break;
-        }
+        if (shouldMove) break;
       }
   
       if (moveBy !== 0 || shouldMove) {
         moveSlides({slides: selectedSlides, pasteIndex: originIndex + moveBy});
       }
       else {
-        console.log("here");
         setActiveSlide(dragSlidesOrigin);
       }
 
