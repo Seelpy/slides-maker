@@ -1,12 +1,15 @@
 import { useEffect, useRef } from "react";
 import { SlideInfo } from "../models/types";
-import { useAppSelector, usePresentationActions } from "./redux";
+import { useAppSelector, useInterfaceActions, usePresentationActions } from "./redux";
 
 function useDragSlide(elementRef: React.MutableRefObject<HTMLDivElement | null>, slide: SlideInfo, isDraggingCallback: (start: boolean) => void) {
-    const isDraggingThis = useRef<boolean>(false);
     const {isDraggingSlides} = useAppSelector(state => state.interfaceReducer);
-    const {moveSlide} = usePresentationActions();
+    const slides = useAppSelector(state => state.presentationReducer.slides);
 
+    const {moveSlide} = usePresentationActions();
+    const {setMovedSlides} = useInterfaceActions();
+
+    const isDraggingThis = useRef<boolean>(false);
     const coords = useRef<{startMouse: number, lastMouse: number}>({
         startMouse: 0,
         lastMouse: 0,
@@ -23,11 +26,29 @@ function useDragSlide(elementRef: React.MutableRefObject<HTMLDivElement | null>,
                 elementRef.current.style.transform = ``;
 
                 const moveDelta = coords.current.lastMouse - coords.current.startMouse;
-                const slidesPassed = Math.round(moveDelta / 228.0);
-                if (slidesPassed !== 0) {     
+                const slidesPassed = Math.round(moveDelta / (elementRef.current.clientHeight + 12));
+
+                // Клэмпим количество пройденных слайдов
+                const oldIndex = slides.findIndex(s => s.id === slide.id);
+                const minMove = -oldIndex;
+                const maxMove = slides.length - oldIndex - 1;
+                const moveBy = Math.min(Math.max(slidesPassed, minMove), maxMove);
+
+                // Проверяем, есть ли смысл двигать слайды (есть ли невыделенные слайды выше/ниже)
+                let shouldMove = false;
+                for (let i = moveBy > 0 ? (oldIndex + 1) : 0; moveBy > 0 ? i < slides.length : i < oldIndex; i++) {
+                    if (!slides[i].selected) {
+                        shouldMove = true;
+                        break;
+                    }
+                }
+
+                // Двигаем слайды и меняем активный слайд, если он поменялся
+                if (shouldMove && moveBy !== 0) {     
+                    setMovedSlides(true);
                     moveSlide({
                         slide: slide,
-                        moveBy: slidesPassed
+                        moveBy: moveBy
                     });
                 }
             }
@@ -40,8 +61,6 @@ function useDragSlide(elementRef: React.MutableRefObject<HTMLDivElement | null>,
     useEffect(() => {
         const element = elementRef.current;
         if (!element) throw new Error("Slide is undefined!");
-
-        console.log(element.offsetTop);
         
         const area = element.parentElement;
         if (!area) throw new Error("Wrong slide structure! Slide doesn't have a parent-area");

@@ -8,7 +8,7 @@ import { useAppSelector, useInterfaceActions, usePresentationActions } from '../
 import { useEffect } from 'react';
 
 function Presentation() {
-  const activeSlideIndex = useAppSelector(state => state.interfaceReducer.activeSlideIndex)
+  const activeSlide = useAppSelector(state => state.interfaceReducer.activeSlide)
   const presentation = useAppSelector(state => state.presentationReducer);
   const {setDragObjects, setDragSlides} = useInterfaceActions();
   const {updatePresentation, changeName} = usePresentationActions();
@@ -43,12 +43,14 @@ function Presentation() {
         onExportJson={(filename: string) => FileHandler.ExportJson(filename, PresentationConverter.ConvertToJson(presentation))}
       />
 
-      {presentation.slides.length > 0 && (
+      {presentation.slides.length > 0 &&
         <div className={styles.mainBlock}>
           <LeftBar/>
-          <SlideEditor slideInfo={presentation.slides[activeSlideIndex]}></SlideEditor>
+          {activeSlide !== undefined &&
+            <SlideEditor slideInfo={activeSlide}></SlideEditor>
+          }
         </div>
-      )}
+      }
     </div>
   )
 }
