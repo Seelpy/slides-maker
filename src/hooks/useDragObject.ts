@@ -7,23 +7,22 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
     const isDraggingObjects = useAppSelector(state => state.interfaceReducer.isDraggingObjects);
 
     const {updateSlide} = usePresentationActions();
-    const coords = useRef<{start: Position, stop: Position, lastEvent: Position}>({
-        start: { x: 0, y: 0 },
-        stop: { x: 0, y: 0 },
-        lastEvent: { x: 0, y: 0 },
+    const coords = useRef<{startMouse: Position, startOffset: Position, currentMouse: Position}>({
+        startMouse: { x: 0, y: 0 },
+        startOffset: { x: 0, y: 0 },
+        currentMouse: { x: 0, y: 0 },
     });
 
     useEffect(() => {
         if (elementRef.current && elementRef.current.getAttribute("data-selected") === "true") {
             if (isDraggingObjects) {
                 isDraggingThis.current = true;
-                coords.current.start.x = coords.current.lastEvent.x;
-                coords.current.start.y = coords.current.lastEvent.y;
+                coords.current.startMouse = coords.current.currentMouse;
+                coords.current.startOffset.x = elementRef.current.offsetLeft;
+                coords.current.startOffset.y = elementRef.current.offsetTop;
             }
             else {
                 isDraggingThis.current = false;
-                coords.current.stop.x = elementRef.current.offsetLeft;
-                coords.current.stop.y = elementRef.current.offsetTop;
             }
         }
         else {
@@ -45,13 +44,13 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
         }
     
         const onMouseMove = (e: MouseEvent) => {
-            coords.current.lastEvent.x = e.clientX;
-            coords.current.lastEvent.y = e.clientY;
+            coords.current.currentMouse.x = e.clientX;
+            coords.current.currentMouse.y = e.clientY;
 
             if (!isDraggingThis.current) return;
 
-            const deltaHeight = e.clientY - coords.current.start.y + coords.current.stop.y;
-            const deltaWidth = e.clientX - coords.current.start.x + coords.current.stop.x;
+            const deltaHeight = e.clientY - coords.current.startMouse.y + coords.current.startOffset.y;
+            const deltaWidth = e.clientX - coords.current.startMouse.x + coords.current.startOffset.x;
 
             updateSlide({
                 slide: slide,
