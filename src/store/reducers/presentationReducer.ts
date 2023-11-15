@@ -30,7 +30,7 @@ const presentationReducer = createReducer(presentation, (builder) => { builder
                 slideInfo.slide = slideInfo.slide.map((obj) => obj.id === action.payload.oldSlideObject!.id ? action.payload.newSlideObject! : obj);
             }
             else if (action.payload.oldSlideObject !== undefined && action.payload.newSlideObject === undefined) {
-                // удаляемо объект на слайде
+                // удаляем объект на слайде
                 const objIndex = slideInfo.slide.findIndex(obj => obj.id === action.payload.oldSlideObject!.id);
                 if (objIndex !== -1) {
                     slideInfo.slide.splice(objIndex, 1);
