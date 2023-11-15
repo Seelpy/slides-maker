@@ -16,7 +16,8 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
     useEffect(() => {
         if (elementRef.current && elementRef.current.getAttribute("data-selected") === "true" && isDraggingObjects) {
             isDraggingThis.current = true;
-            coords.current.startMouse = coords.current.currentMouse;
+            coords.current.startMouse.x = coords.current.currentMouse.x;
+            coords.current.startMouse.y = coords.current.currentMouse.y;
             coords.current.startOffset.x = elementRef.current.offsetLeft;
             coords.current.startOffset.y = elementRef.current.offsetTop;
         }
