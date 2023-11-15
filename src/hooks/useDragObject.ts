@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
 import { Position, SlideInfo, SlideObject } from "../models/types";
-import { useAppSelector, usePresentationActions } from "./redux";
+import { useAppSelector, useInterfaceActions, usePresentationActions } from "./redux";
 
-function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>, slide: SlideInfo, obj: SlideObject, isDraggingCallback: (start: boolean) => void) {
+function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>, slide: SlideInfo, obj: SlideObject) {
     const isDraggingThis = useRef<boolean>(false);
     const isDraggingObjects = useAppSelector(state => state.interfaceReducer.isDraggingObjects);
 
     const {updateSlide} = usePresentationActions();
+    const {setDragObjects} = useInterfaceActions();
+
     const coords = useRef<{startMouse: Position, startOffset: Position, currentMouse: Position}>({
         startMouse: { x: 0, y: 0 },
         startOffset: { x: 0, y: 0 },
@@ -35,7 +37,7 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
 
         const onMouseDown = () => {
             if (element.getAttribute("data-selected") === "true") {
-                isDraggingCallback(true);
+                setDragObjects(true);
             }
         }
     

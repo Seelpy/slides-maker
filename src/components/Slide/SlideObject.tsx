@@ -5,7 +5,6 @@ import SlideText from './SlideText.tsx'
 import SlideImage from './SlideImage.tsx'
 import { useRef } from 'react'
 import useDragObject from '../../hooks/useDragObject.ts'
-import { useInterfaceActions } from '../../hooks/redux.ts'
 
 type UserSelect = "none";
 type SlideObjectProps = {
@@ -40,10 +39,9 @@ const EditorObject = (props: SlideObjectProps) => {
   }
   
   const slideObject = useRef<HTMLDivElement | null>(null);
-  const {setDragObjects} = useInterfaceActions();
   
   if (!props.preview) {
-    useDragObject(slideObject, props.slide, props.data, setDragObjects);
+    useDragObject(slideObject, props.slide, props.data);
   }
 
   return (
