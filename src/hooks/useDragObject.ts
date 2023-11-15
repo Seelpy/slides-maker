@@ -14,16 +14,11 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
     });
 
     useEffect(() => {
-        if (elementRef.current && elementRef.current.getAttribute("data-selected") === "true") {
-            if (isDraggingObjects) {
-                isDraggingThis.current = true;
-                coords.current.startMouse = coords.current.currentMouse;
-                coords.current.startOffset.x = elementRef.current.offsetLeft;
-                coords.current.startOffset.y = elementRef.current.offsetTop;
-            }
-            else {
-                isDraggingThis.current = false;
-            }
+        if (elementRef.current && elementRef.current.getAttribute("data-selected") === "true" && isDraggingObjects) {
+            isDraggingThis.current = true;
+            coords.current.startMouse = coords.current.currentMouse;
+            coords.current.startOffset.x = elementRef.current.offsetLeft;
+            coords.current.startOffset.y = elementRef.current.offsetTop;
         }
         else {
             isDraggingThis.current = false;
