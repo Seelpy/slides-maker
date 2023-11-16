@@ -4,6 +4,7 @@ import LeftBar from '../components/UI/LeftBar'
 import SlideEditor from '../components/Slide/SlideEditor'
 import { useInterfaceActions } from '../hooks/redux';
 import { useEffect } from 'react';
+import keyHandler from '../utils/KeyHandler';
 
 function Presentation() {
   const {setDragObjects, setDragSlides} = useInterfaceActions();
@@ -14,6 +15,8 @@ function Presentation() {
       setDragSlides(false);
     }
   }, []);
+
+  keyHandler();
 
   return (
     <div className={styles.presentation}>
