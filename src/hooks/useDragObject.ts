@@ -7,7 +7,7 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
     const isDraggingObjects = useAppSelector(state => state.interfaceReducer.isDraggingObjects);
 
     const {updateSlide} = usePresentationActions();
-    const {setDragObjects, setDragObjectsDelta} = useInterfaceActions();
+    const {setDragObjectsDelta} = useInterfaceActions();
 
     const coords = useRef<{startMouse: Position, startOffset: Position, currentMouse: Position}>({
         startMouse: { x: 0, y: 0 },
@@ -34,14 +34,6 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
         
         const area = element.parentElement?.parentElement;
         if (!area) throw new Error("Wrong slide object structure! Object doesn't have a parent-area");
-
-        const onMouseDown = () => {
-            if (obj.selected) {
-                setDragObjects(true);
-            }
-
-            setDragObjectsDelta(0);
-        }
     
         const onMouseMove = (e: MouseEvent) => {
             coords.current.currentMouse.x = e.clientX;
@@ -61,11 +53,9 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
             });
         }
     
-        element.addEventListener('mousedown', onMouseDown);
         area.addEventListener('mousemove', onMouseMove);
     
         return () => {
-            element.removeEventListener('mousedown', onMouseDown);
             area.removeEventListener('mousemove', onMouseMove);
         };
     }, [elementRef, obj])

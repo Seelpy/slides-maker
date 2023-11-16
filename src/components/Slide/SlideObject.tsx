@@ -5,7 +5,7 @@ import SlideText from './SlideText.tsx'
 import SlideImage from './SlideImage.tsx'
 import { useRef } from 'react'
 import useDragObject from '../../hooks/useDragObject.ts'
-import { useAppSelector, usePresentationActions } from '../../hooks/redux.ts'
+import { useAppSelector, useInterfaceActions, usePresentationActions } from '../../hooks/redux.ts'
 
 type UserSelect = "none";
 type SlideObjectProps = {
@@ -39,36 +39,35 @@ const EditorObject = (props: SlideObjectProps) => {
     userSelect: "none" as UserSelect,
   }
   
-  const dragObjectsDelta = useAppSelector(state => state.interfaceReducer.dragObjectsDelta);
   const {updateSlide} = usePresentationActions();
+  const {setDragObjects, setDragObjectsDelta} = useInterfaceActions();
   const slideObject = useRef<HTMLDivElement | null>(null);
 
   if (!props.preview) {
     useDragObject(slideObject, props.slide, props.data);
   }
 
-  const handleObjectClick = (event: React.MouseEvent) => {
-    if (dragObjectsDelta === 0) {
+  const handleMouseDown = (event: React.MouseEvent) => {
+    if (!props.data.selected) {
       if (!event.ctrlKey) {
         // снимаем выделение со всех объектов
         props.slide.slide.map(obj => updateSlide({slide: props.slide, oldSlideObject: obj, newSlideObject: {...obj, selected: false}}));
-
-        // Выделяем текущий
-        updateSlide({slide: props.slide, oldSlideObject: props.data, newSlideObject: {...props.data, selected: true}});
       }
-      else {
-        // Изменяем выделение текущего
-        updateSlide({slide: props.slide, oldSlideObject: props.data, newSlideObject: {...props.data, selected: !props.data.selected}});
-      }
+      
+      // Выделяем текущий
+      updateSlide({slide: props.slide, oldSlideObject: props.data, newSlideObject: {...props.data, selected: true}});
     }
+
+    setDragObjects(true);
+    setDragObjectsDelta(0);
   }
 
   return (
     <div 
       style={style} 
-      ref={slideObject}
+      ref={slideObject} data-selected={props.data.selected ? `true` : `false`} 
       className={styles.slideObject  + (props.data.selected && !props.preview? ` ${styles.activeObject}` : ``)}
-      onClick={!props.preview ? (e) => handleObjectClick(e) : () => {}}
+      onMouseDown={!props.preview ? (e) => handleMouseDown(e) : () => {}}
     >
       {getObject(data)}
     </div>
