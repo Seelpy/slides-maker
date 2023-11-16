@@ -49,7 +49,7 @@ const EditorObject = (props: SlideObjectProps) => {
   const slideObject = useRef<HTMLDivElement | null>(null)
 
   if (!props.preview) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+     
     useDragObject(slideObject, props.slide, props.data)
   }
 

@@ -6,18 +6,16 @@ import {
 } from '../hooks/redux'
 
 function keyHandler() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const slides = useAppSelector((state) => state.presentationReducer.slides)
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   const activeSlide = useAppSelector(
     (state) => state.interfaceReducer.activeSlide,
   )
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   const { setActiveSlide } = useInterfaceActions()
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   const { deleteSlides, updateSlide } = usePresentationActions()
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleDeleteKey = () => {
     const selectedSlides = slides.filter((s) => s.selected)
 
@@ -52,7 +50,6 @@ function keyHandler() {
     }
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     window.onkeyup = (event: KeyboardEvent) => {
       switch (event.key) {
