@@ -21,17 +21,6 @@ const SectionImages = (props: SectionImagesProps) => {
     })
   }
 
-  // const clickCreateObjectHandler = (
-  //   slideId: string | undefined,
-  //   type: string,
-  //   subtype: string | undefined,
-  // ) => {
-  //   if (slideId === undefined) {
-  //     return
-  //   }
-  //   createObject({ slideId: slideId, type: type, subtype: subtype })
-  // }
-
   return (
     <MenuSection name="Images">
       <div>
