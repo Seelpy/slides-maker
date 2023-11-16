@@ -1,7 +1,6 @@
 import styles from './LeftBar.module.css'
 import SlidePreview from '../Slide/SlidePreview';
 import { useAppSelector, useInterfaceActions, usePresentationActions } from '../../hooks/redux';
-import { SlideInfo } from '../../models/types';
 import { useEffect } from "react";
 
 const LeftBar = () => {
@@ -9,19 +8,9 @@ const LeftBar = () => {
   const {activeSlide, isDraggingSlides, dragSlidesOrigin, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
   const {setDragSlides, setActiveSlide, setDragSlidesOrigin, setDragSlidesDelta} = useInterfaceActions();
   const {moveSlides} = usePresentationActions();
-  
-  const updateActiveSlide = (slide: SlideInfo) => {
-    // dragSlidesOrigin нужен, чтобы после перетаскивания не срабатывал случайный клик
-    if (dragSlidesOrigin === undefined) {
-      setActiveSlide(slide);
-    }
-    else {
-      setDragSlidesOrigin(undefined);
-    }
-  }
 
   useEffect(() => {
-    if (!isDraggingSlides && dragSlidesOrigin && dragSlidesDelta !== 0) {
+    if (!isDraggingSlides && dragSlidesOrigin) {
       // Получаем нужные данные, для будущего свапа слайдов
       const selectedSlides = slides.filter(s => s.selected);
       const slidesPassed = Math.round(dragSlidesDelta / 228.0);
@@ -51,6 +40,7 @@ const LeftBar = () => {
         setActiveSlide(dragSlidesOrigin);
       }
 
+      setDragSlidesOrigin(undefined);
       setDragSlidesDelta(0);
     }
   }, [isDraggingSlides])
@@ -63,7 +53,6 @@ const LeftBar = () => {
           active={activeSlide !== undefined && slideInfo.id === activeSlide.id} 
           selected={slideInfo.selected} 
           slideInfo={slideInfo}
-          setActiveSlide={() => updateActiveSlide(slideInfo)}
         />
        ))
       }
