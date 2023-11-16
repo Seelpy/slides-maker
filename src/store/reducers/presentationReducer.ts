@@ -1,6 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { changeName, createSlide, moveSlides, deleteSlides, updatePresentation, updateSlide } from "../actions/presentationActions.ts"
+import { changeName, createSlide, moveSlides, deleteSlides, updatePresentation, updateSlide, createObject, updateTextSettings } from "../actions/presentationActions.ts"
 import { presentation } from "../../models/example/high.ts";
+import ObjectGenerator from "../../services/ObjectGenerator.ts";
+import { SlideObjectType, TextObject } from "../../models/types.ts";
 
 const presentationReducer = createReducer(presentation, (builder) => { builder
     .addCase(changeName, (state, action) => {
@@ -48,6 +50,42 @@ const presentationReducer = createReducer(presentation, (builder) => { builder
         }
     })
     .addCase(updatePresentation, (_, action) => action.payload)
+    .addCase(createObject, (state, action) => {
+        console.log(action)
+        let index = state.slides.findIndex((slide) => slide.id == action.payload.slideId)
+        let slideInfo = state.slides[index]
+        let object = ObjectGenerator.Generate(action.payload.type,action.payload.subtype);
+        if (object === undefined) {
+            return
+        }
+        
+        slideInfo.slide.push(object)
+        state.slides[index] = slideInfo
+    })
+    .addCase(updateTextSettings, (state, action) => {
+        console.log(action)
+        let index = state.slides.findIndex((slide) => slide.id == action.payload.slideId)
+        let slideInfo = state.slides[index]
+        let texts = slideInfo.slide.filter((slide) => slide.selected && slide.type == SlideObjectType.Text)
+        slideInfo.slide = slideInfo.slide.filter((slide) => !slide.selected || !(slide.type == SlideObjectType.Text))
+        texts = texts.map((text) => {
+            let newText: TextObject = text as TextObject
+            newText.chars = newText.chars.map((char) => {
+                char.fontFamily = action.payload.font ?? char.fontFamily
+                char.fontSize = action.payload.size ?? char.fontSize
+                char.italic = (action.payload.italic === undefined)?char.italic:!char.italic
+                char.bold = (action.payload.bold === undefined)?char.bold:!char.bold
+                char.underline = (action.payload.underline === undefined)?char.underline:!char.underline
+                console.log(char.fontSize)
+                return char
+            })
+            return newText
+        })
+        texts.forEach((text) => {
+            slideInfo.slide.push(text)
+        })
+        state.slides[index] = slideInfo
+    })
 });
 
 export default presentationReducer

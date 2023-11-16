@@ -1,21 +1,25 @@
 import MenuSection from '../MenuSection'
 import Button from '../Button'
 import ColorButton from '../ColorButton'
+import { useState } from 'react';
 
 type SectionColorsProps = {
     
 };
 
-const SectionColors = (props: SectionColorsProps) => {
+const SectionColors = (props: SectionColorsProps) => { 
+    const [leftColor] = useState<string>(`yellow`)
+    const [rightColor] = useState<string>(`black`)
+
     return (
       <MenuSection name='Colors'>
         <div>
           <Button>
-            <i className="fa-solid fa-square" style={{color: `yellow`, fontSize: `1.5rem`}}/> <br/>
+            <i className="fa-solid fa-square" style={{color: leftColor, fontSize: `1.5rem`}}/> <br/>
             Color 1
           </Button> 
           <Button>
-            <i className="fa-solid fa-square" style={{color: `black`, fontSize: `1.5rem`}}/> <br/>
+            <i className="fa-solid fa-square" style={{color: rightColor, fontSize: `1.5rem`}}/> <br/>
             Color 2
           </Button> 
 

@@ -25,11 +25,11 @@ const size: Size = {
 
 const char: Char = {
   value: 'a',
-  fontSize: 10,
+  fontSize: 25,
   fontFamily: 'Corbila',
   color: 'Dark',
   bold: true,
-  italic: true,
+  italic: false,
   underline: true,
 }
 
@@ -40,7 +40,7 @@ const textObject: TextObject = {
   chars: [char, char, char, char, char, char, char],
   size: size,
   rotate: 0,
-  selected: false,
+  selected: true,
 }
 
 const imageObject: ImageObject = {

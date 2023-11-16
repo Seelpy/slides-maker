@@ -20,6 +20,7 @@ const initialInterfaceState = {
 
 const interfaceReducer = createReducer(initialInterfaceState, (builder) => { builder
     .addCase(setActiveSlide, (state, action) => {
+        console.log(action)
         state.activeSlide = action.payload;
     })
     .addCase(setDragSlides, (state, action) => {

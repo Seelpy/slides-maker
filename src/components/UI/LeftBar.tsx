@@ -4,7 +4,11 @@ import { useAppSelector, useInterfaceActions, usePresentationActions } from '../
 import { SlideInfo } from '../../models/types';
 import { useEffect } from "react";
 
-const LeftBar = () => {
+type LeftBarProps = {
+  onSetActiveSlide: (slideId: string) => void,
+}
+
+const LeftBar = (props: LeftBarProps) => {
   const slides = useAppSelector(state => state.presentationReducer.slides);
   const {activeSlide, isDraggingSlides, dragSlidesOrigin, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
   const {setDragSlides, setActiveSlide, setDragSlidesOrigin, setDragSlidesDelta} = useInterfaceActions();
@@ -12,13 +16,8 @@ const LeftBar = () => {
   
   const updateActiveSlide = (slide: SlideInfo) => {
     // dragSlidesOrigin нужен, чтобы после перетаскивания не срабатывал случайный клик
-    if (dragSlidesOrigin === undefined) {
-      setActiveSlide(slide);
-      console.log("update");
-    }
-    else {
-      setDragSlidesOrigin(undefined);
-    }
+    props.onSetActiveSlide(slide.id)
+    setActiveSlide(slide);
   }
 
   useEffect(() => {
