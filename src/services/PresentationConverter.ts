@@ -1,6 +1,6 @@
 import { Presentaion } from '../models/types'
 
-class PresentaionConverter {
+class PresentationConverter {
   public ConvertToJson(presentaion: Presentaion): string {
     return JSON.stringify(presentaion)
   }
@@ -15,4 +15,4 @@ class PresentaionConverter {
   }
 }
 
-export default new PresentaionConverter()
+export default new PresentationConverter()

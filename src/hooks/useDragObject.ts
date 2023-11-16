@@ -76,7 +76,7 @@ function useDragObject(
     return () => {
       area.removeEventListener('mousemove', onMouseMove)
     }
-  }, [elementRef, obj, setDragObjectsDelta, slide, updateSlide])
+  }, [elementRef, obj])
 }
 
 export default useDragObject

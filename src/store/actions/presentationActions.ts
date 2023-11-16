@@ -10,6 +10,8 @@ enum presentationActions {
   updatePresentation = 'UPDATE_PRESENTATION',
   createObject = 'CREATE_OBJECT',
   updateTextSettings = 'UPDATE_TEXT_SETTINGS',
+  updateColor = 'UPDATE_COLOR',
+  importImage = 'IMPORT_IMAGE',
 }
 
 type moveSlidesPayload = {
@@ -39,6 +41,16 @@ type updateTextSettingsPayload = {
   underline?: boolean
 }
 
+type updateColorPayload = {
+  slideId: string
+  color: string
+}
+
+type importImagePayload = {
+  slideId: string
+  data: string
+}
+
 export const changeName = createAction<string>(presentationActions.changeName)
 export const createSlide = createAction<SlideInfo>(
   presentationActions.createSlide,
@@ -60,4 +72,10 @@ export const createObject = createAction<createObjectPayload>(
 )
 export const updateTextSettings = createAction<updateTextSettingsPayload>(
   presentationActions.updateTextSettings,
+)
+export const updateColor = createAction<updateColorPayload>(
+  presentationActions.updateColor,
+)
+export const importImage = createAction<importImagePayload>(
+  presentationActions.importImage,
 )

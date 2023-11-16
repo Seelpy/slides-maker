@@ -7,7 +7,7 @@ type CharObjectProps = {
 const CharObject = (props: CharObjectProps) => {
   const data = props.data
   const style = {
-    fontSize: data.fontSize,
+    fontSize: data.fontSize + 'px',
     fontFamily: data.fontFamily,
     color: data.color,
     fontStyle: data.italic ? 'italic' : '',

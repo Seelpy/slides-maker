@@ -40,7 +40,7 @@ function SlidesMoveHandler() {
         moveSlides({ slides: selectedSlides, pasteIndex: originIndex + moveBy })
       }
     }
-  }, [dragSlidesDelta, dragSlidesOrigin, isDraggingSlides, moveSlides, slides])
+  }, [isDraggingSlides])
 }
 
 export default SlidesMoveHandler

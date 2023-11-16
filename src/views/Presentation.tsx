@@ -17,7 +17,7 @@ function Presentation() {
       setDragObjects(false)
       setDragSlides(false)
     }
-  }, [setDragObjects, setDragSlides])
+  }, [])
 
   keyHandler()
 

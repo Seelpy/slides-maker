@@ -59,7 +59,7 @@ function keyHandler() {
         }
       }
     }
-  }, [slides, activeSlide, handleDeleteKey])
+  }, [slides, activeSlide])
 }
 
 export default keyHandler

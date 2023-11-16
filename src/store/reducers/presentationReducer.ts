@@ -1,17 +1,26 @@
 import { createReducer } from '@reduxjs/toolkit'
 import {
   changeName,
+  createObject,
   createSlide,
-  moveSlides,
   deleteSlides,
+  importImage,
+  moveSlides,
+  updateColor,
   updatePresentation,
   updateSlide,
-  createObject,
   updateTextSettings,
 } from '../actions/presentationActions.ts'
 import { presentation } from '../../models/example/high.ts'
 import ObjectGenerator from '../../services/ObjectGenerator.ts'
-import { SlideObjectType, TextObject } from '../../models/types.ts'
+import {
+  CircleObject,
+  SlideObjectType,
+  SquareObject,
+  TextObject,
+  TriangleObject,
+} from '../../models/types.ts'
+import objectGenerator from '../../services/ObjectGenerator.ts'
 
 const presentationReducer = createReducer(presentation, (builder) => {
   builder
@@ -92,9 +101,7 @@ const presentationReducer = createReducer(presentation, (builder) => {
       if (object === undefined) {
         return
       }
-
       slideInfo.slide.push(object)
-      state.slides[index] = slideInfo
     })
     .addCase(updateTextSettings, (state, action) => {
       console.log(action)
@@ -129,6 +136,47 @@ const presentationReducer = createReducer(presentation, (builder) => {
         slideInfo.slide.push(text)
       })
       state.slides[index] = slideInfo
+    })
+    .addCase(updateColor, (state, action) => {
+      console.log(action)
+      const index = state.slides.findIndex(
+        (slide) => slide.id == action.payload.slideId,
+      )
+      const slideInfo = state.slides[index]
+      slideInfo.slide.forEach((obj) => {
+        console.log(action.payload.color)
+        if (obj.selected && obj.type != SlideObjectType.Image) {
+          switch (obj.type) {
+            case SlideObjectType.Text: {
+              obj = obj as TextObject
+              obj.chars.forEach((char) => {
+                char.color = action.payload.color
+                console.log(action.payload.color)
+              })
+              break
+            }
+            case SlideObjectType.Primitive: {
+              obj = obj as CircleObject | SquareObject | TriangleObject
+              obj.color = action.payload.color
+            }
+          }
+        }
+      })
+    })
+    .addCase(importImage, (state, action) => {
+      console.log(action)
+      const index = state.slides.findIndex(
+        (slide) => slide.id == action.payload.slideId,
+      )
+      const slideInfo = state.slides[index]
+      const image = objectGenerator.Generate(
+        SlideObjectType.Image,
+        undefined,
+        action.payload.data,
+      )
+      if (image != undefined) {
+        slideInfo.slide.push(image)
+      }
     })
 })
 

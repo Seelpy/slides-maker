@@ -19,7 +19,7 @@ const MenuBar = (props: MenuBarProps) => {
       <SectionFigures activeSlideId={props.activeSlideId} />
       <SectionText activeSlideId={props.activeSlideId} />
       <SectionImages activeSlideId={props.activeSlideId} />
-      <SectionColors />
+      <SectionColors activeSlideId={props.activeSlideId} />
       <SectionSlides />
     </div>
   )

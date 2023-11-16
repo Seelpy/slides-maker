@@ -28,7 +28,7 @@ function useDragSlide(
     } else {
       isDraggingThis.current = false
     }
-  }, [elementRef, isDraggingSlides, slide])
+  }, [isDraggingSlides])
 
   useEffect(() => {
     const element = elementRef.current
@@ -64,13 +64,7 @@ function useDragSlide(
       element.removeEventListener('mousedown', onMouseDown)
       area.removeEventListener('mousemove', onMouseMove)
     }
-  }, [
-    elementRef,
-    setDragSlides,
-    setDragSlidesDelta,
-    setDragSlidesOrigin,
-    slide,
-  ])
+  }, [slide])
 }
 
 export default useDragSlide
