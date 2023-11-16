@@ -36,7 +36,7 @@ const LeftBar = () => {
       const moveBy = Math.min(Math.max(slidesPassed, minMove), maxMove);
       let shouldMove = false;
 
-      // Смотрим, нужно ли двигать слайды (если у нас выделено несколько слайдов, они могут идти подряд и сдвиг не нужен)
+      // Смотрим, нужно ли сгруппировать слайды (если у нас выделено несколько слайдов, идущих подряд)
       for (let i = 0; i < selectedSlides.length; i++) {
         for (let j = i + 1; j < selectedSlides.length; j++) {
           if (Math.abs(slides.findIndex(s => s.id === selectedSlides[i].id) - slides.findIndex(s => s.id === selectedSlides[j].id)) > 1) {

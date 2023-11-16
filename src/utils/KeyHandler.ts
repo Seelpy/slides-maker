@@ -29,9 +29,7 @@ function keyHandler() {
     // Удаляем выделенные объекты, если есть активный слайд.
     if (activeSlide) {
       const selectedObjects = activeSlide.slide.filter(obj => obj.selected);
-      for (let i = 0; i < selectedObjects.length; i++) {
-        updateSlide({slide: activeSlide, oldSlideObject: selectedObjects[i]});
-      }
+      selectedObjects.map(obj => updateSlide({slide: activeSlide, oldSlideObject: obj}));
     }
   }
 
