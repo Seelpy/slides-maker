@@ -3,16 +3,16 @@ import Char from './Char.tsx'
 import styles from './SlideText.module.css'
 
 type TextProps = {
-  data: TextObject;
+  data: TextObject
 }
 
 const SlideText = (props: TextProps) => {
-  const data = props.data;
+  const data = props.data
 
   return (
     <div className={styles.text}>
       {data.chars.map((char, i) => (
-          <Char key={i} data={char} />
+        <Char key={i} data={char} />
       ))}
     </div>
   )

@@ -1,105 +1,107 @@
 enum SlideObjectType {
-    Text = "TEXT",
-    Image = "IMAGE",
-    Primitive = "PRIMITIVE",
+  Text = 'TEXT',
+  Image = 'IMAGE',
+  Primitive = 'PRIMITIVE',
 }
 
 enum PrimitiveType {
-    Circle = "CIRCLE",
-    Square = "SQUARE",
-    Triangle = "TRIANGLE",
+  Circle = 'CIRCLE',
+  Square = 'SQUARE',
+  Triangle = 'TRIANGLE',
 }
 
 type Position = {
-    x: number,
-    y: number,
+  x: number
+  y: number
 }
 
 type Size = {
-    width: number,
-    height: number,
+  width: number
+  height: number
 }
 
 type Char = {
-    value: string,
-    fontSize: number,
-    fontFamily: string,
-    color: string,
-    bold: boolean,
-    italic: boolean,
-    underline: boolean,
+  value: string
+  fontSize: number
+  fontFamily: string
+  color: string
+  bold: boolean
+  italic: boolean
+  underline: boolean
 }
 
 type BaseSlideObject = {
-    id: string,
-    position: Position,
-    size: Size,
-    rotate: number,
-    selected: boolean,
+  id: string
+  position: Position
+  size: Size
+  rotate: number
+  selected: boolean
 }
 
 type TextObject = BaseSlideObject & {
-    type: SlideObjectType.Text,
-    chars: Array<Char>,
+  type: SlideObjectType.Text
+  chars: Array<Char>
 }
 
 type ImageObject = BaseSlideObject & {
-    type: SlideObjectType.Image,
-    data: string,
+  type: SlideObjectType.Image
+  data: string
 }
 
 type PrimitiveObject = BaseSlideObject & {
-    type: SlideObjectType.Primitive,
-    color: string,
+  type: SlideObjectType.Primitive
+  color: string
 }
 
 type CircleObject = PrimitiveObject & {
-    primitiveType: PrimitiveType.Circle,
+  primitiveType: PrimitiveType.Circle
 }
 
 type SquareObject = PrimitiveObject & {
-    primitiveType: PrimitiveType.Square,
+  primitiveType: PrimitiveType.Square
 }
 
 type TriangleObject = PrimitiveObject & {
-    primitiveType: PrimitiveType.Triangle,
+  primitiveType: PrimitiveType.Triangle
 }
 
-type SlideObject = TextObject | ImageObject | CircleObject | SquareObject | TriangleObject
+type SlideObject =
+  | TextObject
+  | ImageObject
+  | CircleObject
+  | SquareObject
+  | TriangleObject
 type Slide = Array<SlideObject>
 
 type SlideInfo = {
-    id: string;
-    selected: boolean
-    slide: Slide
+  id: string
+  selected: boolean
+  slide: Slide
 }
 
 type PrimType = CircleObject | SquareObject | TriangleObject
 
 type Presentaion = {
-    name: string
-    slides: Array<SlideInfo>
+  name: string
+  slides: Array<SlideInfo>
 }
 
-export {
-    SlideObjectType,
-    PrimitiveType,
-}
+export { SlideObjectType, PrimitiveType }
 
 export type {
-    Position,
-    Size,
-    Char,
-    BaseSlideObject,
-    TextObject,
-    ImageObject,
-    PrimitiveObject,
-    CircleObject,
-    SquareObject,
-    TriangleObject,
-    SlideObject,
-    Slide,
-    Presentaion,
-    PrimType,
-    SlideInfo,
+  Position,
+  Size,
+  Char,
+  BaseSlideObject,
+  TextObject,
+  ImageObject,
+  PrimitiveObject,
+  CircleObject,
+  SquareObject,
+  TriangleObject,
+  SlideObject,
+  Slide,
+  Presentaion,
+  PrimType,
+  SlideInfo,
 }

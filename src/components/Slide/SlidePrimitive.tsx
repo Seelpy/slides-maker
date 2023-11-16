@@ -2,7 +2,7 @@ import { PrimType, PrimitiveType, Size } from '../../models/types.ts'
 import styles from './SlidePrimitive.module.css'
 
 type PrimitiveProps = {
-  data: PrimType;
+  data: PrimType
 }
 
 function getTrianglePoints(size: Size): string {
@@ -46,7 +46,7 @@ function getSVGPrimitive(data: PrimType) {
 }
 
 const SlidePrimitive = (props: PrimitiveProps) => {
-  const data = props.data;
+  const data = props.data
 
   const style = {
     left: data.position.x,

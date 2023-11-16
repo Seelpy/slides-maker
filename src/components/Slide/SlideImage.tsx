@@ -2,7 +2,7 @@ import { ImageObject } from '../../models/types.ts'
 import styles from './SlideImage.module.css'
 
 type ImageObjectProps = {
-  data: ImageObject;
+  data: ImageObject
 }
 
 const SlideImage = (props: ImageObjectProps) => {
@@ -12,12 +12,16 @@ const SlideImage = (props: ImageObjectProps) => {
     left: data.position.x,
     top: data.position.y,
     width: data.size.width,
-    height:  data.size.height,
+    height: data.size.height,
   }
-  
+
   return (
     <div className={styles.image}>
-      <img style={style} src={data.data} onDragStart={(e) => e.preventDefault()}/>
+      <img
+        style={style}
+        src={data.data}
+        onDragStart={(e) => e.preventDefault()}
+      />
     </div>
   )
 }

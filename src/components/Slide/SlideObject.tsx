@@ -49,7 +49,6 @@ const EditorObject = (props: SlideObjectProps) => {
   const slideObject = useRef<HTMLDivElement | null>(null)
 
   if (!props.preview) {
-     
     useDragObject(slideObject, props.slide, props.data)
   }
 
