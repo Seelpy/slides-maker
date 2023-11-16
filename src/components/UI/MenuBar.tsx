@@ -1,5 +1,5 @@
 import styles from './MenuBar.module.css'
-import { SectionColors, SectionFigures, SectionImages, SectionInfo, SectionText } from './MenuSections';
+import { SectionColors, SectionFigures, SectionImages, SectionInfo, SectionText, SectionSlides } from './MenuSections';
 
 const MenuBar = () => {
   return (
@@ -9,6 +9,7 @@ const MenuBar = () => {
       <SectionText />
       <SectionImages />
       <SectionColors />
+      <SectionSlides />
     </div>
   )
 }
