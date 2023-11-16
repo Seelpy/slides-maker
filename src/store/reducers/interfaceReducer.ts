@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { setActiveSlide, setDragSlides, setDragSlidesOrigin, setDragSlidesDelta, setDragObjects } from "../actions/interfaceActions.ts"
+import { setActiveSlide, setDragSlides, setDragSlidesOrigin, setDragSlidesDelta, setDragObjects, setDragObjectsDelta } from "../actions/interfaceActions.ts"
 import { SlideInfo } from "../../models/types.ts";
 
 type initialInterfaceStateType = {
@@ -8,6 +8,7 @@ type initialInterfaceStateType = {
     dragSlidesOrigin: SlideInfo | undefined;
     dragSlidesDelta: number;
     isDraggingObjects: boolean;
+    dragObjectsDelta: number;
 }
 
 const initialInterfaceState = {
@@ -16,6 +17,7 @@ const initialInterfaceState = {
     dragSlidesOrigin: undefined,
     dragSlidesDelta: 0,
     isDraggingObjects: false,
+    dragObjectsDelta: 0,
 } as initialInterfaceStateType;
 
 const interfaceReducer = createReducer(initialInterfaceState, (builder) => { builder
@@ -33,6 +35,9 @@ const interfaceReducer = createReducer(initialInterfaceState, (builder) => { bui
     })
     .addCase(setDragObjects, (state, action) => {
         state.isDraggingObjects = action.payload;
+    })
+    .addCase(setDragObjectsDelta, (state, action) => {
+        state.dragObjectsDelta = action.payload;
     })
 });
 

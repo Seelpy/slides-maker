@@ -1,14 +1,24 @@
 import styles from './LeftBar.module.css'
 import SlidePreview from '../Slide/SlidePreview';
+import SlidesMoveHandler from '../../utils/SlidesMoveHandler';
 import { useAppSelector, useInterfaceActions, usePresentationActions } from '../../hooks/redux';
-import { useEffect } from "react";
+import { useRef } from "react";
 import { SlideInfo } from '../../models/types';
 
 const LeftBar = () => {
   const slides = useAppSelector(state => state.presentationReducer.slides);
-  const {activeSlide, isDraggingSlides, dragSlidesOrigin, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
+  const leftBarRef = useRef<HTMLDivElement | null>(null);
+  const {activeSlide, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
   const {setDragSlides, setActiveSlide} = useInterfaceActions();
-  const {moveSlides, updateSlide} = usePresentationActions();
+  const {updateSlide} = usePresentationActions();
+
+  SlidesMoveHandler();
+
+  const unselectSlides = (event: React.MouseEvent) => {
+    if (event.target === leftBarRef.current) {
+     slides.map(s => updateSlide({slide: s, selected: false}));
+    }
+  }
 
   const handleSlideClick = (event: React.MouseEvent, slide: SlideInfo) => {
     if (dragSlidesDelta === 0) {
@@ -22,39 +32,9 @@ const LeftBar = () => {
       }
     }
   }
-  
-  useEffect(() => {
-    if (!isDraggingSlides && dragSlidesOrigin && dragSlidesDelta !== 0) {
-      // Получаем нужные данные, для будущего свапа слайдов
-      const selectedSlides = slides.filter(s => s.selected);
-      const slidesPassed = Math.round(dragSlidesDelta / 228.0);
-      const originIndex = slides.findIndex(s => s.id === dragSlidesOrigin!.id);
-
-      // Клэмпим значение, на сколько слайдов будет сдвиг
-      const minMove = -originIndex;
-      const maxMove = slides.length - originIndex;
-      const moveBy = Math.min(Math.max(slidesPassed, minMove), maxMove);
-      let shouldMove = false;
-
-      // Смотрим, нужно ли сгруппировать слайды (если у нас выделено несколько слайдов, идущих подряд)
-      for (let i = 0; i < selectedSlides.length; i++) {
-        for (let j = i + 1; j < selectedSlides.length; j++) {
-          if (Math.abs(slides.findIndex(s => s.id === selectedSlides[i].id) - slides.findIndex(s => s.id === selectedSlides[j].id)) > 1) {
-            shouldMove = true;
-            break;
-          }
-        }
-        if (shouldMove) break;
-      }
-  
-      if (moveBy !== 0 || shouldMove) {
-        moveSlides({slides: selectedSlides, pasteIndex: originIndex + moveBy});
-      }
-    }
-  }, [isDraggingSlides])
 
   return (
-    <div className={styles.leftBar} onMouseLeave={() => setDragSlides(false)}>
+    <div className={styles.leftBar} ref={leftBarRef} onMouseLeave={() => setDragSlides(false)} onClick={(e) => unselectSlides(e)}>
       {slides.map((slideInfo, i) => (
         <SlidePreview 
           key={i} 

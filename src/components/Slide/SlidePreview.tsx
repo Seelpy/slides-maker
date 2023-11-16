@@ -34,7 +34,6 @@ const SlidePreview = (props: SlidePreviewProps) => {
   return (
     <div 
       ref={slideRef} 
-      data-selected={props.selected ? `true` : `false`} 
       className={styles.miniSlide + getCorrectBorder(props.active, props.selected)} 
       onClick={(e) => props.onClick(e, props.slideInfo)}
     >
