@@ -8,11 +8,18 @@ const LeftBar = () => {
   const slides = useAppSelector(state => state.presentationReducer.slides);
   const {activeSlide, isDraggingSlides, dragSlidesOrigin, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
   const {setDragSlides, setActiveSlide} = useInterfaceActions();
-  const {moveSlides} = usePresentationActions();
+  const {moveSlides, updateSlide} = usePresentationActions();
 
-  const handleSlideClick = (slide: SlideInfo) => {
+  const handleSlideClick = (event: React.MouseEvent, slide: SlideInfo) => {
     if (dragSlidesDelta === 0) {
-      setActiveSlide(slide);
+      if (!event.ctrlKey) {
+        setActiveSlide(slide);
+        slides.map(s => updateSlide({slide: s, selected: false}));
+        updateSlide({slide: slide, selected: true});
+      }
+      else {
+        updateSlide({slide: slide, selected: !slide.selected});
+      }
     }
   }
   
@@ -54,7 +61,7 @@ const LeftBar = () => {
           active={activeSlide !== undefined && slideInfo.id === activeSlide.id} 
           selected={slideInfo.selected} 
           slideInfo={slideInfo}
-          onClick={(slide: SlideInfo) => handleSlideClick(slide)}
+          onClick={(event: React.MouseEvent, slide: SlideInfo) => handleSlideClick(event, slide)}
         />
        ))
       }
