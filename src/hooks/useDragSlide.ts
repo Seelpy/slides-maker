@@ -13,7 +13,7 @@ function useDragSlide(elementRef: React.MutableRefObject<HTMLDivElement | null>,
     });
 
     useEffect(() => {
-        if (elementRef.current && elementRef.current.getAttribute("data-selected") === "true") {
+        if (elementRef.current && slide.selected) {
             if (isDraggingSlides) {
                 isDraggingThis.current = true;
                 coords.current.startMouse = coords.current.lastMouse;
@@ -26,7 +26,7 @@ function useDragSlide(elementRef: React.MutableRefObject<HTMLDivElement | null>,
         else {
             isDraggingThis.current = false;
         }
-    }, [isDraggingSlides, slide.id]);
+    }, [isDraggingSlides, slide]);
 
     useEffect(() => {
         const element = elementRef.current;
@@ -36,10 +36,12 @@ function useDragSlide(elementRef: React.MutableRefObject<HTMLDivElement | null>,
         if (!area) throw new Error("Wrong slide structure! Slide doesn't have a parent-area");
 
         const onMouseDown = () => {
-            if (element.getAttribute("data-selected") === "true") {
+            if (slide.selected) {
                 setDragSlides(true);
                 setDragSlidesOrigin(slide);
             }
+
+            setDragSlidesDelta(0);
         }
     
         const onMouseMove = (e: MouseEvent) => {
@@ -59,7 +61,7 @@ function useDragSlide(elementRef: React.MutableRefObject<HTMLDivElement | null>,
             element.removeEventListener('mousedown', onMouseDown);
             area.removeEventListener('mousemove', onMouseMove);
         };
-    }, [slide.id])
+    }, [slide])
 }
 
 export default useDragSlide;

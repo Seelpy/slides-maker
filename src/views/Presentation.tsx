@@ -3,7 +3,8 @@ import MenuBar from '../components/UI/MenuBar'
 import LeftBar from '../components/UI/LeftBar'
 import SlideEditor from '../components/Slide/SlideEditor'
 import { useInterfaceActions } from '../hooks/redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useState} from 'react';
+import keyHandler from '../utils/KeyHandler';
 
 function Presentation() {
   const {setDragObjects, setDragSlides} = useInterfaceActions();
@@ -16,17 +17,14 @@ function Presentation() {
     }
   }, []);
 
-  const onSetActiveSlide = (slideId: string) => {
-    console.log(slideId)
-    setActiveSlideId(slideId)
-  }
+  keyHandler();
 
   return (
     <div className={styles.presentation}>
       <MenuBar activeSlideId={activeSlideId}/>
 
       <div className={styles.mainBlock}>
-        <LeftBar onSetActiveSlide={onSetActiveSlide}/>
+        <LeftBar onSetActiveSlide={setActiveSlideId}/>
         <SlideEditor/>
       </div>
     </div>

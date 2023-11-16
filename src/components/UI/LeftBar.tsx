@@ -1,8 +1,9 @@
 import styles from './LeftBar.module.css'
 import SlidePreview from '../Slide/SlidePreview';
+import SlidesMoveHandler from '../../utils/SlidesMoveHandler';
 import { useAppSelector, useInterfaceActions, usePresentationActions } from '../../hooks/redux';
+import { useRef } from "react";
 import { SlideInfo } from '../../models/types';
-import { useEffect } from "react";
 
 type LeftBarProps = {
   onSetActiveSlide: (slideId: string) => void,
@@ -10,6 +11,7 @@ type LeftBarProps = {
 
 const LeftBar = (props: LeftBarProps) => {
   const slides = useAppSelector(state => state.presentationReducer.slides);
+<<<<<<< HEAD
   const {activeSlide, isDraggingSlides, dragSlidesOrigin, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
   const {setDragSlides, setActiveSlide, setDragSlidesOrigin, setDragSlidesDelta} = useInterfaceActions();
   const {moveSlides} = usePresentationActions();
@@ -18,55 +20,43 @@ const LeftBar = (props: LeftBarProps) => {
     // dragSlidesOrigin нужен, чтобы после перетаскивания не срабатывал случайный клик
     props.onSetActiveSlide(slide.id)
     setActiveSlide(slide);
+=======
+  const leftBarRef = useRef<HTMLDivElement | null>(null);
+  const {activeSlide, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
+  const {setDragSlides, setActiveSlide} = useInterfaceActions();
+  const {updateSlide} = usePresentationActions();
+
+  SlidesMoveHandler();
+
+  const unselectSlides = (event: React.MouseEvent) => {
+    if (event.target === leftBarRef.current) {
+     slides.map(s => updateSlide({slide: s, selected: false}));
+    }
+>>>>>>> edit
   }
 
-  useEffect(() => {
-    if (!isDraggingSlides && dragSlidesOrigin && dragSlidesDelta !== 0) {
-      // Получаем нужные данные, для будущего свапа слайдов
-      const selectedSlides = slides.filter(s => s.selected);
-      const slidesPassed = Math.round(dragSlidesDelta / 228.0);
-      const originIndex = slides.findIndex(s => s.id === dragSlidesOrigin!.id);
-
-      // Клэмпим значение, на сколько слайдов будет сдвиг
-      const minMove = -originIndex;
-      const maxMove = slides.length - originIndex;
-      const moveBy = Math.min(Math.max(slidesPassed, minMove), maxMove);
-      let shouldMove = false;
-
-      // Смотрим, нужно ли двигать слайды (если у нас выделено несколько слайдов, они могут идти подряд и сдвиг не нужен)
-      for (let i = 0; i < selectedSlides.length; i++) {
-        for (let j = i + 1; j < selectedSlides.length; j++) {
-          if (Math.abs(slides.findIndex(s => s.id === selectedSlides[i].id) - slides.findIndex(s => s.id === selectedSlides[j].id)) > 1) {
-            shouldMove = true;
-            break;
-          }
-        }
-        if (shouldMove) {
-          break;
-        }
-      }
-  
-      if (moveBy !== 0 || shouldMove) {
-        moveSlides({slides: selectedSlides, pasteIndex: originIndex + moveBy});
+  const handleSlideClick = (event: React.MouseEvent, slide: SlideInfo) => {
+    if (dragSlidesDelta === 0) {
+      if (!event.ctrlKey) {
+        setActiveSlide(slide);
+        slides.map(s => updateSlide({slide: s, selected: false}));
+        updateSlide({slide: slide, selected: true});
       }
       else {
-        console.log("here");
-        setActiveSlide(dragSlidesOrigin);
+        updateSlide({slide: slide, selected: !slide.selected});
       }
-
-      setDragSlidesDelta(0);
     }
-  }, [isDraggingSlides])
+  }
 
   return (
-    <div className={styles.leftBar} onMouseLeave={() => setDragSlides(false)}>
+    <div className={styles.leftBar} ref={leftBarRef} onMouseLeave={() => setDragSlides(false)} onClick={(e) => unselectSlides(e)}>
       {slides.map((slideInfo, i) => (
         <SlidePreview 
           key={i} 
           active={activeSlide !== undefined && slideInfo.id === activeSlide.id} 
           selected={slideInfo.selected} 
           slideInfo={slideInfo}
-          setActiveSlide={() => updateActiveSlide(slideInfo)}
+          onClick={(event: React.MouseEvent, slide: SlideInfo) => handleSlideClick(event, slide)}
         />
        ))
       }

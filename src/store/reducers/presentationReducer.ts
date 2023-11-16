@@ -23,7 +23,8 @@ const presentationReducer = createReducer(presentation, (builder) => { builder
         state.slides.splice(action.payload.pasteIndex - offset, 0, ...action.payload.slides);
     })
     .addCase(deleteSlides, (state, action) => {
-        state.slides = state.slides.filter((slide) => !action.payload.includes(slide))
+        const toDeleteIds = action.payload.map(s => s.id);
+        state.slides = state.slides.filter((slide) => !toDeleteIds.includes(slide.id));
     })
     .addCase(updateSlide, (state, action) => {
         const slideInfo = state.slides.find(s => s.id === action.payload.slide.id);

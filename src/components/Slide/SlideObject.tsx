@@ -5,6 +5,7 @@ import SlideText from './SlideText.tsx'
 import SlideImage from './SlideImage.tsx'
 import { useRef } from 'react'
 import useDragObject from '../../hooks/useDragObject.ts'
+import { useAppSelector, useInterfaceActions, usePresentationActions } from '../../hooks/redux.ts'
 
 type UserSelect = "none";
 type SlideObjectProps = {
@@ -38,14 +39,36 @@ const EditorObject = (props: SlideObjectProps) => {
     userSelect: "none" as UserSelect,
   }
   
+  const {updateSlide} = usePresentationActions();
+  const {setDragObjects, setDragObjectsDelta} = useInterfaceActions();
   const slideObject = useRef<HTMLDivElement | null>(null);
-  
+
   if (!props.preview) {
     useDragObject(slideObject, props.slide, props.data);
   }
 
+  const handleMouseDown = (event: React.MouseEvent) => {
+    if (!props.data.selected) {
+      if (!event.ctrlKey) {
+        // снимаем выделение со всех объектов
+        props.slide.slide.map(obj => updateSlide({slide: props.slide, oldSlideObject: obj, newSlideObject: {...obj, selected: false}}));
+      }
+      
+      // Выделяем текущий
+      updateSlide({slide: props.slide, oldSlideObject: props.data, newSlideObject: {...props.data, selected: true}});
+    }
+
+    setDragObjects(true);
+    setDragObjectsDelta(0);
+  }
+
   return (
-    <div ref={slideObject} data-selected={props.data.selected ? `true` : `false`} style={style} className={styles.slideObject  + (props.data.selected && !props.preview? ` ${styles.activeObject}` : ``)}>
+    <div 
+      style={style} 
+      ref={slideObject} data-selected={props.data.selected ? `true` : `false`} 
+      className={styles.slideObject  + (props.data.selected && !props.preview? ` ${styles.activeObject}` : ``)}
+      onMouseDown={!props.preview ? (e) => handleMouseDown(e) : () => {}}
+    >
       {getObject(data)}
     </div>
   )

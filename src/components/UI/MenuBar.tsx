@@ -1,5 +1,5 @@
 import styles from './MenuBar.module.css'
-import { SectionColors, SectionFigures, SectionImages, SectionInfo, SectionText } from './MenuSections';
+import { SectionColors, SectionFigures, SectionImages, SectionInfo, SectionText, SectionSlides } from './MenuSections';
 
 type MenuBarProps = {
   activeSlideId: string|undefined
@@ -13,6 +13,7 @@ const MenuBar = (props: MenuBarProps) => {
       <SectionText activeSlideId={props.activeSlideId}/>
       <SectionImages activeSlideId={props.activeSlideId}/>
       <SectionColors />
+      <SectionSlides />
     </div>
   )
 }
