@@ -53,9 +53,9 @@ const presentationReducer = createReducer(presentation, (builder) => { builder
     .addCase(updatePresentation, (_, action) => action.payload)
     .addCase(createObject, (state, action) => {
         console.log(action)
-        let index = state.slides.findIndex((slide) => slide.id == action.payload.slideId)
-        let slideInfo = state.slides[index]
-        let object = ObjectGenerator.Generate(action.payload.type,action.payload.subtype);
+        const index = state.slides.findIndex((slide) => slide.id == action.payload.slideId)
+        const slideInfo = state.slides[index]
+        const object = ObjectGenerator.Generate(action.payload.type,action.payload.subtype);
         if (object === undefined) {
             return
         }
@@ -65,12 +65,12 @@ const presentationReducer = createReducer(presentation, (builder) => { builder
     })
     .addCase(updateTextSettings, (state, action) => {
         console.log(action)
-        let index = state.slides.findIndex((slide) => slide.id == action.payload.slideId)
-        let slideInfo = state.slides[index]
+        const index = state.slides.findIndex((slide) => slide.id == action.payload.slideId)
+        const slideInfo = state.slides[index]
         let texts = slideInfo.slide.filter((slide) => slide.selected && slide.type == SlideObjectType.Text)
         slideInfo.slide = slideInfo.slide.filter((slide) => !slide.selected || !(slide.type == SlideObjectType.Text))
         texts = texts.map((text) => {
-            let newText: TextObject = text as TextObject
+            const newText: TextObject = text as TextObject
             newText.chars = newText.chars.map((char) => {
                 char.fontFamily = action.payload.font ?? char.fontFamily
                 char.fontSize = action.payload.size ?? char.fontSize

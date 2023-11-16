@@ -75,7 +75,6 @@ const imageObject2: ImageObject = {
   selected: false,
 }
 
-
 const circleObject: CircleObject = {
   id: 'c1',
   type: SlideObjectType.Primitive,
@@ -127,7 +126,6 @@ const triangleObject: TriangleObject = {
   selected: true,
 }
 
-
 const triangle2Object: TriangleObject = {
   id: 'tr2',
   type: SlideObjectType.Primitive,
@@ -170,14 +168,15 @@ const slide1: Slide = [
   squareObject,
   triangleObject,
 ]
-const slide2: Slide = [
-  triangle2Object,
-  triangle3Object,
-]
+const slide2: Slide = [triangle2Object, triangle3Object]
 
 const presentation: Presentaion = {
   name: 'presentation',
-  slides: [{id: "slide1", slide: slide1, selected: true}, {id: "slide2", slide: slide2, selected: true}, {id: "slide3", slide: [], selected: false}]
+  slides: [
+    { id: 'slide1', slide: slide1, selected: true },
+    { id: 'slide2', slide: slide2, selected: true },
+    { id: 'slide3', slide: [], selected: false },
+  ],
 }
 
-export {presentation}
+export { presentation }

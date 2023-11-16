@@ -2,10 +2,8 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-
     box-sizing: border-box;
     padding: 6px 12px;
-    
-    background-color: rgba(242, 242, 242, 255);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 15px 0px;
+    background-color: rgb(242 242 242 / 25500%);
+    box-shadow: rgb(0 0 0 / 25%) 0 0 15px 0;
 }

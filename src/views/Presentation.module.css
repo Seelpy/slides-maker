@@ -1,7 +1,6 @@
 .presentation {
     display: flex;
     flex-direction: column;
-
     width: 100vw;
     height: 100vh;
 }
@@ -9,7 +8,6 @@
 .mainBlock {
     display: flex;
     flex-direction: row;
-
     gap: 0;
     width: 100vw;
     height: 100vh;

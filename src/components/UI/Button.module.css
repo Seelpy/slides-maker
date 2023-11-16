@@ -2,15 +2,13 @@
     box-sizing: border-box;
     text-align: center;
     cursor: pointer;
-
     padding: 6px;
     border-radius: 5px;
-
     background-color: white;
-    border: 1px solid rgba(24, 24, 24, 0.38);
+    border: 1px solid rgb(24 24 24 / 38%);
     transition : border 180ms ease-in-out;
 }
 
 .button:hover {
-    border: 1px solid rgba(24, 24, 24, 0.88);
+    border: 1px solid rgb(24 24 24 / 88%);
 }

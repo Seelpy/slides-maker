@@ -11,16 +11,6 @@ type LeftBarProps = {
 
 const LeftBar = (props: LeftBarProps) => {
   const slides = useAppSelector(state => state.presentationReducer.slides);
-<<<<<<< HEAD
-  const {activeSlide, isDraggingSlides, dragSlidesOrigin, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
-  const {setDragSlides, setActiveSlide, setDragSlidesOrigin, setDragSlidesDelta} = useInterfaceActions();
-  const {moveSlides} = usePresentationActions();
-  
-  const updateActiveSlide = (slide: SlideInfo) => {
-    // dragSlidesOrigin нужен, чтобы после перетаскивания не срабатывал случайный клик
-    props.onSetActiveSlide(slide.id)
-    setActiveSlide(slide);
-=======
   const leftBarRef = useRef<HTMLDivElement | null>(null);
   const {activeSlide, dragSlidesDelta} = useAppSelector(state => state.interfaceReducer);
   const {setDragSlides, setActiveSlide} = useInterfaceActions();
@@ -32,13 +22,13 @@ const LeftBar = (props: LeftBarProps) => {
     if (event.target === leftBarRef.current) {
      slides.map(s => updateSlide({slide: s, selected: false}));
     }
->>>>>>> edit
   }
 
   const handleSlideClick = (event: React.MouseEvent, slide: SlideInfo) => {
     if (dragSlidesDelta === 0) {
       if (!event.ctrlKey) {
         setActiveSlide(slide);
+        props.onSetActiveSlide(slide.id)
         slides.map(s => updateSlide({slide: s, selected: false}));
         updateSlide({slide: slide, selected: true});
       }
