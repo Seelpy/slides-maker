@@ -53,7 +53,6 @@ function useDragObject(elementRef: React.MutableRefObject<HTMLDivElement | null>
             const deltaWidth = e.clientX - coords.current.startMouse.x + coords.current.startOffset.x;
 
             setDragObjectsDelta(Math.abs(deltaHeight) + Math.abs(deltaWidth));
-            console.log(obj.id, obj.selected);
             
             updateSlide({
                 slide: slide,
