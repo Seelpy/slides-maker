@@ -39,8 +39,9 @@ function useDragSlide(elementRef: React.MutableRefObject<HTMLDivElement | null>,
             if (element.getAttribute("data-selected") === "true") {
                 setDragSlides(true);
                 setDragSlidesOrigin(slide);
-                setDragSlidesDelta(0);
             }
+
+            setDragSlidesDelta(0);
         }
     
         const onMouseMove = (e: MouseEvent) => {
