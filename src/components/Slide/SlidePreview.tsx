@@ -8,6 +8,7 @@ type SlidePreviewProps = {
   active: boolean,
   selected: boolean,
   slideInfo: SlideInfo;
+  onClick: (slide: SlideInfo) => void;
 };
 
 function getCorrectBorder(active: boolean, selected: boolean) {
@@ -31,7 +32,7 @@ const SlidePreview = (props: SlidePreviewProps) => {
   useDragSlide(slideRef, props.slideInfo);
 
   return (
-    <div ref={slideRef} data-selected={props.selected ? `true` : `false`} className={styles.miniSlide + getCorrectBorder(props.active, props.selected)}>
+    <div ref={slideRef} data-selected={props.selected ? `true` : `false`} className={styles.miniSlide + getCorrectBorder(props.active, props.selected)} onClick={() => props.onClick(props.slideInfo)}>
       <div className={styles.slidePreview}>
         {props.slideInfo.slide.map((obj, i) => (
           <EditorObject key={i} slide={props.slideInfo} data={obj} preview={true}/>
