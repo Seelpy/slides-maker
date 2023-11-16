@@ -14,13 +14,17 @@ function keyHandler() {
     if (selectedSlides.length > 0) {
       const activeSlideIndex = activeSlide ? selectedSlides.findIndex(s => s.id === activeSlide!.id) : -1;
   
-      if (activeSlideIndex !== -1) {
-        for (let i = activeSlideIndex + 1; i < slides.length; i++) {
-          if (!slides[i].selected) {
-            setActiveSlide(slides[i]);
-            break;
+      searchNextActive: {
+        if (activeSlideIndex !== -1) {
+          for (let i = activeSlideIndex + 1; i < slides.length; i++) {
+            if (!slides[i].selected) {
+              setActiveSlide(slides[i]);
+              break searchNextActive;
+            }
           }
         }
+
+        setActiveSlide(undefined);
       }
   
       deleteSlides(selectedSlides); 
