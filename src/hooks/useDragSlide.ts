@@ -24,6 +24,8 @@ function useDragSlide(
       } else if (isDraggingThis.current) {
         isDraggingThis.current = false
         elementRef.current.style.transform = ``
+        elementRef.current.style.position = ``
+        elementRef.current.style.zIndex = ``
       }
     } else {
       isDraggingThis.current = false
@@ -54,6 +56,9 @@ function useDragSlide(
 
       const deltaHeight = e.clientY - coords.current.startMouse
       element.style.transform = `translateY(${deltaHeight}px)`
+      element.style.position = `relative`
+      element.style.zIndex = `1`
+
       setDragSlidesDelta(deltaHeight)
     }
 
