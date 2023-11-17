@@ -1,6 +1,7 @@
 import styles from './SlideEditor.module.css'
 import EditorObject from './SlideObject'
 import SelectionAreaHandler from '../../utils/SelectionAreaHandler'
+import SelectedObjectsHandler from '../../utils/SelectedObjectsHandler'
 import { useAppSelector } from '../../hooks/redux'
 import { useInterfaceActions } from '../../hooks/redux'
 import { useRef } from 'react'
@@ -8,14 +9,15 @@ import { useRef } from 'react'
 const SlideEditor = () => {
   const editorAreaRef = useRef<HTMLDivElement | null>(null)
   const slideEditorRef = useRef<HTMLDivElement | null>(null)
-  const selectionRef = useRef<HTMLDivElement | null>(null)
+  const mouseSelectionRef = useRef<HTMLDivElement | null>(null)
 
   const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
   const slides = useAppSelector((state) => state.presentationReducer.slides)
   const referencedActiveSlide = slides.find((s) => s.id === activeSlideId)
   const { setDragObjects, setSelectingArea } = useInterfaceActions()
 
-  SelectionAreaHandler(referencedActiveSlide, editorAreaRef, slideEditorRef, selectionRef);
+  SelectionAreaHandler(referencedActiveSlide, editorAreaRef, slideEditorRef, mouseSelectionRef);
+  SelectedObjectsHandler(editorAreaRef, referencedActiveSlide)
 
   const dropDragEvent = (e: React.DragEvent) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const SlideEditor = () => {
     >
       {referencedActiveSlide && 
         <div className={styles.slideEditor} ref={slideEditorRef} onDragStart={(e) => dropDragEvent(e)}>
-          <div ref={selectionRef} className={styles.selectionArea}/>
+          <div ref={mouseSelectionRef} className={styles.selectionArea}/>
           {referencedActiveSlide.slide.map((obj, i) => (
             <EditorObject
               key={i}

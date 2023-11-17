@@ -1,10 +1,9 @@
 import styles from './SlideObject.module.css'
-import { SlideObject, SlideInfo, SlideObjectType, Slide } from '../../models/types.ts'
+import { SlideObject, SlideInfo, SlideObjectType } from '../../models/types.ts'
 import SlidePrimitive from './SlidePrimitive.tsx'
 import SlideText from './SlideText.tsx'
 import SlideImage from './SlideImage.tsx'
 import { useRef } from 'react'
-import useDragObject from '../../hooks/useDragObject.ts'
 import {
   useInterfaceActions,
   usePresentationActions,
@@ -47,10 +46,6 @@ const EditorObject = (props: SlideObjectProps) => {
   const { updateSlide } = usePresentationActions()
   const { setDragObjects, setDragObjectsDelta } = useInterfaceActions()
   const slideObject = useRef<HTMLDivElement | null>(null)
-
-  if (!props.preview) {
-    useDragObject(slideObject, props.slide, props.data)
-  }
 
   const handleMouseDown = (event: React.MouseEvent) => {
     if (!props.data.selected) {

@@ -63,7 +63,7 @@ function SelectionAreaHandler(
     const area = areaRef.current;
     const editor = editorRef.current;
 
-    if (!area) throw new Error("editorArea is undefined!")
+    if (!area) return;
     if (!editor) return;
 
     const selection = selectionRef.current!;
