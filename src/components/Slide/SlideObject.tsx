@@ -1,5 +1,5 @@
 import styles from './SlideObject.module.css'
-import { SlideObject, SlideInfo, SlideObjectType } from '../../models/types.ts'
+import { SlideObject, SlideInfo, SlideObjectType, Slide } from '../../models/types.ts'
 import SlidePrimitive from './SlidePrimitive.tsx'
 import SlideText from './SlideText.tsx'
 import SlideImage from './SlideImage.tsx'
@@ -17,13 +17,13 @@ type SlideObjectProps = {
   preview: boolean
 }
 
-function getObject(data: SlideObject) {
+function getObject(data: SlideObject, slide: SlideInfo) {
   switch (data.type) {
     case SlideObjectType.Primitive:
       return <SlidePrimitive data={data} />
 
     case SlideObjectType.Text:
-      return <SlideText data={data} />
+      return <SlideText data={data} slide={slide}/>
 
     case SlideObjectType.Image:
       return <SlideImage data={data} />
@@ -81,14 +81,13 @@ const EditorObject = (props: SlideObjectProps) => {
     <div
       style={style}
       ref={slideObject}
-      data-selected={props.data.selected ? `true` : `false`}
       className={
         styles.slideObject +
         (props.data.selected && !props.preview ? ` ${styles.activeObject}` : ``)
       }
       onMouseDown={!props.preview ? (e) => handleMouseDown(e) : () => {}}
     >
-      {getObject(data)}
+      {getObject(data, props.slide)}
     </div>
   )
 }

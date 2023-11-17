@@ -1,11 +1,15 @@
 .colorButton {
-  box-sizing: border-box;
-  padding: 0 1px;
-  border-radius: 2px;
+  width: 26px;
+  height: 26px;
+  font-size: 25px;
+  text-align: center;
+
   cursor: pointer;
-  transition: outline 180ms ease-in-out;
+  border-radius: 5px;
+  border: 1px solid rgb(24 24 24 / 38%);
+  transition : border 180ms ease-in-out;
 }
 
 .colorButton:hover {
-  outline: 1px solid rgb(24 24 24 / 88%);
+  border: 1px solid rgb(24 24 24 / 88%);
 }

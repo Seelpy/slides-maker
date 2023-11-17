@@ -10,7 +10,7 @@ const ColorButton = (props: ColorButtonProps) => {
     <i
       onClick={() => props.onClick(props.color)}
       className={styles.colorButton + ' fa-sharp fa-solid fa-square'}
-      style={{ color: props.color, fontSize: `1.5rem` }}
+      style={{ color: props.color }}
     />
   )
 }
