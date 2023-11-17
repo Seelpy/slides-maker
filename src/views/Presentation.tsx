@@ -5,6 +5,7 @@ import SlideEditor from '../components/Slide/SlideEditor'
 import { useInterfaceActions } from '../hooks/redux'
 import { useEffect } from 'react'
 import keyHandler from '../utils/KeyHandler'
+import textKeyHandler from '../utils/TextKeyHandler'
 
 function Presentation() {
   const { setDragObjects, setDragSlides, setSelectingArea } = useInterfaceActions()
@@ -18,6 +19,7 @@ function Presentation() {
   }, [])
 
   keyHandler()
+  textKeyHandler()
 
   return (
     <div className={styles.presentation}>

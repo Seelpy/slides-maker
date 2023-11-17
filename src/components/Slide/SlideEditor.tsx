@@ -5,6 +5,7 @@ import SelectedObjectsHandler from '../../utils/SelectedObjectsHandler'
 import { useAppSelector } from '../../hooks/redux'
 import { useInterfaceActions } from '../../hooks/redux'
 import { useRef } from 'react'
+import textKeyHandler from '../../utils/TextKeyHandler'
 
 const SlideEditor = () => {
   const editorAreaRef = useRef<HTMLDivElement | null>(null)
@@ -18,6 +19,7 @@ const SlideEditor = () => {
 
   SelectionAreaHandler(referencedActiveSlide, editorAreaRef, slideEditorRef, mouseSelectionRef);
   SelectedObjectsHandler(editorAreaRef, referencedActiveSlide)
+  textKeyHandler()
 
   const dropDragEvent = (e: React.DragEvent) => {
     e.preventDefault();
