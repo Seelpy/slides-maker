@@ -8,18 +8,14 @@ import {
   SectionSlides,
 } from './MenuSections'
 
-type MenuBarProps = {
-  activeSlideId: string | undefined
-}
-
-const MenuBar = (props: MenuBarProps) => {
+const MenuBar = () => {
   return (
     <div className={styles.menuBar}>
       <SectionInfo />
-      <SectionFigures activeSlideId={props.activeSlideId} />
-      <SectionText activeSlideId={props.activeSlideId} />
-      <SectionImages activeSlideId={props.activeSlideId} />
-      <SectionColors activeSlideId={props.activeSlideId} />
+      <SectionFigures />
+      <SectionText />
+      <SectionImages  />
+      <SectionColors />
       <SectionSlides />
     </div>
   )

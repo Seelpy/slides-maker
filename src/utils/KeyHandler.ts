@@ -8,12 +8,13 @@ import {
 function keyHandler() {
   const slides = useAppSelector((state) => state.presentationReducer.slides)
 
-  const activeSlide = useAppSelector(
-    (state) => state.interfaceReducer.activeSlide,
+  const activeSlideId = useAppSelector(
+    (state) => state.interfaceReducer.activeSlideId,
   )
 
-  const { setActiveSlide } = useInterfaceActions()
+  const activeSlide = slides.find((s) => s.id === activeSlideId)
 
+  const { setActiveSlideId } = useInterfaceActions()
   const { deleteSlides, updateSlide } = usePresentationActions()
 
   const handleDeleteKey = () => {
@@ -21,21 +22,21 @@ function keyHandler() {
 
     // Удаляем выделенные слайды. Если активный слайд - выделенный, то меняем активный на следующий.
     if (selectedSlides.length > 0) {
-      const activeSlideIndex = activeSlide
-        ? selectedSlides.findIndex((s) => s.id === activeSlide!.id)
+      const activeSlideIndex = activeSlideId
+        ? selectedSlides.findIndex((s) => s.id === activeSlideId)
         : -1
 
       searchNextActive: {
         if (activeSlideIndex !== -1) {
           for (let i = activeSlideIndex + 1; i < slides.length; i++) {
             if (!slides[i].selected) {
-              setActiveSlide(slides[i])
+              setActiveSlideId(slides[i].id)
               break searchNextActive
             }
           }
         }
 
-        setActiveSlide(undefined)
+        setActiveSlideId(undefined)
       }
 
       deleteSlides(selectedSlides)

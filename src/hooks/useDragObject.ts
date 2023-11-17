@@ -32,8 +32,7 @@ function useDragObject(
   useEffect(() => {
     if (elementRef.current && obj.selected && isDraggingObjects) {
       isDraggingThis.current = true
-      coords.current.startMouse.x = coords.current.currentMouse.x
-      coords.current.startMouse.y = coords.current.currentMouse.y
+      coords.current.startMouse = {...coords.current.currentMouse}
       coords.current.startOffset.x = elementRef.current.offsetLeft
       coords.current.startOffset.y = elementRef.current.offsetTop
     } else {

@@ -1,14 +1,11 @@
 import MenuSection from '../MenuSection'
 import Button from '../Button'
-import { usePresentationActions } from '../../../hooks/redux'
+import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
 import { SlideObjectType } from '../../../models/types'
 
-type SectionTextProps = {
-  activeSlideId: string | undefined
-}
-
-const SectionText = (props: SectionTextProps) => {
+const SectionText = () => {
   const { createObject, updateTextSettings } = usePresentationActions()
+  const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
 
   const clickCreateObjectHandler = (
     slideId: string | undefined,
@@ -43,21 +40,21 @@ const SectionText = (props: SectionTextProps) => {
   }
 
   const onFontSelectChange = (event: any) => {
-    if (props.activeSlideId === undefined) {
+    if (activeSlideId === undefined) {
       return
     }
     updateTextSettings({
-      slideId: props.activeSlideId,
+      slideId: activeSlideId,
       font: event.target.value,
     })
   }
 
   const onSizeChange = (event: any) => {
-    if (props.activeSlideId === undefined) {
+    if (activeSlideId === undefined) {
       return
     }
     updateTextSettings({
-      slideId: props.activeSlideId,
+      slideId: activeSlideId,
       size: event.target.value,
     })
   }
@@ -90,7 +87,7 @@ const SectionText = (props: SectionTextProps) => {
         <Button
           onClick={() =>
             clickCreateObjectHandler(
-              props.activeSlideId,
+              activeSlideId,
               SlideObjectType.Text,
               undefined,
             )
@@ -101,7 +98,7 @@ const SectionText = (props: SectionTextProps) => {
         <Button
           onClick={() =>
             clickUpdateSettingsHandler(
-              props.activeSlideId,
+              activeSlideId,
               true,
               undefined,
               undefined,
@@ -115,7 +112,7 @@ const SectionText = (props: SectionTextProps) => {
         <Button
           onClick={() =>
             clickUpdateSettingsHandler(
-              props.activeSlideId,
+              activeSlideId,
               undefined,
               true,
               undefined,
@@ -129,7 +126,7 @@ const SectionText = (props: SectionTextProps) => {
         <Button
           onClick={() =>
             clickUpdateSettingsHandler(
-              props.activeSlideId,
+              activeSlideId,
               undefined,
               undefined,
               true,

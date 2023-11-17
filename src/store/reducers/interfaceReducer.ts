@@ -1,36 +1,39 @@
 import { createReducer } from '@reduxjs/toolkit'
 import {
-  setActiveSlide,
+  setActiveSlideId,
   setDragSlides,
   setDragSlidesOrigin,
   setDragSlidesDelta,
   setDragObjects,
   setDragObjectsDelta,
+  setSelectingArea,
 } from '../actions/interfaceActions.ts'
 import { SlideInfo } from '../../models/types.ts'
 
 type initialInterfaceStateType = {
-  activeSlide: SlideInfo | undefined
+  activeSlideId: string | undefined
   isDraggingSlides: boolean
   dragSlidesOrigin: SlideInfo | undefined
   dragSlidesDelta: number
   isDraggingObjects: boolean
   dragObjectsDelta: number
+  isSelectingArea: boolean
 }
 
 const initialInterfaceState = {
-  activeSlide: undefined,
+  activeSlideId: undefined,
   isDraggingSlides: false,
   dragSlidesOrigin: undefined,
   dragSlidesDelta: 0,
   isDraggingObjects: false,
   dragObjectsDelta: 0,
+  isSelectingArea: false,
 } as initialInterfaceStateType
 
 const interfaceReducer = createReducer(initialInterfaceState, (builder) => {
   builder
-    .addCase(setActiveSlide, (state, action) => {
-      state.activeSlide = action.payload
+    .addCase(setActiveSlideId, (state, action) => {
+      state.activeSlideId = action.payload
     })
     .addCase(setDragSlides, (state, action) => {
       state.isDraggingSlides = action.payload
@@ -46,6 +49,9 @@ const interfaceReducer = createReducer(initialInterfaceState, (builder) => {
     })
     .addCase(setDragObjectsDelta, (state, action) => {
       state.dragObjectsDelta = action.payload
+    })
+    .addCase(setSelectingArea, (state, action) => {
+      state.isSelectingArea = action.payload
     })
 })
 

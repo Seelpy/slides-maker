@@ -14,7 +14,7 @@ const SectionInfo = () => {
   const importJsonFile = useRef<HTMLInputElement | null>(null)
   const presentation = useAppSelector((state) => state.presentationReducer)
   const { updatePresentation, changeName } = usePresentationActions()
-  const { setActiveSlide } = useInterfaceActions()
+  const { setActiveSlideId } = useInterfaceActions()
 
   const importFromJson = (file: File) => {
     FileHandler.ImportJson(file).then((stringJson) => {
@@ -22,9 +22,9 @@ const SectionInfo = () => {
         PresentationConverter.ConvertFromJson(stringJson)
       if ('name' in importedPresentation && 'slides' in importedPresentation) {
         updatePresentation(importedPresentation)
-        setActiveSlide(
+        setActiveSlideId(
           importedPresentation.slides.length > 0
-            ? importedPresentation.slides[0]
+            ? importedPresentation.slides[0].id
             : undefined,
         )
       } else {

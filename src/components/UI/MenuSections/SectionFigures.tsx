@@ -1,14 +1,11 @@
 import MenuSection from '../MenuSection'
 import Button from '../Button'
-import { usePresentationActions } from '../../../hooks/redux'
+import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
 import { PrimitiveType, SlideObjectType } from '../../../models/types'
 
-type SectionFiguresProps = {
-  activeSlideId: string | undefined
-}
-
-const SectionFigures = (props: SectionFiguresProps) => {
+const SectionFigures = () => {
   const { createObject } = usePresentationActions()
+  const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
 
   const clickCreateObjectHandler = (
     slideId: string | undefined,
@@ -29,7 +26,7 @@ const SectionFigures = (props: SectionFiguresProps) => {
           height="2.5rem"
           onClick={() =>
             clickCreateObjectHandler(
-              props.activeSlideId,
+              activeSlideId,
               SlideObjectType.Primitive,
               PrimitiveType.Circle,
             )
@@ -46,7 +43,7 @@ const SectionFigures = (props: SectionFiguresProps) => {
           height="2.5rem"
           onClick={() =>
             clickCreateObjectHandler(
-              props.activeSlideId,
+              activeSlideId,
               SlideObjectType.Primitive,
               PrimitiveType.Square,
             )
@@ -65,7 +62,7 @@ const SectionFigures = (props: SectionFiguresProps) => {
           height="2.5rem"
           onClick={() =>
             clickCreateObjectHandler(
-              props.activeSlideId,
+              activeSlideId,
               SlideObjectType.Primitive,
               PrimitiveType.Triangle,
             )
