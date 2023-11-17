@@ -24,7 +24,6 @@ const SectionImages = () => {
         <Button onClick={() => importImageFile.current?.click()}>
           <input
             type="file"
-            id="importImageFile"
             ref={importImageFile}
             style={{ display: 'none' }}
             accept="image/png, image/gif, image/jpeg"

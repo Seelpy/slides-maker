@@ -5,6 +5,7 @@ import {
   createSlide,
   deleteSlides,
   importImage,
+  importImageBackground,
   moveSlides,
   updateColor,
   updatePresentation,
@@ -170,6 +171,12 @@ const presentationReducer = createReducer(presentation, (builder) => {
       if (image != undefined) {
         slideInfo.slide.push(image)
       }
+    })
+    .addCase(importImageBackground, (state, action) => {
+      const index = state.slides.findIndex(
+        (slide) => slide.id == action.payload.slideId,
+      )
+      state.slides[index].background = action.payload.data
     })
 })
 

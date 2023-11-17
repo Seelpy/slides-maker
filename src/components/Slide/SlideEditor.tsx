@@ -31,7 +31,11 @@ const SlideEditor = () => {
       onDragStart={(e) => dropDragEvent(e)}
     >
       {referencedActiveSlide && 
-        <div className={styles.slideEditor} ref={slideEditorRef} onDragStart={(e) => dropDragEvent(e)}>
+        <div 
+          className={styles.slideEditor} 
+          ref={slideEditorRef} onDragStart={(e) => dropDragEvent(e)}
+          style={{background: referencedActiveSlide.background}}
+        >
           <div ref={mouseSelectionRef} className={styles.selectionArea}/>
           {referencedActiveSlide.slide.map((obj, i) => (
             <EditorObject

@@ -76,6 +76,7 @@ type Slide = Array<SlideObject>
 type SlideInfo = {
   id: string
   selected: boolean
+  background?: string
   slide: Slide
 }
 

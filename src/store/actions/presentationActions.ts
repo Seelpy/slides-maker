@@ -12,6 +12,7 @@ enum presentationActions {
   updateTextSettings = 'UPDATE_TEXT_SETTINGS',
   updateColor = 'UPDATE_COLOR',
   importImage = 'IMPORT_IMAGE',
+  importImageBackground = 'IMPORT_IMAGE_BACKGROUND'
 }
 
 type moveSlidesPayload = {
@@ -78,4 +79,7 @@ export const updateColor = createAction<updateColorPayload>(
 )
 export const importImage = createAction<importImagePayload>(
   presentationActions.importImage,
+)
+export const importImageBackground = createAction<importImagePayload>(
+  presentationActions.importImageBackground,
 )

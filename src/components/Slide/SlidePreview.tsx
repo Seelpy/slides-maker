@@ -39,7 +39,7 @@ const SlidePreview = (props: SlidePreviewProps) => {
       }
       onClick={(e) => props.onClick(e, props.slideInfo)}
     >
-      <div className={styles.slidePreview}>
+      <div className={styles.slidePreview} style={{background: props.slideInfo.background}}>
         {props.slideInfo.slide.map((obj, i) => (
           <EditorObject
             key={i}
