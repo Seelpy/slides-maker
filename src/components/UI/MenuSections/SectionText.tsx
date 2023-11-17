@@ -46,7 +46,6 @@ const SectionText = (props: SectionTextProps) => {
     if (props.activeSlideId === undefined) {
       return
     }
-    console.log(event.target.value)
     updateTextSettings({
       slideId: props.activeSlideId,
       font: event.target.value,
@@ -57,7 +56,6 @@ const SectionText = (props: SectionTextProps) => {
     if (props.activeSlideId === undefined) {
       return
     }
-    console.log(event.target.value)
     updateTextSettings({
       slideId: props.activeSlideId,
       size: event.target.value,

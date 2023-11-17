@@ -89,7 +89,6 @@ const presentationReducer = createReducer(presentation, (builder) => {
     })
     .addCase(updatePresentation, (_, action) => action.payload)
     .addCase(createObject, (state, action) => {
-      console.log(action)
       const index = state.slides.findIndex(
         (slide) => slide.id == action.payload.slideId,
       )
@@ -104,7 +103,6 @@ const presentationReducer = createReducer(presentation, (builder) => {
       slideInfo.slide.push(object)
     })
     .addCase(updateTextSettings, (state, action) => {
-      console.log(action)
       const index = state.slides.findIndex(
         (slide) => slide.id == action.payload.slideId,
       )
@@ -127,7 +125,6 @@ const presentationReducer = createReducer(presentation, (builder) => {
             action.payload.underline === undefined
               ? char.underline
               : !char.underline
-          console.log(char.fontSize)
           return char
         })
         return newText
@@ -138,20 +135,17 @@ const presentationReducer = createReducer(presentation, (builder) => {
       state.slides[index] = slideInfo
     })
     .addCase(updateColor, (state, action) => {
-      console.log(action)
       const index = state.slides.findIndex(
         (slide) => slide.id == action.payload.slideId,
       )
       const slideInfo = state.slides[index]
       slideInfo.slide.forEach((obj) => {
-        console.log(action.payload.color)
         if (obj.selected && obj.type != SlideObjectType.Image) {
           switch (obj.type) {
             case SlideObjectType.Text: {
               obj = obj as TextObject
               obj.chars.forEach((char) => {
                 char.color = action.payload.color
-                console.log(action.payload.color)
               })
               break
             }
@@ -164,7 +158,6 @@ const presentationReducer = createReducer(presentation, (builder) => {
       })
     })
     .addCase(importImage, (state, action) => {
-      console.log(action)
       const index = state.slides.findIndex(
         (slide) => slide.id == action.payload.slideId,
       )
