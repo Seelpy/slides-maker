@@ -96,9 +96,7 @@ const SectionText = (props: SectionTextProps) => {
             )
           }
         >
-          {' '}
-          <i className="fa-solid fa-plus" style={{ color: `#4c88f0` }} /> New
-          Text{' '}
+          <i className="fa-solid fa-plus" style={{ color: `#4c88f0` }} /> New Text
         </Button>
         <Button
           onClick={() =>
@@ -112,8 +110,7 @@ const SectionText = (props: SectionTextProps) => {
             )
           }
         >
-          {' '}
-          <em>italic</em>{' '}
+          <em>italic</em>
         </Button>
         <Button
           onClick={() =>
@@ -127,8 +124,7 @@ const SectionText = (props: SectionTextProps) => {
             )
           }
         >
-          {' '}
-          <strong>Bold</strong>{' '}
+          <strong>Bold</strong>
         </Button>
         <Button
           onClick={() =>
@@ -142,8 +138,7 @@ const SectionText = (props: SectionTextProps) => {
             )
           }
         >
-          {' '}
-          <u>underline</u>{' '}
+          <u>underline</u>
         </Button>
       </div>
     </MenuSection>

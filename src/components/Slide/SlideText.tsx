@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { Size, TextObject } from '../../models/types.ts'
 import Char from './Char.tsx'
 import styles from './SlideText.module.css'
@@ -15,17 +15,19 @@ const SlideText = (props: TextProps) => {
   const textRef = useRef<HTMLDivElement | null>(null);
   const {updateSlide} = usePresentationActions();
 
-  // Подгоняем размер объекта под размер текста
-  if (textRef.current) {
-    const textSize: Size = {
-      width: textRef.current.clientWidth, 
-      height: textRef.current.clientHeight
-    };
+  useEffect(() => {
+    // Подгоняем размер объекта под размер текста
+    if (textRef.current) {
+      const textSize: Size = {
+        width: textRef.current.clientWidth, 
+        height: textRef.current.clientHeight
+      };
 
-    if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
-      updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}});
+      if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
+        updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}});
+      }
     }
-  }
+  }, [data])
 
   return (
     <div className={styles.text} ref={textRef}>
