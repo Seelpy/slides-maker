@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Position, SlideInfo, SlideObject, Size, SlideObjectType } from '../models/types'
+import { Position, SlideInfo, SlideObject, Size, SlideObjectType, PrimitiveType } from '../models/types'
 import {
   useAppSelector,
   useInterfaceActions,
@@ -44,10 +44,10 @@ function SelectedObjectsHandler(
     selectedObjects.current = slide.slide.filter((obj) => obj.selected)
     
     if (selectedObjects.current.length > 0) {
-      const minX = Math.min.apply(Math, selectedObjects.current.map((obj) => obj.position.x))
-      const minY = Math.min.apply(Math, selectedObjects.current.map((obj) => obj.position.y))
-      const maxX = Math.max.apply(Math, selectedObjects.current.map((obj) => obj.position.x + obj.size.width))
-      const maxY = Math.max.apply(Math, selectedObjects.current.map((obj) => obj.position.y + obj.size.height))
+      const minX = Math.min(...selectedObjects.current.map((obj) => obj.position.x))
+      const minY = Math.min(...selectedObjects.current.map((obj) => obj.position.y))
+      const maxX = Math.max(...selectedObjects.current.map((obj) => obj.position.x + obj.size.width))
+      const maxY = Math.max(...selectedObjects.current.map((obj) => obj.position.y + obj.size.height))
 
       coords.current.selectedArea.position.x = minX
       coords.current.selectedArea.position.y = minY
@@ -78,8 +78,16 @@ function SelectedObjectsHandler(
         const scaleY = (deltaY + coords.current.selectedArea.size.height) / coords.current.selectedArea.size.height
         selectedObjects.current.map((obj) => {
           if (obj.type !== SlideObjectType.Text) {
-            const nextWidth = Math.max(10, obj.size.width * scaleX)
-            const nextHeight = Math.max(10, obj.size.height * scaleY)
+            let nextWidth = Math.max(10, obj.size.width * scaleX)
+            let nextHeight = Math.max(10, obj.size.height * scaleY)
+
+            if (obj.type === SlideObjectType.Primitive &&
+                obj.primitiveType === PrimitiveType.Circle) 
+            {
+              const medium = (nextWidth + nextHeight) / 2
+              nextWidth = nextHeight = medium
+            }
+
             updateSlide({
               slide: slide,
               oldSlideObject: obj,

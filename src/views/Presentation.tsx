@@ -28,7 +28,7 @@ function Presentation() {
         clearHistoryAfterIndex()
       }
 
-      pushHistoryState({presentation: presentation, activeSlideId: activeSlideId})
+      // pushHistoryState({presentation: presentation, activeSlideId: activeSlideId})
     }
 
     setLastOperationType(undefined)

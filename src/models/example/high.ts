@@ -40,7 +40,7 @@ const textObject: TextObject = {
   chars: [char, char, char, char, char, char, char],
   size: size,
   rotate: 0,
-  selected: true,
+  selected: false,
 }
 
 const imageObject: ImageObject = {
@@ -89,7 +89,7 @@ const circleObject: CircleObject = {
     height: 100,
   },
   rotate: 0,
-  selected: true,
+  selected: false,
 }
 
 const squareObject: SquareObject = {
@@ -106,7 +106,7 @@ const squareObject: SquareObject = {
     height: 15,
   },
   rotate: 0,
-  selected: true,
+  selected: false,
 }
 
 const triangleObject: TriangleObject = {
@@ -123,7 +123,7 @@ const triangleObject: TriangleObject = {
     height: 25,
   },
   rotate: 0,
-  selected: true,
+  selected: false,
 }
 
 const triangle2Object: TriangleObject = {
@@ -157,7 +157,7 @@ const triangle3Object: TriangleObject = {
     height: 66,
   },
   rotate: 0,
-  selected: true,
+  selected: false,
 }
 
 const slide1: Slide = [
@@ -173,8 +173,8 @@ const slide2: Slide = [triangle2Object, triangle3Object]
 const presentation: Presentaion = {
   name: 'presentation',
   slides: [
-    { id: 'slide1', slide: slide1, selected: true },
-    { id: 'slide2', slide: slide2, selected: true },
+    { id: 'slide1', slide: slide1, selected: false },
+    { id: 'slide2', slide: slide2, selected: false },
     { id: 'slide3', slide: [], selected: false },
   ],
 }
