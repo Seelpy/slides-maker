@@ -49,6 +49,7 @@ function textKeyHandler() {
 
         tmpText.chars.push(tmpChar)
         if (activeSlide) {
+          console.log(tmpText);
           updateSlide({ slide  : activeSlide, oldSlideObject: text, newSlideObject: tmpText})
         }
       })
@@ -65,26 +66,14 @@ function textKeyHandler() {
         handleOnDelete()
         break
       }
-      case 'Tab': {
-        handleKey('\t')
-        break
-      }
-      case 'Enter': {
-        handleKey('\n')
-        break
-      }
-      case 'Shift': {
-        break
-      }
-      case 'Alt': {
-        break
-      }
       case " ": {
         handleKey("ㅤ")
         break
       }
       default : {
-        handleKey(event.key)
+        if (event.key.length === 1) {
+          handleKey(event.key)
+        }
       }
     }
   }
