@@ -49,7 +49,6 @@ function textKeyHandler() {
 
         tmpText.chars.push(tmpChar)
         if (activeSlide) {
-          console.log(tmpText);
           updateSlide({ slide  : activeSlide, oldSlideObject: text, newSlideObject: tmpText})
         }
       })
@@ -71,7 +70,7 @@ function textKeyHandler() {
         break
       }
       default : {
-        if (event.key.length === 1) {
+        if (event.key.length === 1 && !event.ctrlKey) {
           handleKey(event.key)
         }
       }

@@ -15,17 +15,27 @@ const SlideText = (props: TextProps) => {
   const textRef = useRef<HTMLDivElement | null>(null);
   const {updateSlide} = usePresentationActions();
 
+  // Подгоняем размер объекта под размер текста
   useEffect(() => {
-    // Подгоняем размер объекта под размер текста
-    if (textRef.current) {
-      const textSize: Size = {
-        width: textRef.current.clientWidth, 
-        height: textRef.current.clientHeight
-      };
-
-      if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
-        updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}});
+    const fetchTextSize = () => {
+      if (textRef.current) {
+        const textSize: Size = {
+          width: textRef.current.clientWidth, 
+          height: textRef.current.clientHeight
+        };
+  
+        if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
+          updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}});
+        }
       }
+    }
+
+    document.addEventListener("mousedown", fetchTextSize)
+    document.addEventListener("mouseup", fetchTextSize)
+
+    return () => {
+      document.removeEventListener("mousedown", fetchTextSize)
+      document.removeEventListener("mouseup", fetchTextSize)
     }
   }, [data])
 

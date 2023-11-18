@@ -87,7 +87,18 @@ type Presentaion = {
   slides: Array<SlideInfo>
 }
 
-export { SlideObjectType, PrimitiveType }
+type History = {
+  presentation: Presentaion
+  activeSlideId: string | undefined
+}
+
+enum HistoryOperation {
+  backward = `HISTORY_BACKWARD`,
+  forward = `HISTORY_FORWARD`,
+}
+
+
+export { SlideObjectType, PrimitiveType, HistoryOperation }
 
 export type {
   Position,
@@ -105,4 +116,5 @@ export type {
   Presentaion,
   PrimType,
   SlideInfo,
+  History
 }

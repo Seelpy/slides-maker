@@ -2,12 +2,16 @@ import styles from './Presentation.module.css'
 import MenuBar from '../components/UI/MenuBar'
 import LeftBar from '../components/UI/LeftBar'
 import SlideEditor from '../components/Slide/SlideEditor'
-import { useInterfaceActions } from '../hooks/redux'
-import { useEffect } from 'react'
 import keyHandler from '../utils/KeyHandler'
 import textKeyHandler from '../utils/TextKeyHandler'
+import { useEffect } from 'react'
+import { useAppSelector, useHistoryActions, useInterfaceActions } from '../hooks/redux'
 
 function Presentation() {
+  const presentation = useAppSelector((state) => state.presentationReducer)
+  const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
+  const { history, lastHistoryOperation, currentIndex } = useAppSelector((state) => state.historyReducer)
+  const { pushHistoryState, clearHistoryAfterIndex, setLastOperationType } = useHistoryActions()
   const { setDragObjects, setDragSlides, setSelectingArea } = useInterfaceActions()
 
   useEffect(() => {
@@ -17,6 +21,19 @@ function Presentation() {
       setSelectingArea(false)
     }
   }, [])
+
+  useEffect(() => {
+    console.log(lastHistoryOperation)
+    if (lastHistoryOperation === undefined) {
+      if (currentIndex !== history.length - 1) {
+        clearHistoryAfterIndex()
+      }
+
+      pushHistoryState({presentation: presentation, activeSlideId: activeSlideId})
+    }
+
+    setLastOperationType(undefined)
+  }, [presentation, activeSlideId])
 
   keyHandler()
   textKeyHandler()
