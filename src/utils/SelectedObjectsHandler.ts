@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Position, SlideInfo, SlideObject, Size } from '../models/types'
+import { Position, SlideInfo, SlideObject, Size, SlideObjectType } from '../models/types'
 import {
   useAppSelector,
   useInterfaceActions,
@@ -77,13 +77,15 @@ function SelectedObjectsHandler(
         const scaleX = (deltaX + coords.current.selectedArea.size.width) / coords.current.selectedArea.size.width
         const scaleY = (deltaY + coords.current.selectedArea.size.height) / coords.current.selectedArea.size.height
         selectedObjects.current.map((obj) => {
-          const nextWidth = Math.max(10, obj.size.width * scaleX)
-          const nextHeight = Math.max(10, obj.size.height * scaleY)
-          updateSlide({
-            slide: slide,
-            oldSlideObject: obj,
-            newSlideObject: { ...obj, size: {width: nextWidth, height: nextHeight} },
-          })
+          if (obj.type !== SlideObjectType.Text) {
+            const nextWidth = Math.max(10, obj.size.width * scaleX)
+            const nextHeight = Math.max(10, obj.size.height * scaleY)
+            updateSlide({
+              slide: slide,
+              oldSlideObject: obj,
+              newSlideObject: { ...obj, size: {width: nextWidth, height: nextHeight} },
+            })
+          }
         })
       } else if (e.altKey) {
         // Вращение

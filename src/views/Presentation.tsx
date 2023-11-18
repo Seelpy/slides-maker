@@ -23,7 +23,6 @@ function Presentation() {
   }, [])
 
   useEffect(() => {
-    console.log(lastHistoryOperation)
     if (lastHistoryOperation === undefined) {
       if (currentIndex !== history.length - 1) {
         clearHistoryAfterIndex()
