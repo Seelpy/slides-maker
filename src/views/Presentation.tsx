@@ -9,7 +9,7 @@ import { useAppSelector, useHistoryActions, useInterfaceActions } from '../hooks
 
 function Presentation() {
   const presentation = useAppSelector((state) => state.presentationReducer)
-  const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
+  const { activeSlideId, isDraggingObjects } = useAppSelector((state) => state.interfaceReducer)
   const { history, lastHistoryOperation, currentIndex } = useAppSelector((state) => state.historyReducer)
   const { pushHistoryState, clearHistoryAfterIndex, setLastOperationType } = useHistoryActions()
   const { setDragObjects, setDragSlides, setSelectingArea } = useInterfaceActions()
@@ -23,7 +23,7 @@ function Presentation() {
   }, [])
 
   useEffect(() => {
-    if (lastHistoryOperation === undefined) {
+    if (lastHistoryOperation === undefined && !isDraggingObjects) {
       if (currentIndex !== history.length - 1) {
         clearHistoryAfterIndex()
       }
@@ -32,7 +32,7 @@ function Presentation() {
     }
 
     setLastOperationType(undefined)
-  }, [presentation, activeSlideId])
+  }, [presentation, activeSlideId, isDraggingObjects])
 
   keyHandler()
   textKeyHandler()
