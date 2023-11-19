@@ -13,6 +13,7 @@ type TextProps = {
 const SlideText = (props: TextProps) => {
   const data = props.data
   const textRef = useRef<HTMLDivElement | null>(null);
+  const lastTextSize = useRef<Size>({width: 0, height: 0})
   const {updateSlide} = usePresentationActions();
 
   useEffect(() => {
@@ -23,9 +24,13 @@ const SlideText = (props: TextProps) => {
         height: textRef.current.clientHeight
       };
 
-      if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
-        updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}});
+      if (lastTextSize.current.width !== textSize.width || lastTextSize.current.height !== textSize.height) {
+        if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
+          updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}});
+        }
       }
+
+      lastTextSize.current = textSize
     }
   }, [data])
 
