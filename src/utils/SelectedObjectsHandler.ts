@@ -37,7 +37,7 @@ function SelectedObjectsHandler(
     } else {
       isDraggingThis.current = false;
     }
-  }, [isDraggingObjects])
+  }, [isDraggingObjects, areaRef])
 
   useEffect(() => {
     if (!slide) return
