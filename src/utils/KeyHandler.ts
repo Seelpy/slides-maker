@@ -1,15 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   useAppSelector,
   useHistoryActions,
   useInterfaceActions,
   usePresentationActions,
 } from '../hooks/redux'
-import { HistoryOperation } from '../models/types'
+import { HistoryOperation, SlideInfo, SlideObject } from '../models/types'
+import { v4 as uuidv4 } from 'uuid';
 
 function keyHandler() {
   const presentation = useAppSelector((state) => state.presentationReducer)
   const slides = useAppSelector((state) => state.presentationReducer.slides)
+  const [copiedObjects, setCopiedObjects] = useState<SlideInfo[] | SlideObject[]>([])
 
   const currentHistoryIndex = useAppSelector((state) => state.historyReducer.currentIndex)
   const history = useAppSelector((state) => state.historyReducer.history)
@@ -19,7 +21,7 @@ function keyHandler() {
 
   const activeSlide = slides.find((s) => s.id === activeSlideId)
 
-  const { deleteSlides, updateSlide, updatePresentation } = usePresentationActions()
+  const { deleteSlides, updateSlide, updatePresentation, createSlide } = usePresentationActions()
   const { moveCurrentIndex, setLastOperationType } = useHistoryActions();
   const { setActiveSlideId } = useInterfaceActions()
 
@@ -68,6 +70,35 @@ function keyHandler() {
     }
   }
 
+  const copyObjects = () => {
+    const selectedSlides = slides.filter((s) => s.selected)
+    if (selectedSlides.length > 0) {
+      setCopiedObjects(selectedSlides)
+    } else if (activeSlide) {
+      const selectedObjects = activeSlide.slide.filter((obj) => obj.selected)
+      setCopiedObjects(selectedObjects)
+    }
+  }
+
+  const pasteObjects = () => {
+    if (copiedObjects.length === 0) return;
+
+    if ("slide" in copiedObjects[0]) {
+      const copiedSlides = copiedObjects as SlideInfo[]
+      copiedSlides.map((slide) => createSlide({
+        ...slide, 
+        id: uuidv4(),
+        selected: false,
+        slide:slide.slide.map((obj) => ({...obj, id: uuidv4()})), 
+      }))
+    } else {
+      copiedObjects.map((obj) => updateSlide({
+          slide: activeSlide!,
+          newSlideObject: {...obj, id: uuidv4(), selected: false} as SlideObject
+      }))
+    }
+  }
+
   const onKeyDown = (event: KeyboardEvent) => {
     switch (event.key.toLowerCase()) {
       case 'delete': {
@@ -88,6 +119,19 @@ function keyHandler() {
         if (event.ctrlKey) {
           moveHistory(1)
         }
+        break
+      }
+      case 'c': {
+        if (event.ctrlKey) {
+          copyObjects()
+        }
+        break
+      }
+      case 'v': {
+        if (event.ctrlKey) {
+          pasteObjects()
+        }
+        break
       }
     }
   }
@@ -98,7 +142,7 @@ function keyHandler() {
     return () => {
       document.removeEventListener("keydown", onKeyDown)
     }
-  }, [presentation, activeSlide, currentHistoryIndex])
+  }, [presentation, activeSlide, currentHistoryIndex, copiedObjects])
 }
 
 export default keyHandler
