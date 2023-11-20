@@ -56,6 +56,8 @@ function textKeyHandler() {
   } 
 
   window.onkeydown = (event: KeyboardEvent) => {
+    if (document.activeElement?.tagName === "INPUT") return;
+
     switch (event.key) {
       case 'Delete': {
         handleOnDelete()
