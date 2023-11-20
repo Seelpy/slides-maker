@@ -1,9 +1,8 @@
 import { useRef, useEffect } from 'react'
-import { Size, TextObject } from '../../models/types.ts'
+import { Size, TextObject, SlideInfo, HistoryOperation } from '../../models/types.ts'
 import Char from './Char.tsx'
 import styles from './SlideText.module.css'
-import { usePresentationActions } from '../../hooks/redux.ts'
-import { SlideInfo } from '../../models/types.ts'
+import { useAppSelector, useHistoryActions, usePresentationActions } from '../../hooks/redux.ts'
 
 type TextProps = {
   data: TextObject;
@@ -13,24 +12,22 @@ type TextProps = {
 const SlideText = (props: TextProps) => {
   const data = props.data
   const textRef = useRef<HTMLDivElement | null>(null);
-  const lastTextSize = useRef<Size>({width: 0, height: 0})
   const {updateSlide} = usePresentationActions();
+  const {setLastOperationType} = useHistoryActions();
+  const lastHistoryOperation = useAppSelector((state) => state.historyReducer.lastHistoryOperation)
 
+  // Подгоняем размер объекта под размер текста
   useEffect(() => {
-    // Подгоняем размер объекта под размер текста
-    if (textRef.current) {
+    if (textRef.current && lastHistoryOperation === undefined) {
       const textSize: Size = {
         width: textRef.current.clientWidth, 
         height: textRef.current.clientHeight
       };
 
-      if (lastTextSize.current.width !== textSize.width || lastTextSize.current.height !== textSize.height) {
-        if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
-          updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}});
-        }
+      if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
+        setLastOperationType(HistoryOperation.update)
+        updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}})
       }
-
-      lastTextSize.current = textSize
     }
   }, [data])
 

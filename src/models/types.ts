@@ -95,6 +95,7 @@ type History = {
 enum HistoryOperation {
   backward = `HISTORY_BACKWARD`,
   forward = `HISTORY_FORWARD`,
+  update = `HISTORY_UPDATE`
 }
 
 

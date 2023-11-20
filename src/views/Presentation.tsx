@@ -30,8 +30,9 @@ function Presentation() {
 
       pushHistoryState({presentation: presentation, activeSlideId: activeSlideId})
     }
-
-    setLastOperationType(undefined)
+    else {
+      setLastOperationType(undefined)
+    }
   }, [presentation, activeSlideId, isDraggingObjects])
 
   keyHandler()
