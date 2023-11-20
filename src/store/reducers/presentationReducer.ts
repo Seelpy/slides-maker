@@ -58,8 +58,9 @@ const presentationReducer = createReducer(presentation, (builder) => {
       )
       if (slideInfo !== undefined) {
         if (action.payload.selected !== undefined) {
-          // обновляем selected у слайда
+          // обновляем selected у слайда, убираем выделение объектов
           slideInfo.selected = action.payload.selected
+          state.slides.map((s) => s.slide.map((obj) => obj.selected = false))
         }
         if (
           action.payload.oldSlideObject !== undefined &&
@@ -85,6 +86,12 @@ const presentationReducer = createReducer(presentation, (builder) => {
         } else if (action.payload.newSlideObject !== undefined) {
           // создаём объект на слайде
           slideInfo.slide.push(action.payload.newSlideObject)
+        }
+
+        // если выделили объект - убираем выделение слайдов
+        if (action.payload.newSlideObject && 
+          action.payload.newSlideObject.selected) {
+          state.slides.map((s) => s.selected = false)
         }
       }
     })
