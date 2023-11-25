@@ -175,7 +175,13 @@ const presentationReducer = createReducer(presentation, (builder) => {
         undefined,
         action.payload.data,
       )
+
       if (image != undefined) {
+        if (action.payload.width && action.payload.height) {
+          image.size.width = action.payload.width
+          image.size.height = action.payload.height
+        }
+        
         slideInfo.slide.push(image)
       }
     })

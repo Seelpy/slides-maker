@@ -50,6 +50,8 @@ type updateColorPayload = {
 type importImagePayload = {
   slideId: string
   data: string
+  width?: number
+  height?: number
 }
 
 export const changeName = createAction<string>(presentationActions.changeName)
