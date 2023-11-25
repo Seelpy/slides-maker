@@ -1,15 +1,15 @@
 import MenuSection from '../MenuSection'
 import Button from '../Button'
 import ColorButton from '../ColorButton'
-import { useState, useRef } from 'react'
-import { useAppSelector, usePresentationActions } from '../../../hooks/redux.ts'
+import { useRef } from 'react'
+import { useAppSelector, useInterfaceActions, usePresentationActions } from '../../../hooks/redux.ts'
 
 const SectionColors = () => {
-  const [activeColor, setActiveColor] = useState<string>(`yellow`)
   const colorPickerRef = useRef<HTMLInputElement | null>(null)
 
+  const { activeSlideId, activeColor } = useAppSelector((state) => state.interfaceReducer)
   const { updateColor } = usePresentationActions()
-  const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
+  const { setActiveColor } = useInterfaceActions()
 
   const clickUpdateColorHandler = (
     slideId: string | undefined,

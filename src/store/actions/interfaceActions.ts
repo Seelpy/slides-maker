@@ -9,6 +9,7 @@ enum interfaceActions {
   setDragObjects = 'SET_DRAG_OBJECTS',
   setDragObjectsDelta = 'SET_DRAG_OBJECTS_DELTA',
   setSelectingArea = 'SET_SELECTING_AREA',
+  setActiveColor = 'SET_ACTIVE_COLOR',
 }
 
 export const setActiveSlideId = createAction<string | undefined>(
@@ -31,4 +32,7 @@ export const setDragObjectsDelta = createAction<number>(
 )
 export const setSelectingArea = createAction<boolean>(
   interfaceActions.setSelectingArea,
+)
+export const setActiveColor = createAction<string>(
+  interfaceActions.setActiveColor,
 )

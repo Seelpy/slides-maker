@@ -7,6 +7,7 @@ import {
   setDragObjects,
   setDragObjectsDelta,
   setSelectingArea,
+  setActiveColor,
 } from '../actions/interfaceActions.ts'
 import { SlideInfo } from '../../models/types.ts'
 
@@ -18,6 +19,7 @@ type initialInterfaceStateType = {
   isDraggingObjects: boolean
   dragObjectsDelta: number
   isSelectingArea: boolean
+  activeColor: string
 }
 
 const initialInterfaceState = {
@@ -28,6 +30,7 @@ const initialInterfaceState = {
   isDraggingObjects: false,
   dragObjectsDelta: 0,
   isSelectingArea: false,
+  activeColor: '#fa5050',
 } as initialInterfaceStateType
 
 const interfaceReducer = createReducer(initialInterfaceState, (builder) => {
@@ -52,6 +55,9 @@ const interfaceReducer = createReducer(initialInterfaceState, (builder) => {
     })
     .addCase(setSelectingArea, (state, action) => {
       state.isSelectingArea = action.payload
+    })
+    .addCase(setActiveColor, (state, action) => {
+      state.activeColor = action.payload
     })
 })
 
