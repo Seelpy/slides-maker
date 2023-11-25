@@ -1,15 +1,12 @@
 .colorButton {
-  width: 27px;
-  height: 26px;
   font-size: 25px;
   text-align: center;
 
   cursor: pointer;
-  border-radius: 5px;
-  border: 1px solid rgb(24 24 24 / 38%);
-  transition : border 180ms ease-in-out;
+  text-shadow: 0px 0px 3px rgb(24 24 24 / 38%);
+  transition: text-shadow 180ms ease-in-out;
 }
 
 .colorButton:hover {
-  border: 1px solid rgb(24 24 24 / 88%);
+  text-shadow: 0px 0px 3px rgb(24 24 24 / 88%);
 }
