@@ -5,7 +5,7 @@ import { SlideObjectType } from '../../../models/types'
 
 const SectionText = () => {
   const { createObject, updateTextSettings } = usePresentationActions()
-  const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
+  const { activeSlideId, activeColor } = useAppSelector((state) => state.interfaceReducer)
 
   const clickCreateObjectHandler = (
     slideId: string | undefined,
@@ -15,7 +15,7 @@ const SectionText = () => {
     if (slideId === undefined) {
       return
     }
-    createObject({ slideId: slideId, type: type, subtype: subtype })
+    createObject({ slideId: slideId, type: type, subtype: subtype, color: activeColor })
   }
 
   const clickUpdateSettingsHandler = (

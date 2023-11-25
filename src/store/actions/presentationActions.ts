@@ -31,6 +31,7 @@ type createObjectPayload = {
   slideId: string
   type: string
   subtype?: string
+  color?: string
 }
 
 type updateTextSettingsPayload = {

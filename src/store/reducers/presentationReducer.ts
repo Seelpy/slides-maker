@@ -108,6 +108,13 @@ const presentationReducer = createReducer(presentation, (builder) => {
       if (object === undefined) {
         return
       }
+      if (action.payload.color) {
+        if (object.type === SlideObjectType.Primitive) {
+          object.color = action.payload.color
+        } else if (object.type === SlideObjectType.Text) {
+          object.chars.map((ch) => ch.color = action.payload.color!)
+        }
+      }
       slideInfo.slide.push(object)
     })
     .addCase(updateTextSettings, (state, action) => {

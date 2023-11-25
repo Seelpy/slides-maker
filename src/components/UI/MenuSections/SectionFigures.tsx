@@ -5,7 +5,7 @@ import { PrimitiveType, SlideObjectType } from '../../../models/types'
 
 const SectionFigures = () => {
   const { createObject } = usePresentationActions()
-  const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
+  const { activeSlideId, activeColor } = useAppSelector((state) => state.interfaceReducer)
 
   const clickCreateObjectHandler = (
     slideId: string | undefined,
@@ -15,7 +15,7 @@ const SectionFigures = () => {
     if (slideId === undefined) {
       return
     }
-    createObject({ slideId: slideId, type: type, subtype: subtype })
+    createObject({ slideId: slideId, type: type, subtype: subtype, color: activeColor })
   }
 
   return (
