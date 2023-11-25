@@ -1,7 +1,7 @@
 import styles from './SlideEditor.module.css'
 import EditorObject from './SlideObject'
-import SelectionAreaHandler from '../../utils/SelectionAreaHandler'
-import SelectedObjectsHandler from '../../utils/SelectedObjectsHandler'
+import useSelectObjects from '../../hooks/useSelectObjects'
+import useDragObjects from '../../hooks/useDragObjects'
 import { useAppSelector } from '../../hooks/redux'
 import { useInterfaceActions } from '../../hooks/redux'
 import { useRef } from 'react'
@@ -14,11 +14,11 @@ const SlideEditor = () => {
 
   const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
   const slides = useAppSelector((state) => state.presentationReducer.slides)
-  const referencedActiveSlide = slides.find((s) => s.id === activeSlideId)
+  const activeSlide = slides.find((s) => s.id === activeSlideId)
   const { setDragObjects, setSelectingArea } = useInterfaceActions()
 
-  SelectionAreaHandler(referencedActiveSlide, editorAreaRef, slideEditorRef, mouseSelectionRef);
-  SelectedObjectsHandler(editorAreaRef, referencedActiveSlide)
+  useSelectObjects(activeSlide, editorAreaRef, slideEditorRef, mouseSelectionRef);
+  useDragObjects(editorAreaRef, activeSlide)
   textKeyHandler()
 
   const dropDragEvent = (e: React.DragEvent) => {
@@ -32,17 +32,17 @@ const SlideEditor = () => {
       onMouseLeave={() => {setDragObjects(false); setSelectingArea(false)}}
       onDragStart={(e) => dropDragEvent(e)}
     >
-      {referencedActiveSlide && 
+      {activeSlide && 
         <div 
           className={styles.slideEditor} 
           ref={slideEditorRef} onDragStart={(e) => dropDragEvent(e)}
-          style={{background: referencedActiveSlide.background}}
+          style={{background: activeSlide.background}}
         >
           <div ref={mouseSelectionRef} className={styles.selectionArea}/>
-          {referencedActiveSlide.slide.map((obj, i) => (
+          {activeSlide.slide.map((obj, i) => (
             <EditorObject
               key={i}
-              slide={referencedActiveSlide}
+              slide={activeSlide}
               data={obj}
               preview={false}
             />

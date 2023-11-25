@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
-import { useAppSelector, useInterfaceActions, usePresentationActions } from '../hooks/redux'
+import { useAppSelector, useInterfaceActions, usePresentationActions } from './redux'
 import { Position, Size, SlideInfo, SlideObject } from '../models/types';
 
-function SelectionAreaHandler(
+function useSelectObjects(
   activeSlide: SlideInfo | undefined,
   areaRef: React.MutableRefObject<HTMLDivElement | null>, 
   editorRef: React.MutableRefObject<HTMLDivElement | null>,
@@ -113,4 +113,4 @@ function SelectionAreaHandler(
   }, [activeSlide, areaRef, editorRef])
 }
 
-export default SelectionAreaHandler
+export default useSelectObjects

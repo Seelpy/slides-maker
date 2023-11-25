@@ -6,12 +6,11 @@ import {
   usePresentationActions,
 } from '../hooks/redux'
 
-function SelectedObjectsHandler(
+function useDragObjects(
   areaRef: React.MutableRefObject<HTMLDivElement | null>,
   slide: SlideInfo | undefined,
 ) {
   const selectedObjects = useRef<SlideObject[]>([]);
-  const isDraggingThis = useRef<boolean>(false)
   const isDraggingObjects = useAppSelector(state => state.interfaceReducer.isDraggingObjects)
 
   const { updateSlide } = usePresentationActions()
@@ -29,16 +28,11 @@ function SelectedObjectsHandler(
     currentMouse: { x: 0, y: 0 },
   })
 
-  useEffect(() => {
-    if (isDraggingObjects) {
-      isDraggingThis.current = true;
-      coords.current.startMouse = {...coords.current.currentMouse}
-      coords.current.lastMouse = {...coords.current.currentMouse}
-    } else {
-      isDraggingThis.current = false;
-    }
-  }, [isDraggingObjects, areaRef])
-
+  /*
+  selectedArea - невидимый box от верхнего левого объекта и до нижнего правого
+  selectedArea нужен для правильного изменения размера нескольких объектов
+  При любом изменении слайда обновляем координаты selectedArea
+  */
   useEffect(() => {
     if (!slide) return
     selectedObjects.current = slide.slide.filter((obj) => obj.selected)
@@ -62,11 +56,16 @@ function SelectedObjectsHandler(
     const area = areaRef.current
     if (!area) return
 
+    if (isDraggingObjects) {
+      coords.current.startMouse = {...coords.current.currentMouse}
+      coords.current.lastMouse = {...coords.current.currentMouse}
+    }
+
     const onMouseMove = (e: MouseEvent) => {
       coords.current.currentMouse.x = e.clientX
       coords.current.currentMouse.y = e.clientY
 
-      if (!isDraggingThis.current) return
+      if (!isDraggingObjects) return
 
       const deltaX = e.clientX - coords.current.lastMouse.x
       const deltaY = e.clientY - coords.current.lastMouse.y
@@ -74,8 +73,8 @@ function SelectedObjectsHandler(
 
       if (e.shiftKey) {
         // Изменение размера
-        const scaleX = (deltaX + coords.current.selectedArea.size.width) / coords.current.selectedArea.size.width
-        const scaleY = (deltaY + coords.current.selectedArea.size.height) / coords.current.selectedArea.size.height
+        const scaleX = deltaX / coords.current.selectedArea.size.width + 1
+        const scaleY = deltaY / coords.current.selectedArea.size.height + 1
         selectedObjects.current.map((obj) => {
           if (obj.type !== SlideObjectType.Text) {
             let nextWidth = Math.max(10, obj.size.width * scaleX)
@@ -125,7 +124,7 @@ function SelectedObjectsHandler(
     return () => {
       area.removeEventListener('mousemove', onMouseMove)
     }
-  }, [areaRef, slide])
+  }, [isDraggingObjects, slide])
 }
 
-export default SelectedObjectsHandler
+export default useDragObjects

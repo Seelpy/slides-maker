@@ -1,6 +1,6 @@
 import styles from './LeftBar.module.css'
 import SlidePreview from '../Slide/SlidePreview'
-import SlidesMoveHandler from '../../utils/SlidesMoveHandler'
+import useMoveSelectedSlides from '../../hooks/useMoveSelectedSlides'
 import {
   useAppSelector,
   useInterfaceActions,
@@ -18,7 +18,7 @@ const LeftBar = () => {
   const { setDragSlides, setActiveSlideId } = useInterfaceActions()
   const { updateSlide } = usePresentationActions()
 
-  SlidesMoveHandler()
+  useMoveSelectedSlides()
 
   const handleSlideClick = (event: React.MouseEvent, slide: SlideInfo) => {
     if (dragSlidesDelta === 0) {

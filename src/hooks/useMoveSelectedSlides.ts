@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { useAppSelector, usePresentationActions } from '../hooks/redux'
+import { useAppSelector, usePresentationActions } from './redux'
 
-function SlidesMoveHandler() {
+function useMoveSelectedSlides() {
   const { isDraggingSlides, dragSlidesOrigin, dragSlidesDelta } =
     useAppSelector((state) => state.interfaceReducer)
   const slides = useAppSelector((state) => state.presentationReducer.slides)
@@ -43,4 +43,4 @@ function SlidesMoveHandler() {
   }, [isDraggingSlides])
 }
 
-export default SlidesMoveHandler
+export default useMoveSelectedSlides
