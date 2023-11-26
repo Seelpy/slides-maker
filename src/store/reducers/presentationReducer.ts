@@ -18,7 +18,6 @@ import {
   CircleObject,
   SlideObjectType,
   SquareObject,
-  TextObject,
   TriangleObject,
 } from '../../models/types.ts'
 import objectGenerator from '../../services/ObjectGenerator.ts'
@@ -109,45 +108,27 @@ const presentationReducer = createReducer(presentation, (builder) => {
         return
       }
       if (action.payload.color) {
-        if (object.type === SlideObjectType.Primitive) {
+        if (object.type === SlideObjectType.Primitive
+          || object.type === SlideObjectType.Text) {
           object.color = action.payload.color
-        } else if (object.type === SlideObjectType.Text) {
-          object.chars.map((ch) => ch.color = action.payload.color!)
         }
       }
       slideInfo.slide.push(object)
     })
     .addCase(updateTextSettings, (state, action) => {
-      const index = state.slides.findIndex(
+      const slideInfo = state.slides.find(
         (slide) => slide.id == action.payload.slideId,
       )
-      const slideInfo = state.slides[index]
-      let texts = slideInfo.slide.filter(
-        (slide) => slide.selected && slide.type == SlideObjectType.Text,
-      )
-      slideInfo.slide = slideInfo.slide.filter(
-        (slide) => !slide.selected || !(slide.type == SlideObjectType.Text),
-      )
-      texts = texts.map((text) => {
-        const newText: TextObject = text as TextObject
-        newText.chars = newText.chars.map((char) => {
-          char.fontFamily = action.payload.font ?? char.fontFamily
-          char.fontSize = action.payload.size ?? char.fontSize
-          char.italic =
-            action.payload.italic === undefined ? char.italic : !char.italic
-          char.bold = action.payload.bold === undefined ? char.bold : !char.bold
-          char.underline =
-            action.payload.underline === undefined
-              ? char.underline
-              : !char.underline
-          return char
-        })
-        return newText
+      slideInfo!.slide = slideInfo!.slide.map((obj) => {
+        if (obj.selected && obj.type === SlideObjectType.Text) {
+          obj.fontFamily = action.payload.font ?? obj.fontFamily
+          obj.fontSize = action.payload.size ?? obj.fontSize
+          obj.italic = action.payload.italic ? !obj.italic : obj.italic
+          obj.bold = action.payload.bold ? !obj.bold : obj.bold
+          obj.underline = action.payload.underline ? !obj.underline : obj.underline
+        }
+        return obj
       })
-      texts.forEach((text) => {
-        slideInfo.slide.push(text)
-      })
-      state.slides[index] = slideInfo
     })
     .addCase(updateColor, (state, action) => {
       const index = state.slides.findIndex(
@@ -158,15 +139,13 @@ const presentationReducer = createReducer(presentation, (builder) => {
         if (obj.selected && obj.type != SlideObjectType.Image) {
           switch (obj.type) {
             case SlideObjectType.Text: {
-              obj = obj as TextObject
-              obj.chars.forEach((char) => {
-                char.color = action.payload.color
-              })
+              obj.color = action.payload.color
               break
             }
             case SlideObjectType.Primitive: {
               obj = obj as CircleObject | SquareObject | TriangleObject
               obj.color = action.payload.color
+              break
             }
           }
         }

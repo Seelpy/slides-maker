@@ -1,7 +1,6 @@
 import { useAppSelector } from '../hooks/redux'
 import { SlideObjectType, TextObject } from '../models/types'
 import { usePresentationActions } from '../hooks/redux'
-import { Char } from '../models/types'
 
 function textKeyHandler() {
   const slides = useAppSelector((state) => state.presentationReducer.slides)
@@ -14,17 +13,14 @@ function textKeyHandler() {
 
   let activeSlide = slides.find((s) => s.id === activeSlideId)
 
-
   const selectedText = activeSlide?.slide.filter((obj) => obj.selected && obj.type === SlideObjectType.Text) ?? []
 
   const handleOnDelete = () => {
     if (activeSlide) {
       selectedText.map((text) => {
         const tmpText = structuredClone(text) as TextObject
-        tmpText.chars.pop()
-        if (activeSlide) {
-          updateSlide({ slide  : activeSlide, oldSlideObject: text, newSlideObject: tmpText})
-        }
+        tmpText.value = tmpText.value.slice(0, -1)
+        updateSlide({ slide  : activeSlide!, oldSlideObject: text, newSlideObject: tmpText})
       })
     }
   } 
@@ -33,42 +29,26 @@ function textKeyHandler() {
     if (activeSlide) {
       selectedText.map((text) => {
         const tmpText = structuredClone(text) as TextObject
-        let tmpChar: Char = {
-          value: key,
-          fontFamily: "Arial",
-          fontSize: 14,
-          color: "black",
-          bold: false,
-          italic: false,
-          underline: false
-        }
-        if (tmpText.chars.length > 0) {
-          tmpChar = structuredClone(tmpText.chars[0])
-          tmpChar.value = key
-        }
-
-        tmpText.chars.push(tmpChar)
-        if (activeSlide) {
-          updateSlide({ slide  : activeSlide, oldSlideObject: text, newSlideObject: tmpText})
-        }
+        tmpText.value += key
+        updateSlide({ slide  : activeSlide!, oldSlideObject: text, newSlideObject: tmpText})
       })
     }
-  } 
+  }
 
   window.onkeydown = (event: KeyboardEvent) => {
     if (document.activeElement?.tagName === "INPUT") return;
 
     switch (event.key) {
-      case 'Delete': {
-        handleOnDelete()
-        break
-      }
       case 'Backspace': {
         handleOnDelete()
         break
       }
+      case 'Enter': {
+        handleKey('\n')
+        break
+      }
       case " ": {
-        handleKey("ㅤ")
+        handleKey('\u00A0')
         break
       }
       default : {

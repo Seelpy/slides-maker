@@ -10,7 +10,6 @@ import {
   TriangleObject,
   Position,
   Size,
-  Char,
 } from '../types.ts'
 
 const position: Position = {
@@ -23,21 +22,17 @@ const size: Size = {
   height: 25,
 }
 
-const char: Char = {
-  value: 'a',
-  fontSize: 25,
-  fontFamily: 'Corbila',
-  color: 'Dark',
-  bold: true,
-  italic: false,
-  underline: true,
-}
-
 const textObject: TextObject = {
   id: 't1',
   type: SlideObjectType.Text,
   position: position,
-  chars: [char, char, char, char, char, char, char],
+  value: 'Hello!',
+  fontSize: 25,
+  fontFamily: 'Corbila',
+  color: 'red',
+  bold: true,
+  italic: false,
+  underline: true,
   size: size,
   rotate: 0,
   selected: false,

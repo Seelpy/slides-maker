@@ -20,16 +20,6 @@ type Size = {
   height: number
 }
 
-type Char = {
-  value: string
-  fontSize: number
-  fontFamily: string
-  color: string
-  bold: boolean
-  italic: boolean
-  underline: boolean
-}
-
 type BaseSlideObject = {
   id: string
   position: Position
@@ -40,7 +30,13 @@ type BaseSlideObject = {
 
 type TextObject = BaseSlideObject & {
   type: SlideObjectType.Text
-  chars: Array<Char>
+  value: string
+  fontSize: number
+  fontFamily: string
+  color: string
+  bold: boolean
+  italic: boolean
+  underline: boolean
 }
 
 type ImageObject = BaseSlideObject & {
@@ -104,7 +100,6 @@ export { SlideObjectType, PrimitiveType, HistoryOperation }
 export type {
   Position,
   Size,
-  Char,
   BaseSlideObject,
   TextObject,
   ImageObject,

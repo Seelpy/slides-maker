@@ -2,3 +2,8 @@
     position: absolute;
     text-align: center;
 }
+
+.spanText {
+    display: block;
+    white-space: pre-wrap;
+}

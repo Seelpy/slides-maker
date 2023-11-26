@@ -1,11 +1,13 @@
 import MenuSection from '../MenuSection'
 import Button from '../Button'
+import { useState } from 'react'
 import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
 import { SlideObjectType } from '../../../models/types'
 
 const SectionText = () => {
   const { createObject, updateTextSettings } = usePresentationActions()
   const { activeSlideId, activeColor } = useAppSelector((state) => state.interfaceReducer)
+  const [ fontSize, setFontSize ] = useState<number>(14)
 
   const clickCreateObjectHandler = (
     slideId: string | undefined,
@@ -50,13 +52,15 @@ const SectionText = () => {
   }
 
   const onSizeChange = (event: any) => {
-    if (activeSlideId === undefined) {
-      return
+    const value = Math.max(1, Math.min(999, event.target.value));
+    setFontSize(value)
+
+    if (activeSlideId !== undefined) {
+      updateTextSettings({
+        slideId: activeSlideId,
+        size: value,
+      })
     }
-    updateTextSettings({
-      slideId: activeSlideId,
-      size: event.target.value,
-    })
   }
 
   return (
@@ -77,7 +81,7 @@ const SectionText = () => {
         Size:
         <input
           type="number"
-          defaultValue={14}
+          value={fontSize}
           style={{ width: `2.5rem` }}
           onChange={onSizeChange}
         />

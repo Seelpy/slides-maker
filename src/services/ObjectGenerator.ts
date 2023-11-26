@@ -1,5 +1,4 @@
 import {
-  Char,
   ImageObject,
   PrimitiveType,
   SlideObject,
@@ -49,11 +48,17 @@ class SlideObjectGenerator {
     return {
       id: uuidv4(),
       type: SlideObjectType.Text,
+      value: "Text",
+      fontSize: 14,
+      fontFamily: 'Arial',
+      color: 'black',
+      bold: false,
+      italic: false,
+      underline: false,
       position: {
         x: 0,
         y: 0,
       },
-      chars: this.convertStringToChars('Text'),
       size: {
         width: 100,
         height: 100,
@@ -131,21 +136,6 @@ class SlideObjectGenerator {
       },
       rotate: 0,
       selected: false,
-    }
-  }
-
-  private convertStringToChars(text: string): Char[] {
-    return text.split('').map(this.makeChar)
-  }
-  private makeChar(char: string): Char {
-    return {
-      value: char,
-      fontSize: 14,
-      fontFamily: 'Arial',
-      color: 'black',
-      bold: false,
-      italic: false,
-      underline: false,
     }
   }
 }
