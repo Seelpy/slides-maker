@@ -23,12 +23,12 @@ const LeftBar = () => {
   const handleSlideClick = (event: React.MouseEvent, slide: SlideInfo) => {
     if (dragSlidesDelta === 0) {
       if (event.ctrlKey) {
-        updateSlide({ slide: slide, selected: !slide.selected })
+        updateSlide({ slideId: slide.id, selected: !slide.selected })
       }
       else if (event.shiftKey) {
         let firstSelectedIndex = -1;
         const clickedIndex = slides.findIndex((s) => s.id === slide.id);
-        updateSlide({ slide: slide, selected: true });
+        updateSlide({ slideId: slide.id, selected: true });
 
         for (let i = 0; i < slides.length; i++) {
           if (slides[i].selected) {
@@ -39,12 +39,12 @@ const LeftBar = () => {
 
         if (firstSelectedIndex >= 0 && clickedIndex !== firstSelectedIndex) {
           for (let i = firstSelectedIndex; i != clickedIndex; firstSelectedIndex > clickedIndex ? i-- : i++ )
-            updateSlide({ slide: slides[i], selected: true })
+            updateSlide({ slideId: slides[i].id, selected: true })
         }
       }
       else {
         setActiveSlideId(slide.id)
-        slides.map((s) => updateSlide({ slide: s, selected: false }))
+        slides.map((s) => updateSlide({ slideId: s.id, selected: false }))
       }
     }
   }

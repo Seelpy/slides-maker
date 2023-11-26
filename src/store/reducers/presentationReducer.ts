@@ -54,7 +54,7 @@ const presentationReducer = createReducer(presentation, (builder) => {
     })
     .addCase(updateSlide, (state, action) => {
       const slideInfo = state.slides.find(
-        (s) => s.id === action.payload.slide.id,
+        (s) => s.id === action.payload.slideId,
       )
       if (slideInfo !== undefined) {
         if (action.payload.selected !== undefined) {

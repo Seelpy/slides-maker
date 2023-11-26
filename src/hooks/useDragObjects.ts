@@ -88,7 +88,7 @@ function useDragObjects(
             }
 
             updateSlide({
-              slide: slide,
+              slideId: slide.id,
               oldSlideObject: obj,
               newSlideObject: { ...obj, size: {width: nextWidth, height: nextHeight} },
             })
@@ -99,7 +99,7 @@ function useDragObjects(
         const rotateAngle = (deltaX + deltaY)
         selectedObjects.current.map((obj) => {
           updateSlide({
-            slide: slide,
+            slideId: slide.id,
             oldSlideObject: obj,
             newSlideObject: { ...obj, rotate: obj.rotate - rotateAngle },
           })
@@ -108,7 +108,7 @@ function useDragObjects(
         // Перетаскивание
         selectedObjects.current.map((obj) => {
           updateSlide({
-            slide: slide,
+            slideId: slide.id,
             oldSlideObject: obj,
             newSlideObject: { ...obj, position: { x: obj.position.x + deltaX, y: obj.position.y + deltaY } },
           })

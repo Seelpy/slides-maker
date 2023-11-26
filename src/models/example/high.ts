@@ -84,6 +84,7 @@ const circleObject: CircleObject = {
     width: 100,
     height: 100,
   },
+  rounding: 0,
   rotate: 0,
   selected: false,
 }
@@ -101,6 +102,7 @@ const squareObject: SquareObject = {
     width: 15,
     height: 15,
   },
+  rounding: 0,
   rotate: 0,
   selected: false,
 }
@@ -118,6 +120,7 @@ const triangleObject: TriangleObject = {
     width: 55,
     height: 25,
   },
+  rounding: 0,
   rotate: 0,
   selected: false,
 }
@@ -135,6 +138,7 @@ const triangle2Object: TriangleObject = {
     width: 55,
     height: 33,
   },
+  rounding: 0,
   rotate: 0,
   selected: false,
 }
@@ -152,6 +156,7 @@ const triangle3Object: TriangleObject = {
     width: 110,
     height: 66,
   },
+  rounding: 0,
   rotate: 0,
   selected: false,
 }

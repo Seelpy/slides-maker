@@ -20,7 +20,7 @@ function textKeyHandler() {
       selectedText.map((text) => {
         const tmpText = structuredClone(text) as TextObject
         tmpText.value = tmpText.value.slice(0, -1)
-        updateSlide({ slide  : activeSlide!, oldSlideObject: text, newSlideObject: tmpText})
+        updateSlide({ slideId: activeSlide!.id, oldSlideObject: text, newSlideObject: tmpText})
       })
     }
   } 
@@ -30,7 +30,7 @@ function textKeyHandler() {
       selectedText.map((text) => {
         const tmpText = structuredClone(text) as TextObject
         tmpText.value += key
-        updateSlide({ slide  : activeSlide!, oldSlideObject: text, newSlideObject: tmpText})
+        updateSlide({ slideId: activeSlide!.id, oldSlideObject: text, newSlideObject: tmpText})
       })
     }
   }

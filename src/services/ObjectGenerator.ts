@@ -97,6 +97,7 @@ class SlideObjectGenerator {
         width: 100,
         height: 100,
       },
+      rounding: 0,
       rotate: 0,
       selected: false,
     }
@@ -116,6 +117,7 @@ class SlideObjectGenerator {
         width: 100,
         height: 100,
       },
+      rounding: 0,
       rotate: 0,
       selected: false,
     }
@@ -135,6 +137,7 @@ class SlideObjectGenerator {
         width: 100,
         height: 100,
       },
+      rounding: 0,
       rotate: 0,
       selected: false,
     }

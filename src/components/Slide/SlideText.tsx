@@ -36,7 +36,7 @@ const SlideText = (props: TextProps) => {
 
       if (textSize.width !== data.size.width || textSize.height !== data.size.height) {
         setLastOperationType(HistoryOperation.update)
-        updateSlide({slide: props.slide, oldSlideObject: data, newSlideObject: {...data, size: textSize}})
+        updateSlide({slideId: props.slide.id, oldSlideObject: data, newSlideObject: {...data, size: textSize}})
       }
     }
   }, [data])

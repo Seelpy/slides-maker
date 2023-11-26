@@ -54,7 +54,7 @@ function keyHandler() {
     if (activeSlide) {
       const selectedObjects = activeSlide.slide.filter((obj) => obj.selected)
       selectedObjects.map((obj) =>
-        updateSlide({ slide: activeSlide, oldSlideObject: obj }),
+        updateSlide({ slideId: activeSlide.id, oldSlideObject: obj }),
       )
     }
   }
@@ -93,7 +93,7 @@ function keyHandler() {
       }))
     } else {
       copiedObjects.map((obj) => updateSlide({
-          slide: activeSlide!,
+          slideId: activeSlide!.id,
           newSlideObject: {...obj, id: uuidv4(), selected: false} as SlideObject
       }))
     }

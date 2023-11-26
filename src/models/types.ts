@@ -50,6 +50,7 @@ type ImageObject = BaseSlideObject & {
 type PrimitiveObject = BaseSlideObject & {
   type: SlideObjectType.Primitive
   color: string
+  rounding: number
 }
 
 type CircleObject = PrimitiveObject & {

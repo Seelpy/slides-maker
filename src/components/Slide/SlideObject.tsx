@@ -53,7 +53,7 @@ const EditorObject = (props: SlideObjectProps) => {
         // снимаем выделение со всех объектов
         props.slide.slide.map((obj) =>
           updateSlide({
-            slide: props.slide,
+            slideId: props.slide.id,
             oldSlideObject: obj,
             newSlideObject: { ...obj, selected: false },
           }),
@@ -62,7 +62,7 @@ const EditorObject = (props: SlideObjectProps) => {
 
       // Выделяем текущий
       updateSlide({
-        slide: props.slide,
+        slideId: props.slide.id,
         oldSlideObject: props.data,
         newSlideObject: { ...props.data, selected: true },
       })

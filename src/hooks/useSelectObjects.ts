@@ -46,7 +46,7 @@ function useSelectObjects(
       else {
         if (activeSlide && selectionRef.current.style.display === "block") {
           activeSlide.slide.map((obj) => updateSlide({
-            slide: activeSlide,
+            slideId: activeSlide.id,
             oldSlideObject: obj,
             newSlideObject: {...obj, selected: isObjectInArea(
               obj, coords.current.selection

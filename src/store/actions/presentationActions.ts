@@ -21,7 +21,7 @@ type moveSlidesPayload = {
 }
 
 type updateSlidePayload = {
-  slide: SlideInfo
+  slideId: string
   selected?: boolean
   oldSlideObject?: SlideObject
   newSlideObject?: SlideObject
