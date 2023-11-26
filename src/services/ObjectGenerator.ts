@@ -48,7 +48,7 @@ class SlideObjectGenerator {
     return {
       id: uuidv4(),
       type: SlideObjectType.Text,
-      value: "Text",
+      value: 'Text',
       align: 'left',
       fontSize: 14,
       fontFamily: 'Arial',
