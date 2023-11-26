@@ -27,6 +27,7 @@ const textObject: TextObject = {
   type: SlideObjectType.Text,
   position: position,
   value: 'Hello!',
+  align: 'left',
   fontSize: 25,
   fontFamily: 'Corbila',
   color: 'red',

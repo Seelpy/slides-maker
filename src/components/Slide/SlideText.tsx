@@ -12,7 +12,7 @@ type TextProps = {
 const SlideText = (props: TextProps) => {
   const data = props.data
   const textStyle = {
-    textAlign: 'center' as TextAlign,
+    textAlign: data.align as TextAlign,
     fontSize: data.fontSize + 'px',
     fontFamily: data.fontFamily,
     color: data.color,

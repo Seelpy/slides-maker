@@ -9,36 +9,39 @@ const SectionText = () => {
   const { activeSlideId, activeColor } = useAppSelector((state) => state.interfaceReducer)
   const [ fontSize, setFontSize ] = useState<number>(14)
 
-  const clickCreateObjectHandler = (
-    slideId: string | undefined,
-    type: string,
-    subtype: string | undefined,
-  ) => {
-    if (slideId === undefined) {
-      return
-    }
-    createObject({ slideId: slideId, type: type, subtype: subtype, color: activeColor })
-  }
-
-  const clickUpdateSettingsHandler = (
+  type UpdateSettingsPayload = {
     slideId?: string,
+    align?: string,
     italic?: boolean,
     bold?: boolean,
     underline?: boolean,
     size?: number,
     fontFamily?: string,
+  }
+
+  const onSettingsUpdate = (data: UpdateSettingsPayload) => {
+    if (data.slideId === undefined) {
+      return
+    }
+    updateTextSettings({
+      slideId: data.slideId,
+      align: data.align,
+      italic: data.italic,
+      bold: data.bold,
+      underline: data.underline,
+      size: data.size,
+      font: data.fontFamily,
+    })
+  }
+
+  const onNewText = (
+    slideId: string | undefined,
+    type: string,
   ) => {
     if (slideId === undefined) {
       return
     }
-    updateTextSettings({
-      slideId: slideId,
-      italic: italic,
-      bold: bold,
-      underline: underline,
-      size: size,
-      font: fontFamily,
-    })
+    createObject({ slideId: slideId, type: type, subtype: undefined, color: activeColor })
   }
 
   const onFontSelectChange = (event: any) => {
@@ -51,7 +54,7 @@ const SectionText = () => {
     })
   }
 
-  const onSizeChange = (event: any) => {
+  const onFontSizeChange = (event: any) => {
     const value = Math.max(1, Math.min(999, event.target.value));
     setFontSize(value)
 
@@ -83,63 +86,70 @@ const SectionText = () => {
           type="number"
           value={fontSize}
           style={{ width: `2.5rem` }}
-          onChange={onSizeChange}
+          onChange={onFontSizeChange}
         />
       </div>
 
       <div>
         <Button
-          onClick={() =>
-            clickCreateObjectHandler(
-              activeSlideId,
-              SlideObjectType.Text,
-              undefined,
-            )
-          }
+          onClick={() => onNewText(
+            activeSlideId,
+            SlideObjectType.Text,
+          )}
         >
           <i className="fa-solid fa-plus" style={{ color: `#4c88f0` }} /> New Text
         </Button>
         <Button
           onClick={() =>
-            clickUpdateSettingsHandler(
-              activeSlideId,
-              true,
-              undefined,
-              undefined,
-              undefined,
-              undefined,
-            )
+            onSettingsUpdate({
+              slideId: activeSlideId,
+              italic: true
+            })
           }
         >
           <em>italic</em>
         </Button>
         <Button
           onClick={() =>
-            clickUpdateSettingsHandler(
-              activeSlideId,
-              undefined,
-              true,
-              undefined,
-              undefined,
-              undefined,
-            )
+            onSettingsUpdate({
+              slideId: activeSlideId,
+              bold: true
+            })
           }
         >
           <strong>Bold</strong>
         </Button>
         <Button
           onClick={() =>
-            clickUpdateSettingsHandler(
-              activeSlideId,
-              undefined,
-              undefined,
-              true,
-              undefined,
-              undefined,
-            )
+            onSettingsUpdate({
+              slideId: activeSlideId,
+              underline: true
+            })
           }
         >
           <u>underline</u>
+        </Button>
+      </div>
+      <div>
+        <Button onClick={() => onSettingsUpdate({
+          slideId: activeSlideId,
+          align: "left"
+        })}>
+          Left
+        </Button>
+
+        <Button onClick={() => onSettingsUpdate({
+          slideId: activeSlideId,
+          align: "center"
+        })}>
+          Center
+        </Button>
+
+        <Button onClick={() => onSettingsUpdate({
+          slideId: activeSlideId,
+          align: "right"
+        })}>
+          Right
         </Button>
       </div>
     </MenuSection>

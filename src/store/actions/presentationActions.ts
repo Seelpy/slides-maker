@@ -41,6 +41,7 @@ type updateTextSettingsPayload = {
   italic?: boolean
   bold?: boolean
   underline?: boolean
+  align?: string
 }
 
 type updateColorPayload = {

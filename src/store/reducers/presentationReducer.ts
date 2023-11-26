@@ -18,6 +18,7 @@ import {
   CircleObject,
   SlideObjectType,
   SquareObject,
+  TextAlign,
   TriangleObject,
 } from '../../models/types.ts'
 import objectGenerator from '../../services/ObjectGenerator.ts'
@@ -123,6 +124,7 @@ const presentationReducer = createReducer(presentation, (builder) => {
         if (obj.selected && obj.type === SlideObjectType.Text) {
           obj.fontFamily = action.payload.font ?? obj.fontFamily
           obj.fontSize = action.payload.size ?? obj.fontSize
+          obj.align = action.payload.align as TextAlign ?? obj.align
           obj.italic = action.payload.italic ? !obj.italic : obj.italic
           obj.bold = action.payload.bold ? !obj.bold : obj.bold
           obj.underline = action.payload.underline ? !obj.underline : obj.underline

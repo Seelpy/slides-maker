@@ -10,6 +10,8 @@ enum PrimitiveType {
   Triangle = 'TRIANGLE',
 }
 
+type TextAlign = "left" | "center" | "right"
+
 type Position = {
   x: number
   y: number
@@ -31,6 +33,7 @@ type BaseSlideObject = {
 type TextObject = BaseSlideObject & {
   type: SlideObjectType.Text
   value: string
+  align: TextAlign
   fontSize: number
   fontFamily: string
   color: string
@@ -95,12 +98,17 @@ enum HistoryOperation {
 }
 
 
-export { SlideObjectType, PrimitiveType, HistoryOperation }
+export { 
+  SlideObjectType, 
+  PrimitiveType, 
+  HistoryOperation,
+}
 
 export type {
   Position,
   Size,
   BaseSlideObject,
+  TextAlign,
   TextObject,
   ImageObject,
   PrimitiveObject,
