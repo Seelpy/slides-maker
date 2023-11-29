@@ -7,9 +7,9 @@ import {
 } from '../hooks/redux'
 import { HistoryOperation, SlideInfo, SlideObject } from '../models/types'
 import { v4 as uuidv4 } from 'uuid';
+import useHotkey from '../hooks/useHotkey';
 
 function keyHandler() {
-  const presentation = useAppSelector((state) => state.presentationReducer)
   const slides = useAppSelector((state) => state.presentationReducer.slides)
   const [copiedObjects, setCopiedObjects] = useState<SlideInfo[] | SlideObject[]>([])
 
@@ -99,50 +99,12 @@ function keyHandler() {
     }
   }
 
-  const onKeyDown = (event: KeyboardEvent) => {
-    switch (event.key.toLowerCase()) {
-      case 'delete': {
-        handleDeleteKey()
-        break
-      }
-      case 'z': {
-        if (event.ctrlKey) {
-          if (event.shiftKey) {
-            moveHistory(1)
-          } else {
-            moveHistory(-1)
-          }
-        }
-        break
-      }
-      case 'y': {
-        if (event.ctrlKey) {
-          moveHistory(1)
-        }
-        break
-      }
-      case 'c': {
-        if (event.ctrlKey) {
-          copyObjects()
-        }
-        break
-      }
-      case 'v': {
-        if (event.ctrlKey) {
-          pasteObjects()
-        }
-        break
-      }
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener("keydown", onKeyDown)
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown)
-    }
-  }, [presentation, activeSlide, currentHistoryIndex, copiedObjects])
+  useHotkey({hotkey: "Ctrl+C", callback: () => copyObjects()})
+  useHotkey({hotkey: "Ctrl+V", callback: () => pasteObjects()})
+  useHotkey({hotkey: "Ctrl+Z", callback: () => moveHistory(-1)})
+  useHotkey({hotkey: "Ctrl+Shift+Z", callback: () => moveHistory(1)})
+  useHotkey({hotkey: "Ctrl+Y", callback: () => moveHistory(1)})
+  useHotkey({hotkey: "Delete", callback: () => handleDeleteKey()})
 }
 
 export default keyHandler
