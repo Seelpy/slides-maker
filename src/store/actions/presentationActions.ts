@@ -1,7 +1,7 @@
-import { createAction } from '@reduxjs/toolkit'
+import { createAction } from '../createAction'
 import { Presentaion, SlideInfo, SlideObject } from '../../models/types'
 
-enum presentationActions {
+enum PresentationActions {
   changeName = 'CHANGE_NAME',
   createSlide = 'CREATE_SLIDE',
   moveSlides = 'MOVE_SLIDES',
@@ -15,26 +15,26 @@ enum presentationActions {
   updateBackground = 'UPDATE_BACKGROUND'
 }
 
-type moveSlidesPayload = {
+type MoveSlidesPayload = {
   slides: SlideInfo[]
   pasteIndex: number
 }
 
-type updateSlidePayload = {
+type UpdateSlidePayload = {
   slideId: string
   selected?: boolean
   oldSlideObject?: SlideObject
   newSlideObject?: SlideObject
 }
 
-type createObjectPayload = {
+type CreateObjectPayload = {
   slideId: string
   type: string
   subtype?: string
   color?: string
 }
 
-type updateTextSettingsPayload = {
+type UpdateTextSettingsPayload = {
   slideId: string
   font?: string
   size?: number
@@ -44,46 +44,46 @@ type updateTextSettingsPayload = {
   align?: string
 }
 
-type updateColorPayload = {
+type UpdateColorPayload = {
   slideId: string
   color: string
 }
 
-type importImagePayload = {
+type ImportImagePayload = {
   slideId: string
   data: string
   width?: number
   height?: number
 }
 
-export const changeName = createAction<string>(presentationActions.changeName)
+export const changeName = createAction<string>(PresentationActions.changeName)
 export const createSlide = createAction<SlideInfo>(
-  presentationActions.createSlide,
+  PresentationActions.createSlide,
 )
-export const moveSlides = createAction<moveSlidesPayload>(
-  presentationActions.moveSlides,
+export const moveSlides = createAction<MoveSlidesPayload>(
+  PresentationActions.moveSlides,
 )
 export const deleteSlides = createAction<SlideInfo[]>(
-  presentationActions.deleteSlides,
+  PresentationActions.deleteSlides,
 )
-export const updateSlide = createAction<updateSlidePayload>(
-  presentationActions.updateSlide,
+export const updateSlide = createAction<UpdateSlidePayload>(
+  PresentationActions.updateSlide,
 )
 export const updatePresentation = createAction<Presentaion>(
-  presentationActions.updatePresentation,
+  PresentationActions.updatePresentation,
 )
-export const createObject = createAction<createObjectPayload>(
-  presentationActions.createObject,
+export const createObject = createAction<CreateObjectPayload>(
+  PresentationActions.createObject,
 )
-export const updateTextSettings = createAction<updateTextSettingsPayload>(
-  presentationActions.updateTextSettings,
+export const updateTextSettings = createAction<UpdateTextSettingsPayload>(
+  PresentationActions.updateTextSettings,
 )
-export const updateColor = createAction<updateColorPayload>(
-  presentationActions.updateColor,
+export const updateColor = createAction<UpdateColorPayload>(
+  PresentationActions.updateColor,
 )
-export const importImage = createAction<importImagePayload>(
-  presentationActions.importImage,
+export const importImage = createAction<ImportImagePayload>(
+  PresentationActions.importImage,
 )
-export const updateBackground = createAction<importImagePayload>(
-  presentationActions.updateBackground,
+export const updateBackground = createAction<ImportImagePayload>(
+  PresentationActions.updateBackground,
 )

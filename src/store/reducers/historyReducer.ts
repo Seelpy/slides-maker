@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit'
+import { createReducer } from '../createReducer.ts';
 import { HistoryOperation, History } from '../../models/types.ts'
 import {
   pushHistoryState,
@@ -19,21 +19,21 @@ const initialHistoryState = {
   currentIndex: 0,
 } as initialHistoryStateType
 
-const historyReducer = createReducer(initialHistoryState, (builder) => {
-  builder
-    .addCase(pushHistoryState, (state, action) => {
-      state.history.push(action.payload)
-      state.currentIndex += 1
-    })
-    .addCase(clearHistoryAfterIndex, (state, _) => {
-      state.history.length = state.currentIndex + 1
-    })
-    .addCase(moveCurrentIndex, (state, action) => {
-      state.currentIndex += action.payload
-    })
-    .addCase(setLastOperationType, (state, action) => {
-      state.lastHistoryOperation = action.payload
-    })
+const historyReducer = createReducer(initialHistoryState, {
+  [pushHistoryState.type]: (state, action: typeof pushHistoryState.actionInstance) => {
+    return {...state, history: [...state.history, action.payload], currentIndex: state.currentIndex + 1}
+  },
+  [clearHistoryAfterIndex.type]: (state, _) => {
+    const newHistory = [...state.history];
+    newHistory.length = state.currentIndex + 1
+    return {...state, history: newHistory}
+  },
+  [moveCurrentIndex.type]: (state, action: typeof moveCurrentIndex.actionInstance) => {
+    return {...state, currentIndex: state.currentIndex + action.payload}
+  },
+  [setLastOperationType.type]: (state, action: typeof setLastOperationType.actionInstance) => {
+    return {...state, lastHistoryOperation: action.payload}
+  }
 })
 
 export default historyReducer

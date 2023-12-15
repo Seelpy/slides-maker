@@ -1,7 +1,7 @@
-import { createAction } from '@reduxjs/toolkit'
+import { createAction } from '../createAction'
 import { SlideInfo } from '../../models/types'
 
-enum interfaceActions {
+enum InterfaceActions {
   setActiveSlideId = 'SET_ACTIVE_SLIDE_ID',
   setDragSlides = 'SET_DRAG_SLIDES',
   setDragSlidesOrigin = 'SET_DRAG_SLIDES_ORIGIN',
@@ -13,26 +13,26 @@ enum interfaceActions {
 }
 
 export const setActiveSlideId = createAction<string | undefined>(
-  interfaceActions.setActiveSlideId,
+  InterfaceActions.setActiveSlideId,
 )
 export const setDragSlides = createAction<boolean>(
-  interfaceActions.setDragSlides,
+  InterfaceActions.setDragSlides,
 )
 export const setDragSlidesOrigin = createAction<SlideInfo | undefined>(
-  interfaceActions.setDragSlidesOrigin,
+  InterfaceActions.setDragSlidesOrigin,
 )
 export const setDragSlidesDelta = createAction<number>(
-  interfaceActions.setDragSlidesDelta,
+  InterfaceActions.setDragSlidesDelta,
 )
 export const setDragObjects = createAction<boolean>(
-  interfaceActions.setDragObjects,
+  InterfaceActions.setDragObjects,
 )
 export const setDragObjectsDelta = createAction<number>(
-  interfaceActions.setDragObjectsDelta,
+  InterfaceActions.setDragObjectsDelta,
 )
 export const setSelectingArea = createAction<boolean>(
-  interfaceActions.setSelectingArea,
+  InterfaceActions.setSelectingArea,
 )
 export const setActiveColor = createAction<string>(
-  interfaceActions.setActiveColor,
+  InterfaceActions.setActiveColor,
 )
