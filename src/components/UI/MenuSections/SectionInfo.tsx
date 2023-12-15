@@ -5,7 +5,7 @@ import {
   usePresentationActions,
 } from '../../../hooks/redux'
 // eslint-disable-next-line no-duplicate-imports
-import FileHandler from '../../../services/FileHandler'
+import FileHandler from '../../../services/FileHandler.ts'
 import PresentationConverter from '../../../services/PresentationConverter'
 import MenuSection from '../MenuSection'
 import Button from '../Button'
@@ -68,6 +68,17 @@ const SectionInfo = () => {
           }}
         />
       </div>
+      <Button
+        width="5.4rem"
+        onClick={() =>
+          FileHandler.ExportPdf(
+            presentation.slides,
+            presentation.name
+          )
+        }
+      >
+        Export pdf
+      </Button>
     </MenuSection>
   )
 }
