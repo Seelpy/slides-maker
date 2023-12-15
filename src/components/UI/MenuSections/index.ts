@@ -4,5 +4,6 @@ import SectionImages from "./SectionImages";
 import SectionInfo from "./SectionInfo";
 import SectionText from "./SectionText";
 import SectionSlides from "./SectionSlides";
+import SectionHistory from "./SectionHistory";
 
-export {SectionColors, SectionFigures, SectionImages, SectionInfo, SectionText, SectionSlides}
+export {SectionColors, SectionFigures, SectionImages, SectionInfo, SectionText, SectionSlides, SectionHistory}

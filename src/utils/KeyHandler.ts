@@ -60,7 +60,7 @@ function keyHandler() {
   }
 
   const moveHistory = (by: number) => {
-    if (by === -1 && currentHistoryIndex > 3
+    if (by === -1 && currentHistoryIndex > 2
       || by === 1 && currentHistoryIndex + 1 < history.length)
     {
       moveCurrentIndex(by)
