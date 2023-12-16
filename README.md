@@ -1,6 +1,6 @@
 # Presentation Maker
 
-## Лабораторная работа №7
+## [Лабораторная работа №7](https://docs.google.com/document/d/1x_SHScsO1NztQX2apPwRjgHiWBOK63OUFEfMIvumaAs/edit#heading=h.j45v3dyy86br)
 ### Кто сделали:
 - ПС-21
    - Реактивные типы:
