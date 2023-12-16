@@ -1,51 +1,20 @@
 # Presentation Maker
 
-**Ссылки на лабораторные:**
-   - lw-3 `https://github.com/Seelpy/slides-maker/tree/lw-3`
+## Лабораторная работа №7
+### Кто сделали:
+- ПС-21
+   - Реактивные типы:
+      - Веселов Макисм
+      - Вещев Артем
+     
+### Что сделали:
+- Выпелили из исползования redux toolkit
 
-https://drive.google.com/file/d/13UQ3CQuN2Lrg7DFaU4IznBSerCwVEPom/view?usp=sharing
+--- 
 
-![image](https://github.com/Seelpy/slides-maker/assets/71544630/aeb44ac1-2c15-424e-84b5-2b83c1c00c87)
-
-
-1. **Презентация**
-   - Действия:
-      - Создание
-      - Сохранение
-      - Открытие существующей презентации
-      - Редактирование
-      - Удаление презентации
-      - Предпросмотр презентации
-      - Экспорт в формате PDF
-
-2. **Слайд**
-   - Действия:
-      - Добавление нового слайда
-      - Удаление слайда
-      - Изменение содержания слайда
-
-3. **Объект на слайде**
-   - Объекты:
-      - Текст
-      - Картинка
-      - Примитив   
-   - Действия:
-      - Добавление объекта на слайд
-      - Редактирование содержания и стиля объекта
-      - Перемещение и изменение размера объекта
-        Удаление объекта.
-
-5. **История команд**
-   - Действия:
-      - Запись команды в историю
-      - Вполнение команды Ctrl-Z (откат)
-      - Выполнение команды Ctrl-Y (повтор)
-
-6. **Операции**     
-
-Связи между сущностями:
-- Пользователь может создавать и редактировать презентации.
-- Презентация содержит слайды и историю команд.
-- Слайды содержат объекты, такие как текст, изображения и примитивы.
-- История команд записывает действия пользователя и может быть использована для отмены и восстановления изменений.
-- Презентацию можно сохранить и загрузить в локальной файловой системе или в облачных сервисах.
+### Где были изменения в [коммите](https://github.com/Seelpy/slides-maker/commit/139f9a76c6a404368eaccf66e27d1c01cc54ef7c#diff-b0246ea54ae7c4d9ee5e0c04fbac7f316746cb3e89da4f41f1881c8cb331d118):
+- [actions](https://github.com/Seelpy/slides-maker/tree/lw-7/src/store/actions)
+- [createAction](https://github.com/Seelpy/slides-maker/blob/lw-7/src/store/createAction.ts)
+- [createReducer](https://github.com/Seelpy/slides-maker/blob/lw-7/src/store/createReducer.ts)
+- [reducers](https://github.com/Seelpy/slides-maker/tree/lw-7/src/store/reducers)
+- [store](https://github.com/Seelpy/slides-maker/blob/lw-7/src/store/store.ts)
