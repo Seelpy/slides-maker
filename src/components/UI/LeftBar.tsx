@@ -51,7 +51,6 @@ const LeftBar = () => {
 
   return (
     <div
-      id='to_pdf'
       className={styles.leftBar}
       ref={leftBarRef}
       onMouseLeave={() => setDragSlides(false)}
