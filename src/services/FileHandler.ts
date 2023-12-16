@@ -4,9 +4,9 @@ import PDFSlide from "../components/Slide/PdfSlide.tsx";
 import { renderToStaticMarkup } from "react-dom/server"
 import { SlideInfo } from "../models/types.ts";
 
-const pdfMargin = 800
-const pdfWidth = 1280
-const pdfHeight = 720
+const pdfMargin = 0
+const pdfWidth =963
+const pdfHeight = 543
 class FileHandler {
   private jsonFileType: string = '.json'
   private jsonType: string = 'application/json'
@@ -43,9 +43,9 @@ class FileHandler {
       result += renderToStaticMarkup(PDFSlide(slide))
     }
     let opt = {
-      margin: [0, 0, 0, pdfMargin],
+      margin: pdfMargin,
       filename:     filename + '.pdf',
-      jsPDF:        { format: [pdfWidth, pdfHeight*slides.length], orientation: "p"}
+      jsPDF:        { format: [pdfWidth, (pdfHeight - pdfMargin)*slides.length], orientation: "p"}
     };
 
     console.log(result)

@@ -1,14 +1,14 @@
-import styles from './SlideEditor.module.css'
+import styles from './PdfSlide.module.css'
 import { SlideInfo } from "../../models/types.ts";
 import PdfObject from "./PdfObject.tsx";
 
 const PDFSlide = (slide: SlideInfo) => {
   return (
     <div
-      className={styles.editorArea}
+      className={styles.slideArea}
     >
       <div
-        className={styles.slideEditor}
+        className={styles.slide}
         style={{background: slide.background}}
       >
         <div className={styles.selectionArea}/>
