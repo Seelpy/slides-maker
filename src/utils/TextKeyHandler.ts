@@ -60,7 +60,7 @@ function textKeyHandler() {
     }
   }
 
-  useHotkey({hotkey: "*", callback: (e) => mapKeyToFunc(e)})
+  useHotkey(["*"], (e) => mapKeyToFunc(e))
 }
 
 export default textKeyHandler

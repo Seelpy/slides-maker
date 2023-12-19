@@ -99,12 +99,11 @@ function keyHandler() {
     }
   }
 
-  useHotkey({hotkey: "Ctrl+C", callback: () => copyObjects()})
-  useHotkey({hotkey: "Ctrl+V", callback: () => pasteObjects()})
-  useHotkey({hotkey: "Ctrl+Z", callback: () => moveHistory(-1)})
-  useHotkey({hotkey: "Ctrl+Shift+Z", callback: () => moveHistory(1)})
-  useHotkey({hotkey: "Ctrl+Y", callback: () => moveHistory(1)})
-  useHotkey({hotkey: "Delete", callback: () => handleDeleteKey()})
+  useHotkey(["Delete"], () => handleDeleteKey())
+  useHotkey(["Ctrl+C", "Ctrl+С"], () => copyObjects())
+  useHotkey(["Ctrl+V", "Ctrl+М"], () => pasteObjects())
+  useHotkey(["Ctrl+Z", "Ctrl+Я"], () => moveHistory(-1))
+  useHotkey(["Ctrl+Y", "Ctrl+Н", "Ctrl+Shift+Z", "Ctrl+Shift+Я"], () => moveHistory(1))
 }
 
 export default keyHandler
