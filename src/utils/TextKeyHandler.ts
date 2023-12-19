@@ -11,7 +11,7 @@ function textKeyHandler() {
     (state) => state.interfaceReducer.activeSlideId,
   )
 
-  let activeSlide = slides.find((s) => s.id === activeSlideId)
+  const activeSlide = slides.find((s) => s.id === activeSlideId)
 
   const selectedText = activeSlide?.slide.filter((obj) => obj.selected && obj.type === SlideObjectType.Text) ?? []
 
