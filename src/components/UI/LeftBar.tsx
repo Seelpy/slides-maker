@@ -44,7 +44,7 @@ const LeftBar = () => {
       }
       else {
         setActiveSlideId(slide.id)
-        slides.map((s) => updateSlide({ slideId: s.id, selected: false }))
+        slides.map((s) => updateSlide({ slideId: s.id, selected: s.id === slide.id }))
       }
     }
   }
