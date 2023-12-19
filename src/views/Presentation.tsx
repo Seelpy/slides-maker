@@ -10,8 +10,8 @@ import { useAppSelector, useHistoryActions, useInterfaceActions } from '../hooks
 function Presentation() {
   const presentation = useAppSelector((state) => state.presentationReducer)
   const { activeSlideId, isDraggingObjects } = useAppSelector((state) => state.interfaceReducer)
-  const { history, lastHistoryOperation, currentIndex } = useAppSelector((state) => state.historyReducer)
-  const { pushHistoryState, clearHistoryAfterIndex, setLastOperationType } = useHistoryActions()
+  const { history, lastHistoryOperation, currentIndex, shouldSaveState } = useAppSelector((state) => state.historyReducer)
+  const { pushHistoryState, clearHistoryAfterIndex, setLastOperationType, setShouldSaveState } = useHistoryActions()
   const { setDragObjects, setDragSlides, setSelectingArea } = useInterfaceActions()
 
   useEffect(() => {
@@ -28,7 +28,11 @@ function Presentation() {
         clearHistoryAfterIndex()
       }
 
-      pushHistoryState({presentation: presentation, activeSlideId: activeSlideId})
+      if (shouldSaveState) {
+        pushHistoryState({presentation: presentation, activeSlideId: activeSlideId})
+      } else {
+        setShouldSaveState(true);
+      }
     }
     else {
       setLastOperationType(undefined)

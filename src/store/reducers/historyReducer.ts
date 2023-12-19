@@ -5,18 +5,21 @@ import {
   clearHistoryAfterIndex,
   moveCurrentIndex,
   setLastOperationType,
+  setShouldSaveState,
 } from '../actions/historyActions.ts'
 
 type initialHistoryStateType = {
   history: History[];
   lastHistoryOperation: HistoryOperation | undefined;
   currentIndex: number;
+  shouldSaveState: boolean;
 }
 
 const initialHistoryState = {
   history: [],
   lastHistoryOperation: undefined,
   currentIndex: 0,
+  shouldSaveState: true,
 } as initialHistoryStateType
 
 const historyReducer = createReducer(initialHistoryState, {
@@ -33,6 +36,9 @@ const historyReducer = createReducer(initialHistoryState, {
   },
   [setLastOperationType.type]: (state, action: typeof setLastOperationType.actionInstance) => {
     return {...state, lastHistoryOperation: action.payload}
+  },
+  [setShouldSaveState.type]: (state, action: typeof setShouldSaveState.actionInstance) => {
+    return {...state, shouldSaveState: action.payload}
   }
 })
 
