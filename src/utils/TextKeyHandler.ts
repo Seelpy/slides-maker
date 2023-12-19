@@ -1,3 +1,4 @@
+import useHotkey from '../hooks/useHotkey'
 import { useAppSelector } from '../hooks/redux'
 import { SlideObjectType, TextObject } from '../models/types'
 import { usePresentationActions } from '../hooks/redux'
@@ -35,7 +36,7 @@ function textKeyHandler() {
     }
   }
 
-  window.onkeydown = (event: KeyboardEvent) => {
+  const mapKeyToFunc = (event: KeyboardEvent) => {
     if (document.activeElement?.tagName === "INPUT") return;
 
     switch (event.key) {
@@ -58,6 +59,8 @@ function textKeyHandler() {
       }
     }
   }
+
+  useHotkey({hotkey: "*", callback: (e) => mapKeyToFunc(e)})
 }
 
 export default textKeyHandler
