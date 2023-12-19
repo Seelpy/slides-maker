@@ -23,7 +23,7 @@ const historyReducer = createReducer(initialHistoryState, {
   [pushHistoryState.type]: (state, action: typeof pushHistoryState.actionInstance) => {
     return {...state, history: [...state.history, action.payload], currentIndex: state.currentIndex + 1}
   },
-  [clearHistoryAfterIndex.type]: (state, _) => {
+  [clearHistoryAfterIndex.type]: (state) => {
     const newHistory = [...state.history];
     newHistory.length = state.currentIndex + 1
     return {...state, history: newHistory}

@@ -14,7 +14,7 @@ const SectionImages = () => {
       return
     }
     FileHandler.ImportImage(file).then((base64) => {
-      let image = document.createElement('img');
+      const image = document.createElement('img');
       image.addEventListener('load', () => {
         importImage({ slideId: slideId, data: base64, width: image.width, height: image.height })
       });
