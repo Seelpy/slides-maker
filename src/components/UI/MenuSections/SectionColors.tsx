@@ -2,12 +2,18 @@ import MenuSection from '../MenuSection'
 import Button from '../Button'
 import ColorButton from '../ColorButton'
 import { useRef } from 'react'
-import { useAppSelector, useInterfaceActions, usePresentationActions } from '../../../hooks/redux.ts'
+import {
+  useAppSelector,
+  useInterfaceActions,
+  usePresentationActions,
+} from '../../../hooks/redux.ts'
 
 const SectionColors = () => {
   const colorPickerRef = useRef<HTMLInputElement | null>(null)
 
-  const { activeSlideId, activeColor } = useAppSelector((state) => state.interfaceReducer)
+  const { activeSlideId, activeColor } = useAppSelector(
+    (state) => state.interfaceReducer,
+  )
   const { updateColor } = usePresentationActions()
   const { setActiveColor } = useInterfaceActions()
 
@@ -25,9 +31,7 @@ const SectionColors = () => {
     <MenuSection name="Colors">
       <div>
         <Button
-          onClick={() =>
-            clickUpdateColorHandler(activeSlideId, activeColor)
-          }
+          onClick={() => clickUpdateColorHandler(activeSlideId, activeColor)}
         >
           <i
             className="fa-solid fa-square"
@@ -56,12 +60,12 @@ const SectionColors = () => {
           </div>
         </div>
 
-        <input 
-          type="color" 
-          ref={colorPickerRef} 
-          value={activeColor} 
+        <input
+          type="color"
+          ref={colorPickerRef}
+          value={activeColor}
           onChange={(e) => setActiveColor(e.target.value)}
-          style={{visibility: 'hidden', position: 'absolute'}}
+          style={{ visibility: 'hidden', position: 'absolute' }}
         />
 
         <Button onClick={() => colorPickerRef.current?.click()}>

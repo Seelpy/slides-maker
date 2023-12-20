@@ -15,7 +15,7 @@ const MenuBar = () => {
       <SectionInfo />
       <SectionFigures />
       <SectionText />
-      <SectionImages  />
+      <SectionImages />
       <SectionColors />
       <SectionSlides />
       <SectionHistory />

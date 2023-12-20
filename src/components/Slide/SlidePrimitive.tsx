@@ -54,7 +54,7 @@ const SlidePrimitive = (props: PrimitiveProps) => {
     color: data.color,
     width: data.size.width,
     height: data.size.height,
-    borderRadius: `${data.rounding}px`
+    borderRadius: `${data.rounding}px`,
   }
 
   return (

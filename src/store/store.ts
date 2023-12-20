@@ -6,7 +6,7 @@ import historyReducer from './reducers/historyReducer'
 const rootReducer = combineReducers({
   presentationReducer,
   interfaceReducer,
-  historyReducer
+  historyReducer,
 })
 
 export const setupStore = () => {

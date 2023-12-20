@@ -22,7 +22,7 @@ function getObject(data: SlideObject, slide: SlideInfo) {
       return <SlidePrimitive data={data} />
 
     case SlideObjectType.Text:
-      return <SlideText data={data} slide={slide}/>
+      return <SlideText data={data} slide={slide} />
 
     case SlideObjectType.Image:
       return <SlideImage data={data} />

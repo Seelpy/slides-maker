@@ -71,10 +71,7 @@ const SectionInfo = () => {
       <Button
         width="5.4rem"
         onClick={() =>
-          FileHandler.ExportPdf(
-            presentation.slides,
-            presentation.name
-          )
+          FileHandler.ExportPdf(presentation.slides, presentation.name)
         }
       >
         Export pdf

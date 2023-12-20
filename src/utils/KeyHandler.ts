@@ -6,14 +6,18 @@ import {
   usePresentationActions,
 } from '../hooks/redux'
 import { HistoryOperation, SlideInfo, SlideObject } from '../models/types'
-import { v4 as uuidv4 } from 'uuid';
-import useHotkey from '../hooks/useHotkey';
+import { v4 as uuidv4 } from 'uuid'
+import useHotkey from '../hooks/useHotkey'
 
 function KeyHandler() {
   const slides = useAppSelector((state) => state.presentationReducer.slides)
-  const [copiedObjects, setCopiedObjects] = useState<SlideInfo[] | SlideObject[]>([])
+  const [copiedObjects, setCopiedObjects] = useState<
+    SlideInfo[] | SlideObject[]
+  >([])
 
-  const currentHistoryIndex = useAppSelector((state) => state.historyReducer.currentIndex)
+  const currentHistoryIndex = useAppSelector(
+    (state) => state.historyReducer.currentIndex,
+  )
   const history = useAppSelector((state) => state.historyReducer.history)
   const activeSlideId = useAppSelector(
     (state) => state.interfaceReducer.activeSlideId,
@@ -21,8 +25,9 @@ function KeyHandler() {
 
   const activeSlide = slides.find((s) => s.id === activeSlideId)
 
-  const { deleteSlides, updateSlide, updatePresentation, createSlide } = usePresentationActions()
-  const { moveCurrentIndex, setLastOperationType } = useHistoryActions();
+  const { deleteSlides, updateSlide, updatePresentation, createSlide } =
+    usePresentationActions()
+  const { moveCurrentIndex, setLastOperationType } = useHistoryActions()
   const { setActiveSlideId } = useInterfaceActions()
 
   const handleDeleteKey = () => {
@@ -60,13 +65,16 @@ function KeyHandler() {
   }
 
   const moveHistory = (by: number) => {
-    if (by === -1 && currentHistoryIndex > 2
-      || by === 1 && currentHistoryIndex + 1 < history.length)
-    {
+    if (
+      (by === -1 && currentHistoryIndex > 2) ||
+      (by === 1 && currentHistoryIndex + 1 < history.length)
+    ) {
       moveCurrentIndex(by)
       updatePresentation(history[currentHistoryIndex + by].presentation)
       setActiveSlideId(history[currentHistoryIndex + by].activeSlideId)
-      setLastOperationType(by === 1 ? HistoryOperation.forward : HistoryOperation.backward)
+      setLastOperationType(
+        by === 1 ? HistoryOperation.forward : HistoryOperation.backward,
+      )
     }
   }
 
@@ -81,29 +89,39 @@ function KeyHandler() {
   }
 
   const pasteObjects = () => {
-    if (copiedObjects.length === 0) return;
+    if (copiedObjects.length === 0) return
 
-    if ("slide" in copiedObjects[0]) {
+    if ('slide' in copiedObjects[0]) {
       const copiedSlides = copiedObjects as SlideInfo[]
-      copiedSlides.map((slide) => createSlide({
-        ...slide, 
-        id: uuidv4(),
-        selected: false,
-        slide:slide.slide.map((obj) => ({...obj, id: uuidv4()})), 
-      }))
+      copiedSlides.map((slide) =>
+        createSlide({
+          ...slide,
+          id: uuidv4(),
+          selected: false,
+          slide: slide.slide.map((obj) => ({ ...obj, id: uuidv4() })),
+        }),
+      )
     } else {
-      copiedObjects.map((obj) => updateSlide({
+      copiedObjects.map((obj) =>
+        updateSlide({
           slideId: activeSlide!.id,
-          newSlideObject: {...obj, id: uuidv4(), selected: false} as SlideObject
-      }))
+          newSlideObject: {
+            ...obj,
+            id: uuidv4(),
+            selected: false,
+          } as SlideObject,
+        }),
+      )
     }
   }
 
-  useHotkey(["Delete"], () => handleDeleteKey())
-  useHotkey(["Ctrl+C", "Ctrl+С"], () => copyObjects())
-  useHotkey(["Ctrl+V", "Ctrl+М"], () => pasteObjects())
-  useHotkey(["Ctrl+Z", "Ctrl+Я"], () => moveHistory(-1))
-  useHotkey(["Ctrl+Y", "Ctrl+Н", "Ctrl+Shift+Z", "Ctrl+Shift+Я"], () => moveHistory(1))
+  useHotkey(['Delete'], () => handleDeleteKey())
+  useHotkey(['Ctrl+C', 'Ctrl+С'], () => copyObjects())
+  useHotkey(['Ctrl+V', 'Ctrl+М'], () => pasteObjects())
+  useHotkey(['Ctrl+Z', 'Ctrl+Я'], () => moveHistory(-1))
+  useHotkey(['Ctrl+Y', 'Ctrl+Н', 'Ctrl+Shift+Z', 'Ctrl+Shift+Я'], () =>
+    moveHistory(1),
+  )
 }
 
 export default KeyHandler

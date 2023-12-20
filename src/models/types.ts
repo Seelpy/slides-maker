@@ -10,7 +10,7 @@ enum PrimitiveType {
   Triangle = 'TRIANGLE',
 }
 
-type TextAlign = "left" | "center" | "right"
+type TextAlign = 'left' | 'center' | 'right'
 
 type Position = {
   x: number
@@ -95,15 +95,10 @@ type History = {
 enum HistoryOperation {
   backward = `HISTORY_BACKWARD`,
   forward = `HISTORY_FORWARD`,
-  update = `HISTORY_UPDATE`
+  update = `HISTORY_UPDATE`,
 }
 
-
-export { 
-  SlideObjectType, 
-  PrimitiveType, 
-  HistoryOperation,
-}
+export { SlideObjectType, PrimitiveType, HistoryOperation }
 
 export type {
   Position,
@@ -121,5 +116,5 @@ export type {
   Presentaion,
   PrimType,
   SlideInfo,
-  History
+  History,
 }

@@ -1,11 +1,10 @@
-
 import { TextObject, SlideInfo } from '../../models/types.ts'
 import styles from './SlideText.module.css'
 
 type TextAlign = any
 type TextProps = {
-  data: TextObject;
-  slide: SlideInfo;
+  data: TextObject
+  slide: SlideInfo
 }
 
 const PdfText = (props: TextProps) => {
@@ -22,7 +21,9 @@ const PdfText = (props: TextProps) => {
 
   return (
     <div className={styles.text}>
-        <span className={styles.spanText} style={textStyle}>{data.value}</span>
+      <span className={styles.spanText} style={textStyle}>
+        {data.value}
+      </span>
     </div>
   )
 }

@@ -24,27 +24,31 @@ const LeftBar = () => {
     if (dragSlidesDelta === 0) {
       if (event.ctrlKey) {
         updateSlide({ slideId: slide.id, selected: !slide.selected })
-      }
-      else if (event.shiftKey) {
-        let firstSelectedIndex = -1;
-        const clickedIndex = slides.findIndex((s) => s.id === slide.id);
-        updateSlide({ slideId: slide.id, selected: true });
+      } else if (event.shiftKey) {
+        let firstSelectedIndex = -1
+        const clickedIndex = slides.findIndex((s) => s.id === slide.id)
+        updateSlide({ slideId: slide.id, selected: true })
 
         for (let i = 0; i < slides.length; i++) {
           if (slides[i].selected) {
-            firstSelectedIndex = i;
-            break;
+            firstSelectedIndex = i
+            break
           }
         }
 
         if (firstSelectedIndex >= 0 && clickedIndex !== firstSelectedIndex) {
-          for (let i = firstSelectedIndex; i != clickedIndex; firstSelectedIndex > clickedIndex ? i-- : i++ )
+          for (
+            let i = firstSelectedIndex;
+            i != clickedIndex;
+            firstSelectedIndex > clickedIndex ? i-- : i++
+          )
             updateSlide({ slideId: slides[i].id, selected: true })
         }
-      }
-      else {
+      } else {
         setActiveSlideId(slide.id)
-        slides.map((s) => updateSlide({ slideId: s.id, selected: s.id === slide.id }))
+        slides.map((s) =>
+          updateSlide({ slideId: s.id, selected: s.id === slide.id }),
+        )
       }
     }
   }

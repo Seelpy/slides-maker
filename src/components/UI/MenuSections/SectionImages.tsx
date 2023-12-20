@@ -7,18 +7,25 @@ import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
 const SectionImages = () => {
   const importImageFile = useRef<HTMLInputElement | null>(null)
   const { importImage } = usePresentationActions()
-  const activeSlideId = useAppSelector((state) => state.interfaceReducer.activeSlideId)
+  const activeSlideId = useAppSelector(
+    (state) => state.interfaceReducer.activeSlideId,
+  )
 
   const importFromImage = (slideId: string | undefined, file: File) => {
     if (slideId === undefined) {
       return
     }
     FileHandler.ImportImage(file).then((base64) => {
-      const image = document.createElement('img');
+      const image = document.createElement('img')
       image.addEventListener('load', () => {
-        importImage({ slideId: slideId, data: base64, width: image.width, height: image.height })
-      });
-      image.src = base64;
+        importImage({
+          slideId: slideId,
+          data: base64,
+          width: image.width,
+          height: image.height,
+        })
+      })
+      image.src = base64
     })
   }
 

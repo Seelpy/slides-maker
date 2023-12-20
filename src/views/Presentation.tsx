@@ -5,14 +5,27 @@ import SlideEditor from '../components/Slide/SlideEditor'
 import KeyHandler from '../utils/KeyHandler'
 import TextKeyHandler from '../utils/TextKeyHandler'
 import { useEffect } from 'react'
-import { useAppSelector, useHistoryActions, useInterfaceActions } from '../hooks/redux'
+import {
+  useAppSelector,
+  useHistoryActions,
+  useInterfaceActions,
+} from '../hooks/redux'
 
 function Presentation() {
   const presentation = useAppSelector((state) => state.presentationReducer)
-  const { activeSlideId, isDraggingObjects } = useAppSelector((state) => state.interfaceReducer)
-  const { history, lastHistoryOperation, currentIndex, shouldSaveState } = useAppSelector((state) => state.historyReducer)
-  const { pushHistoryState, clearHistoryAfterIndex, setLastOperationType, setShouldSaveState } = useHistoryActions()
-  const { setDragObjects, setDragSlides, setSelectingArea } = useInterfaceActions()
+  const { activeSlideId, isDraggingObjects } = useAppSelector(
+    (state) => state.interfaceReducer,
+  )
+  const { history, lastHistoryOperation, currentIndex, shouldSaveState } =
+    useAppSelector((state) => state.historyReducer)
+  const {
+    pushHistoryState,
+    clearHistoryAfterIndex,
+    setLastOperationType,
+    setShouldSaveState,
+  } = useHistoryActions()
+  const { setDragObjects, setDragSlides, setSelectingArea } =
+    useInterfaceActions()
 
   useEffect(() => {
     window.onmouseup = () => {
@@ -29,12 +42,14 @@ function Presentation() {
       }
 
       if (shouldSaveState) {
-        pushHistoryState({presentation: presentation, activeSlideId: activeSlideId})
+        pushHistoryState({
+          presentation: presentation,
+          activeSlideId: activeSlideId,
+        })
       } else {
-        setShouldSaveState(true);
+        setShouldSaveState(true)
       }
-    }
-    else {
+    } else {
       setLastOperationType(undefined)
     }
   }, [presentation, activeSlideId, isDraggingObjects])

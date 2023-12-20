@@ -12,7 +12,7 @@ enum PresentationActions {
   updateTextSettings = 'UPDATE_TEXT_SETTINGS',
   updateColor = 'UPDATE_COLOR',
   importImage = 'IMPORT_IMAGE',
-  updateBackground = 'UPDATE_BACKGROUND'
+  updateBackground = 'UPDATE_BACKGROUND',
 }
 
 type MoveSlidesPayload = {

@@ -14,19 +14,15 @@ import {
 } from '../actions/presentationActions.ts'
 import { presentation } from '../../models/example/high.ts'
 import ObjectGenerator from '../../services/ObjectGenerator.ts'
-import {
-  SlideInfo,
-  SlideObjectType,
-  TextAlign,
-} from '../../models/types.ts'
+import { SlideInfo, SlideObjectType, TextAlign } from '../../models/types.ts'
 import objectGenerator from '../../services/ObjectGenerator.ts'
 
 const presentationReducer = createReducer(presentation, {
   [changeName.type]: (state, action: typeof changeName.actionInstance) => {
-    return {...state, name: action.payload}
+    return { ...state, name: action.payload }
   },
   [createSlide.type]: (state, action: typeof createSlide.actionInstance) => {
-    return {...state, slides: [...state.slides, action.payload]}
+    return { ...state, slides: [...state.slides, action.payload] }
   },
   [moveSlides.type]: (state, action: typeof moveSlides.actionInstance) => {
     const moveSlideIds = action.payload.slides.map((s) => s.id)
@@ -42,14 +38,14 @@ const presentationReducer = createReducer(presentation, {
       0,
       ...action.payload.slides,
     )
-    return {...state, slides: newSlides}
+    return { ...state, slides: newSlides }
   },
   [deleteSlides.type]: (state, action: typeof deleteSlides.actionInstance) => {
     const toDeleteIds = action.payload.map((s) => s.id)
     const newSlides = state.slides.filter(
       (slide) => !toDeleteIds.includes(slide.id),
     )
-    return {...state, slides: newSlides}
+    return { ...state, slides: newSlides }
   },
   [updateSlide.type]: (state, action: typeof updateSlide.actionInstance) => {
     const newSlides = [...state.slides]
@@ -57,25 +53,28 @@ const presentationReducer = createReducer(presentation, {
       (slide) => slide.id == action.payload.slideId,
     )
     if (index < 0) {
-      return {...state}
+      return { ...state }
     }
 
     if (action.payload.selected !== undefined) {
       // обновляем selected у слайда, убираем выделение объектов
       for (let i = 0; i < newSlides.length; i++) {
         newSlides[i] = {
-          ...newSlides[i], 
-          selected: newSlides[i].id === action.payload.slideId ? 
-            action.payload.selected : newSlides[i].selected,
-          slide: newSlides[i].slide.map((obj) => ({...obj, selected: false}))
+          ...newSlides[i],
+          selected:
+            newSlides[i].id === action.payload.slideId
+              ? action.payload.selected
+              : newSlides[i].selected,
+          slide: newSlides[i].slide.map((obj) => ({ ...obj, selected: false })),
         }
       }
     }
 
-    const currentSlide = newSlides.find(
-      (s) => s.id === action.payload.slideId,
-    )
-    const slideInfo = {...currentSlide, slide: [...currentSlide!.slide]} as SlideInfo
+    const currentSlide = newSlides.find((s) => s.id === action.payload.slideId)
+    const slideInfo = {
+      ...currentSlide,
+      slide: [...currentSlide!.slide],
+    } as SlideInfo
 
     if (
       action.payload.oldSlideObject !== undefined &&
@@ -107,14 +106,19 @@ const presentationReducer = createReducer(presentation, {
     newSlides[index] = slideInfo
 
     // если выделили объект - убираем выделение слайдов
-    if (action.payload.newSlideObject && 
-      action.payload.newSlideObject.selected) {
-        newSlides.map((s) => s.selected = false)
+    if (
+      action.payload.newSlideObject &&
+      action.payload.newSlideObject.selected
+    ) {
+      newSlides.map((s) => (s.selected = false))
     }
 
-    return {...state, slides: newSlides}
+    return { ...state, slides: newSlides }
   },
-  [updatePresentation.type]: (_, action: typeof updatePresentation.actionInstance) => ({...action.payload}),
+  [updatePresentation.type]: (
+    _,
+    action: typeof updatePresentation.actionInstance,
+  ) => ({ ...action.payload }),
   [createObject.type]: (state, action: typeof createObject.actionInstance) => {
     const newSlides = [...state.slides]
     const index = newSlides.findIndex(
@@ -126,40 +130,53 @@ const presentationReducer = createReducer(presentation, {
       action.payload.subtype,
     )
     if (object === undefined) {
-      return {...state}
+      return { ...state }
     }
     if (action.payload.color) {
-      if (object.type === SlideObjectType.Primitive
-        || object.type === SlideObjectType.Text) {
+      if (
+        object.type === SlideObjectType.Primitive ||
+        object.type === SlideObjectType.Text
+      ) {
         object.color = action.payload.color
       }
     }
-    newSlides[index] = {...newSlides[index], slide: [...newSlides[index].slide, object]}
-    return {...state, slides: newSlides}
+    newSlides[index] = {
+      ...newSlides[index],
+      slide: [...newSlides[index].slide, object],
+    }
+    return { ...state, slides: newSlides }
   },
-  [updateTextSettings.type]: (state, action: typeof updateTextSettings.actionInstance) => {
-    const newSlides = [...state.slides];
+  [updateTextSettings.type]: (
+    state,
+    action: typeof updateTextSettings.actionInstance,
+  ) => {
+    const newSlides = [...state.slides]
     const index = newSlides.findIndex(
       (slide) => slide.id == action.payload.slideId,
     )
     if (index < 0) {
-      return {...state}
+      return { ...state }
     }
 
-    newSlides[index] = {...newSlides[index], slide: newSlides[index].slide.map((originalObj) => {
-      const obj = {...originalObj};
-      if (obj.selected && obj.type === SlideObjectType.Text) {
-        obj.fontFamily = action.payload.font ?? obj.fontFamily
-        obj.fontSize = action.payload.size ?? obj.fontSize
-        obj.align = action.payload.align as TextAlign ?? obj.align
-        obj.italic = action.payload.italic ? !obj.italic : obj.italic
-        obj.bold = action.payload.bold ? !obj.bold : obj.bold
-        obj.underline = action.payload.underline ? !obj.underline : obj.underline
-      }
-      return obj
-    })}
+    newSlides[index] = {
+      ...newSlides[index],
+      slide: newSlides[index].slide.map((originalObj) => {
+        const obj = { ...originalObj }
+        if (obj.selected && obj.type === SlideObjectType.Text) {
+          obj.fontFamily = action.payload.font ?? obj.fontFamily
+          obj.fontSize = action.payload.size ?? obj.fontSize
+          obj.align = (action.payload.align as TextAlign) ?? obj.align
+          obj.italic = action.payload.italic ? !obj.italic : obj.italic
+          obj.bold = action.payload.bold ? !obj.bold : obj.bold
+          obj.underline = action.payload.underline
+            ? !obj.underline
+            : obj.underline
+        }
+        return obj
+      }),
+    }
 
-    return {...state, slides: newSlides}
+    return { ...state, slides: newSlides }
   },
   [updateColor.type]: (state, action: typeof updateColor.actionInstance) => {
     const newSlides = [...state.slides]
@@ -167,18 +184,21 @@ const presentationReducer = createReducer(presentation, {
       (slide) => slide.id == action.payload.slideId,
     )
     if (index < 0) {
-      return {...state}
+      return { ...state }
     }
 
-    newSlides[index] = {...newSlides[index], slide: newSlides[index].slide.map((originalObj) => {
-      const obj = {...originalObj};
-      if (obj.selected && obj.type != SlideObjectType.Image) {
-        obj.color = action.payload.color
-      }
-      return obj;
-    })}
+    newSlides[index] = {
+      ...newSlides[index],
+      slide: newSlides[index].slide.map((originalObj) => {
+        const obj = { ...originalObj }
+        if (obj.selected && obj.type != SlideObjectType.Image) {
+          obj.color = action.payload.color
+        }
+        return obj
+      }),
+    }
 
-    return {...state, slides: newSlides}
+    return { ...state, slides: newSlides }
   },
   [importImage.type]: (state, action: typeof importImage.actionInstance) => {
     const newSlides = [...state.slides]
@@ -186,7 +206,7 @@ const presentationReducer = createReducer(presentation, {
       (slide) => slide.id == action.payload.slideId,
     )
     if (index < 0) {
-      return {...state}
+      return { ...state }
     }
 
     const image = objectGenerator.Generate(
@@ -200,23 +220,29 @@ const presentationReducer = createReducer(presentation, {
         image.size.width = action.payload.width
         image.size.height = action.payload.height
       }
-      
-      newSlides[index] = {...newSlides[index], slide: [...newSlides[index].slide, image]}
+
+      newSlides[index] = {
+        ...newSlides[index],
+        slide: [...newSlides[index].slide, image],
+      }
     }
 
-    return {...state, slides: newSlides}
+    return { ...state, slides: newSlides }
   },
-  [updateBackground.type]: (state, action: typeof updateBackground.actionInstance) => {
+  [updateBackground.type]: (
+    state,
+    action: typeof updateBackground.actionInstance,
+  ) => {
     const newSlides = [...state.slides]
     const index = newSlides.findIndex(
       (slide) => slide.id == action.payload.slideId,
     )
     if (index < 0) {
-      return {...state}
+      return { ...state }
     }
 
-    newSlides[index] = {...newSlides[index], background: action.payload.data}
-    return {...state, slides: newSlides}
+    newSlides[index] = { ...newSlides[index], background: action.payload.data }
+    return { ...state, slides: newSlides }
   },
 })
 
