@@ -9,7 +9,7 @@ import { HistoryOperation, SlideInfo, SlideObject } from '../models/types'
 import { v4 as uuidv4 } from 'uuid';
 import useHotkey from '../hooks/useHotkey';
 
-function keyHandler() {
+function KeyHandler() {
   const slides = useAppSelector((state) => state.presentationReducer.slides)
   const [copiedObjects, setCopiedObjects] = useState<SlideInfo[] | SlideObject[]>([])
 
@@ -106,4 +106,4 @@ function keyHandler() {
   useHotkey(["Ctrl+Y", "Ctrl+Н", "Ctrl+Shift+Z", "Ctrl+Shift+Я"], () => moveHistory(1))
 }
 
-export default keyHandler
+export default KeyHandler
