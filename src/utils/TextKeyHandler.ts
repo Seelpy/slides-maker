@@ -3,7 +3,7 @@ import { useAppSelector } from '../hooks/redux'
 import { SlideObjectType, TextObject } from '../models/types'
 import { usePresentationActions } from '../hooks/redux'
 
-function textKeyHandler() {
+function TextKeyHandler() {
   const slides = useAppSelector((state) => state.presentationReducer.slides)
 
   const { updateSlide } = usePresentationActions()
@@ -63,4 +63,4 @@ function textKeyHandler() {
   useHotkey(["*"], (e) => mapKeyToFunc(e))
 }
 
-export default textKeyHandler
+export default TextKeyHandler

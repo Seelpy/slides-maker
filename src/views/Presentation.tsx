@@ -2,8 +2,8 @@ import styles from './Presentation.module.css'
 import MenuBar from '../components/UI/MenuBar'
 import LeftBar from '../components/UI/LeftBar'
 import SlideEditor from '../components/Slide/SlideEditor'
-import keyHandler from '../utils/KeyHandler'
-import textKeyHandler from '../utils/TextKeyHandler'
+import KeyHandler from '../utils/KeyHandler'
+import TextKeyHandler from '../utils/TextKeyHandler'
 import { useEffect } from 'react'
 import { useAppSelector, useHistoryActions, useInterfaceActions } from '../hooks/redux'
 
@@ -39,8 +39,8 @@ function Presentation() {
     }
   }, [presentation, activeSlideId, isDraggingObjects])
 
-  keyHandler()
-  textKeyHandler()
+  KeyHandler()
+  TextKeyHandler()
 
   return (
     <div className={styles.presentation}>
