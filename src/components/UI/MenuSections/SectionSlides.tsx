@@ -49,15 +49,16 @@ const SectionSlides = () => {
       return
     }
 
+    const colorInput = colorInputRef.current
     const onInput = () => colorInputOpenState.current = true
     const onChange = () => colorInputOpenState.current = false
 
-    colorInputRef.current?.addEventListener('input', onInput)
-    colorInputRef.current?.addEventListener('change', onChange)
+    colorInput?.addEventListener('input', onInput)
+    colorInput?.addEventListener('change', onChange)
 
     return () => {
-      colorInputRef.current?.removeEventListener('input', onInput)
-      colorInputRef.current?.removeEventListener('change', onChange)
+      colorInput?.removeEventListener('input', onInput)
+      colorInput?.removeEventListener('change', onChange)
     }
   }, [activeSlideId, colorInputRef])
 
