@@ -1,7 +1,7 @@
 import MenuSection from "../MenuSection"
 import Button from "../Button"
 import ColorButton from "../ColorButton.tsx"
-import FileHandler from "../../../services/FileHandler.ts"
+import { ImportImage } from "../../../services/FileHandler.ts"
 import { useRef, useState, useEffect } from "react"
 import {
   useAppSelector,
@@ -28,7 +28,7 @@ const SectionSlides = () => {
     if (slideId === undefined) {
       return
     }
-    FileHandler.ImportImage(file).then((base64) => {
+    ImportImage(file).then((base64) => {
       updateBackground({
         slideId: slideId,
         data: `url('${base64}') no-repeat center center / contain`,

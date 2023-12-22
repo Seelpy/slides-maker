@@ -5,7 +5,7 @@ import {
   usePresentationActions,
 } from "../../../hooks/redux"
 // eslint-disable-next-line no-duplicate-imports
-import FileHandler from "../../../services/FileHandler.ts"
+import { ImportJson, ExportJson, ExportPdf } from "../../../services/FileHandler.ts"
 import PresentationConverter from "../../../services/PresentationConverter"
 import MenuSection from "../MenuSection"
 import Button from "../Button"
@@ -17,7 +17,7 @@ const SectionInfo = () => {
   const { setActiveSlideId } = useInterfaceActions()
 
   const importFromJson = (file: File) => {
-    FileHandler.ImportJson(file).then((stringJson) => {
+    ImportJson(file).then((stringJson) => {
       const importedPresentation =
         PresentationConverter.ConvertFromJson(stringJson)
       if ("name" in importedPresentation && "slides" in importedPresentation) {
@@ -45,7 +45,7 @@ const SectionInfo = () => {
         <Button
           width="5.4rem"
           onClick={() =>
-            FileHandler.ExportJson(
+            ExportJson(
               presentation.name,
               PresentationConverter.ConvertToJson(presentation),
             )
@@ -71,7 +71,7 @@ const SectionInfo = () => {
       <Button
         width="5.4rem"
         onClick={() =>
-          FileHandler.ExportPdf(presentation.slides, presentation.name)
+          ExportPdf(presentation.slides, presentation.name)
         }
       >
         Export pdf

@@ -1,6 +1,6 @@
 import MenuSection from "../MenuSection"
 import Button from "../Button"
-import FileHandler from "../../../services/FileHandler.ts"
+import { ImportImage } from "../../../services/FileHandler.ts"
 import { useRef } from "react"
 import { useAppSelector, usePresentationActions } from "../../../hooks/redux"
 
@@ -15,7 +15,7 @@ const SectionImages = () => {
     if (slideId === undefined) {
       return
     }
-    FileHandler.ImportImage(file).then((base64) => {
+    ImportImage(file).then((base64) => {
       const image = document.createElement("img")
       image.addEventListener("load", () => {
         importImage({
