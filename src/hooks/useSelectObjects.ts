@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import {
   useAppSelector,
+  useHistoryActions,
   useInterfaceActions,
   usePresentationActions,
 } from "./redux"
@@ -13,6 +14,7 @@ function useSelectObjects(
   selectionRef: React.MutableRefObject<HTMLDivElement | null>,
 ) {
   const { isSelectingArea } = useAppSelector((state) => state.interfaceReducer)
+  const { setShouldSaveState } = useHistoryActions()
   const { setSelectingArea } = useInterfaceActions()
   const { updateSlide } = usePresentationActions()
 
@@ -57,6 +59,7 @@ function useSelectObjects(
         }
       } else {
         if (activeSlide && selectionRef.current.style.display === "block") {
+          setShouldSaveState(false)
           activeSlide.slide.map((obj) =>
             updateSlide({
               slideId: activeSlide.id,
