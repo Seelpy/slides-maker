@@ -1,17 +1,17 @@
-import html2pdf from 'html2pdf.js'
-import PDFSlide from '../components/Slide/PdfSlide.tsx'
-import { renderToStaticMarkup } from 'react-dom/server'
-import { SlideInfo } from '../models/types.ts'
+import html2pdf from "html2pdf.js"
+import PDFSlide from "../components/Slide/PdfSlide.tsx"
+import { renderToStaticMarkup } from "react-dom/server"
+import { SlideInfo } from "../models/types.ts"
 
 const pdfMargin = 0
 const pdfWidth = 963
 const pdfHeight = 543
 class FileHandler {
-  private jsonFileType: string = '.json'
-  private jsonType: string = 'application/json'
+  private jsonFileType: string = ".json"
+  private jsonType: string = "application/json"
 
   public ExportJson(filename: string, data: string) {
-    const link = document.createElement('a')
+    const link = document.createElement("a")
     const file = new Blob([data], { type: this.jsonType })
     link.href = URL.createObjectURL(file)
     link.download = this.GenerateJsonFilename(filename)
@@ -37,16 +37,16 @@ class FileHandler {
   }
 
   public ExportPdf(slides: SlideInfo[], filename: string) {
-    let result: string = ''
+    let result: string = ""
     for (const slide of slides) {
       result += renderToStaticMarkup(PDFSlide(slide))
     }
     const opt = {
       margin: pdfMargin,
-      filename: filename + '.pdf',
+      filename: filename + ".pdf",
       jsPDF: {
         format: [pdfWidth, (pdfHeight - pdfMargin) * slides.length],
-        orientation: 'p',
+        orientation: "p",
       },
     }
 

@@ -1,5 +1,5 @@
-import { TextObject, SlideInfo } from '../../models/types.ts'
-import styles from './SlideText.module.css'
+import { TextObject, SlideInfo } from "../../models/types.ts"
+import styles from "./SlideText.module.css"
 
 type TextAlign = any
 type TextProps = {
@@ -11,12 +11,12 @@ const PdfText = (props: TextProps) => {
   const data = props.data
   const textStyle = {
     textAlign: data.align as TextAlign,
-    fontSize: data.fontSize + 'px',
+    fontSize: data.fontSize + "px",
     fontFamily: data.fontFamily,
     color: data.color,
-    fontStyle: data.italic ? 'italic' : '',
-    fontWeight: data.bold ? 'bold' : '',
-    textDecoration: data.underline ? 'underline' : '',
+    fontStyle: data.italic ? "italic" : "",
+    fontWeight: data.bold ? "bold" : "",
+    textDecoration: data.underline ? "underline" : "",
   }
 
   return (

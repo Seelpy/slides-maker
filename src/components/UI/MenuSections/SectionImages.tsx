@@ -1,8 +1,8 @@
-import MenuSection from '../MenuSection'
-import Button from '../Button'
-import FileHandler from '../../../services/FileHandler.ts'
-import { useRef } from 'react'
-import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
+import MenuSection from "../MenuSection"
+import Button from "../Button"
+import FileHandler from "../../../services/FileHandler.ts"
+import { useRef } from "react"
+import { useAppSelector, usePresentationActions } from "../../../hooks/redux"
 
 const SectionImages = () => {
   const importImageFile = useRef<HTMLInputElement | null>(null)
@@ -16,8 +16,8 @@ const SectionImages = () => {
       return
     }
     FileHandler.ImportImage(file).then((base64) => {
-      const image = document.createElement('img')
-      image.addEventListener('load', () => {
+      const image = document.createElement("img")
+      image.addEventListener("load", () => {
         importImage({
           slideId: slideId,
           data: base64,
@@ -36,13 +36,13 @@ const SectionImages = () => {
           <input
             type="file"
             ref={importImageFile}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             accept="image/png, image/gif, image/jpeg"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const files = event.currentTarget.files
               if (files && files.length > 0)
                 importFromImage(activeSlideId, files[0])
-              importImageFile.current!.value = ''
+              importImageFile.current!.value = ""
             }}
           />
           <i

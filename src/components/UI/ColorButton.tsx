@@ -1,4 +1,4 @@
-import styles from './ColorButton.module.css'
+import styles from "./ColorButton.module.css"
 
 type ColorButtonProps = {
   color: string
@@ -9,7 +9,7 @@ const ColorButton = (props: ColorButtonProps) => {
   return (
     <i
       onClick={() => props.onClick(props.color)}
-      className={styles.colorButton + ' fa-sharp fa-solid fa-square'}
+      className={styles.colorButton + " fa-sharp fa-solid fa-square"}
       style={{ color: props.color }}
     />
   )

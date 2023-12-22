@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react"
 import {
   Position,
   SlideInfo,
@@ -6,12 +6,12 @@ import {
   Size,
   SlideObjectType,
   PrimitiveType,
-} from '../models/types'
+} from "../models/types"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
-} from '../hooks/redux'
+} from "../hooks/redux"
 
 function useDragObjects(
   areaRef: React.MutableRefObject<HTMLDivElement | null>,
@@ -150,10 +150,10 @@ function useDragObjects(
       coords.current.lastMouse.y = e.clientY
     }
 
-    area.addEventListener('mousemove', onMouseMove)
+    area.addEventListener("mousemove", onMouseMove)
 
     return () => {
-      area.removeEventListener('mousemove', onMouseMove)
+      area.removeEventListener("mousemove", onMouseMove)
     }
   }, [isDraggingObjects, slide])
 }

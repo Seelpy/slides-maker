@@ -1,5 +1,5 @@
-import { ImageObject } from '../../models/types.ts'
-import styles from './SlideImage.module.css'
+import { ImageObject } from "../../models/types.ts"
+import styles from "./SlideImage.module.css"
 
 type ImageObjectProps = {
   data: ImageObject

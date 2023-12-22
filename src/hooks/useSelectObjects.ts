@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
-} from './redux'
-import { Position, Size, SlideInfo, SlideObject } from '../models/types'
+} from "./redux"
+import { Position, Size, SlideInfo, SlideObject } from "../models/types"
 
 function useSelectObjects(
   activeSlide: SlideInfo | undefined,
@@ -48,15 +48,15 @@ function useSelectObjects(
     if (selectionRef.current) {
       if (isSelectingArea) {
         coords.current.startMouse = { ...coords.current.currentMouse }
-        selectionRef.current.style.display = 'block'
-        selectionRef.current.style.width = '0px'
-        selectionRef.current.style.height = '0px'
+        selectionRef.current.style.display = "block"
+        selectionRef.current.style.width = "0px"
+        selectionRef.current.style.height = "0px"
         coords.current.selection = {
           position: { x: -1e5, y: -1e5 },
           size: { width: 0, height: 0 },
         }
       } else {
-        if (activeSlide && selectionRef.current.style.display === 'block') {
+        if (activeSlide && selectionRef.current.style.display === "block") {
           activeSlide.slide.map((obj) =>
             updateSlide({
               slideId: activeSlide.id,
@@ -69,7 +69,7 @@ function useSelectObjects(
           )
         }
 
-        selectionRef.current.style.display = 'none'
+        selectionRef.current.style.display = "none"
       }
     }
   }, [isSelectingArea, activeSlide])
@@ -118,12 +118,12 @@ function useSelectObjects(
       }
     }
 
-    area.addEventListener('mousedown', onMouseDown)
-    area.addEventListener('mousemove', onMouseMove)
+    area.addEventListener("mousedown", onMouseDown)
+    area.addEventListener("mousemove", onMouseMove)
 
     return () => {
-      area.removeEventListener('mousedown', onMouseDown)
-      area.addEventListener('mousemove', onMouseMove)
+      area.removeEventListener("mousedown", onMouseDown)
+      area.addEventListener("mousemove", onMouseMove)
     }
   }, [activeSlide, areaRef, editorRef])
 }

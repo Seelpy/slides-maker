@@ -1,12 +1,12 @@
-import MenuSection from '../MenuSection.tsx'
-import Button from '../Button.tsx'
-import { HistoryOperation } from '../../../models/types.ts'
-import { useAppSelector } from '../../../hooks/redux.ts'
+import MenuSection from "../MenuSection.tsx"
+import Button from "../Button.tsx"
+import { HistoryOperation } from "../../../models/types.ts"
+import { useAppSelector } from "../../../hooks/redux.ts"
 import {
   useHistoryActions,
   useInterfaceActions,
   usePresentationActions,
-} from '../../../hooks/redux.ts'
+} from "../../../hooks/redux.ts"
 
 const SectionHistory = () => {
   const currentHistoryIndex = useAppSelector(

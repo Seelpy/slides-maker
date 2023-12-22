@@ -1,5 +1,5 @@
-import { createAction } from '../createAction'
-import { HistoryOperation, History } from '../../models/types'
+import { createAction } from "../createAction"
+import { HistoryOperation, History } from "../../models/types"
 
 enum HistoryActions {
   pushHistoryState = `PUSH_HISTORY_STATE`,

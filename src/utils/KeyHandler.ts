@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState } from "react"
 import {
   useAppSelector,
   useHistoryActions,
   useInterfaceActions,
   usePresentationActions,
-} from '../hooks/redux'
-import { HistoryOperation, SlideInfo, SlideObject } from '../models/types'
-import { v4 as uuidv4 } from 'uuid'
-import useHotkey from '../hooks/useHotkey'
+} from "../hooks/redux"
+import { HistoryOperation, SlideInfo, SlideObject } from "../models/types"
+import { v4 as uuidv4 } from "uuid"
+import useHotkey from "../hooks/useHotkey"
 
 function KeyHandler() {
   const slides = useAppSelector((state) => state.presentationReducer.slides)
@@ -91,7 +91,7 @@ function KeyHandler() {
   const pasteObjects = () => {
     if (copiedObjects.length === 0) return
 
-    if ('slide' in copiedObjects[0]) {
+    if ("slide" in copiedObjects[0]) {
       const copiedSlides = copiedObjects as SlideInfo[]
       copiedSlides.map((slide) =>
         createSlide({
@@ -115,11 +115,11 @@ function KeyHandler() {
     }
   }
 
-  useHotkey(['Delete'], () => handleDeleteKey())
-  useHotkey(['Ctrl+C', 'Ctrl+С'], () => copyObjects())
-  useHotkey(['Ctrl+V', 'Ctrl+М'], () => pasteObjects())
-  useHotkey(['Ctrl+Z', 'Ctrl+Я'], () => moveHistory(-1))
-  useHotkey(['Ctrl+Y', 'Ctrl+Н', 'Ctrl+Shift+Z', 'Ctrl+Shift+Я'], () =>
+  useHotkey(["Delete"], () => handleDeleteKey())
+  useHotkey(["Ctrl+C", "Ctrl+С"], () => copyObjects())
+  useHotkey(["Ctrl+V", "Ctrl+М"], () => pasteObjects())
+  useHotkey(["Ctrl+Z", "Ctrl+Я"], () => moveHistory(-1))
+  useHotkey(["Ctrl+Y", "Ctrl+Н", "Ctrl+Shift+Z", "Ctrl+Shift+Я"], () =>
     moveHistory(1),
   )
 }

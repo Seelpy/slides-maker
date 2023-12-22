@@ -1,6 +1,6 @@
-import styles from './PdfSlide.module.css'
-import { SlideInfo } from '../../models/types.ts'
-import PdfObject from './PdfObject.tsx'
+import styles from "./PdfSlide.module.css"
+import { SlideInfo } from "../../models/types.ts"
+import PdfObject from "./PdfObject.tsx"
 
 const PDFSlide = (slide: SlideInfo) => {
   return (

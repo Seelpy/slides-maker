@@ -1,14 +1,14 @@
-import { useRef } from 'react'
+import { useRef } from "react"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
-} from '../../../hooks/redux'
+} from "../../../hooks/redux"
 // eslint-disable-next-line no-duplicate-imports
-import FileHandler from '../../../services/FileHandler.ts'
-import PresentationConverter from '../../../services/PresentationConverter'
-import MenuSection from '../MenuSection'
-import Button from '../Button'
+import FileHandler from "../../../services/FileHandler.ts"
+import PresentationConverter from "../../../services/PresentationConverter"
+import MenuSection from "../MenuSection"
+import Button from "../Button"
 
 const SectionInfo = () => {
   const importJsonFile = useRef<HTMLInputElement | null>(null)
@@ -20,7 +20,7 @@ const SectionInfo = () => {
     FileHandler.ImportJson(file).then((stringJson) => {
       const importedPresentation =
         PresentationConverter.ConvertFromJson(stringJson)
-      if ('name' in importedPresentation && 'slides' in importedPresentation) {
+      if ("name" in importedPresentation && "slides" in importedPresentation) {
         updatePresentation(importedPresentation)
         setActiveSlideId(
           importedPresentation.slides.length > 0
@@ -28,7 +28,7 @@ const SectionInfo = () => {
             : undefined,
         )
       } else {
-        alert('Error on import: `name` or `slides` keys are undefined')
+        alert("Error on import: `name` or `slides` keys are undefined")
       }
     })
   }
@@ -60,11 +60,11 @@ const SectionInfo = () => {
           type="file"
           id="importJsonFile"
           ref={importJsonFile}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             const files = event.currentTarget.files
             if (files && files.length > 0) importFromJson(files[0])
-            importJsonFile.current!.value = ''
+            importJsonFile.current!.value = ""
           }}
         />
       </div>

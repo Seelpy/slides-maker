@@ -1,15 +1,15 @@
-import MenuSection from '../MenuSection'
-import Button from '../Button'
-import ColorButton from '../ColorButton.tsx'
-import FileHandler from '../../../services/FileHandler.ts'
-import { useRef, useState, useEffect } from 'react'
+import MenuSection from "../MenuSection"
+import Button from "../Button"
+import ColorButton from "../ColorButton.tsx"
+import FileHandler from "../../../services/FileHandler.ts"
+import { useRef, useState, useEffect } from "react"
 import {
   useAppSelector,
   useHistoryActions,
   usePresentationActions,
-} from '../../../hooks/redux'
-import { SlideInfo } from '../../../models/types'
-import { v4 as uuidv4 } from 'uuid'
+} from "../../../hooks/redux"
+import { SlideInfo } from "../../../models/types"
+import { v4 as uuidv4 } from "uuid"
 
 const SectionSlides = () => {
   const activeSlideId = useAppSelector(
@@ -17,7 +17,7 @@ const SectionSlides = () => {
   )
   const { createSlide, updateBackground } = usePresentationActions()
   const { setShouldSaveState } = useHistoryActions()
-  const [backgroundColor, setBackgroundColor] = useState<string>('#e6e6e6')
+  const [backgroundColor, setBackgroundColor] = useState<string>("#e6e6e6")
 
   const colorDelayTimer = useRef<number | null>(null)
   const colorInputRef = useRef<HTMLInputElement | null>(null)
@@ -62,12 +62,12 @@ const SectionSlides = () => {
     const onInput = () => (colorInputOpenState.current = true)
     const onChange = () => (colorInputOpenState.current = false)
 
-    colorInput?.addEventListener('input', onInput)
-    colorInput?.addEventListener('change', onChange)
+    colorInput?.addEventListener("input", onInput)
+    colorInput?.addEventListener("change", onChange)
 
     return () => {
-      colorInput?.removeEventListener('input', onInput)
-      colorInput?.removeEventListener('change', onChange)
+      colorInput?.removeEventListener("input", onInput)
+      colorInput?.removeEventListener("change", onChange)
     }
   }, [activeSlideId, colorInputRef])
 
@@ -98,16 +98,16 @@ const SectionSlides = () => {
           <input
             type="file"
             ref={importImageFile}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             accept="image/png, image/gif, image/jpeg"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const files = event.currentTarget.files
               if (files && files.length > 0)
                 importFromImage(activeSlideId, files[0])
-              importImageFile.current!.value = ''
+              importImageFile.current!.value = ""
             }}
           />
-          <i className="fa-solid fa-file-image" style={{ color: `#4c88f0` }} />{' '}
+          <i className="fa-solid fa-file-image" style={{ color: `#4c88f0` }} />{" "}
           Background
         </Button>
 
@@ -116,7 +116,7 @@ const SectionSlides = () => {
           ref={colorInputRef}
           value={backgroundColor}
           onChange={(e) => handleColorUpdate(e.target.value)}
-          style={{ visibility: 'hidden', position: 'absolute' }}
+          style={{ visibility: "hidden", position: "absolute" }}
           tabIndex={-1}
         />
         <ColorButton

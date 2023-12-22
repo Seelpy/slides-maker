@@ -1,16 +1,16 @@
 enum SlideObjectType {
-  Text = 'TEXT',
-  Image = 'IMAGE',
-  Primitive = 'PRIMITIVE',
+  Text = "TEXT",
+  Image = "IMAGE",
+  Primitive = "PRIMITIVE",
 }
 
 enum PrimitiveType {
-  Circle = 'CIRCLE',
-  Square = 'SQUARE',
-  Triangle = 'TRIANGLE',
+  Circle = "CIRCLE",
+  Square = "SQUARE",
+  Triangle = "TRIANGLE",
 }
 
-type TextAlign = 'left' | 'center' | 'right'
+type TextAlign = "left" | "center" | "right"
 
 type Position = {
   x: number

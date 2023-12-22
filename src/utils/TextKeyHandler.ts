@@ -1,7 +1,7 @@
-import useHotkey from '../hooks/useHotkey'
-import { useAppSelector } from '../hooks/redux'
-import { SlideObjectType, TextObject } from '../models/types'
-import { usePresentationActions } from '../hooks/redux'
+import useHotkey from "../hooks/useHotkey"
+import { useAppSelector } from "../hooks/redux"
+import { SlideObjectType, TextObject } from "../models/types"
+import { usePresentationActions } from "../hooks/redux"
 
 function TextKeyHandler() {
   const slides = useAppSelector((state) => state.presentationReducer.slides)
@@ -48,19 +48,19 @@ function TextKeyHandler() {
   }
 
   const mapKeyToFunc = (event: KeyboardEvent) => {
-    if (document.activeElement?.tagName === 'INPUT') return
+    if (document.activeElement?.tagName === "INPUT") return
 
     switch (event.key) {
-      case 'Backspace': {
+      case "Backspace": {
         handleOnDelete()
         break
       }
-      case 'Enter': {
-        handleKey('\n')
+      case "Enter": {
+        handleKey("\n")
         break
       }
-      case ' ': {
-        handleKey('\u00A0')
+      case " ": {
+        handleKey("\u00A0")
         break
       }
       default: {
@@ -71,7 +71,7 @@ function TextKeyHandler() {
     }
   }
 
-  useHotkey(['*'], (e) => mapKeyToFunc(e))
+  useHotkey(["*"], (e) => mapKeyToFunc(e))
 }
 
 export default TextKeyHandler

@@ -1,15 +1,15 @@
-import styles from './Presentation.module.css'
-import MenuBar from '../components/UI/MenuBar'
-import LeftBar from '../components/UI/LeftBar'
-import SlideEditor from '../components/Slide/SlideEditor'
-import KeyHandler from '../utils/KeyHandler'
-import TextKeyHandler from '../utils/TextKeyHandler'
-import { useEffect } from 'react'
+import styles from "./Presentation.module.css"
+import MenuBar from "../components/UI/MenuBar"
+import LeftBar from "../components/UI/LeftBar"
+import SlideEditor from "../components/Slide/SlideEditor"
+import KeyHandler from "../utils/KeyHandler"
+import TextKeyHandler from "../utils/TextKeyHandler"
+import { useEffect } from "react"
 import {
   useAppSelector,
   useHistoryActions,
   useInterfaceActions,
-} from '../hooks/redux'
+} from "../hooks/redux"
 
 function Presentation() {
   const presentation = useAppSelector((state) => state.presentationReducer)

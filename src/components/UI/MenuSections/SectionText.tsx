@@ -1,8 +1,8 @@
-import MenuSection from '../MenuSection'
-import Button from '../Button'
-import { useState } from 'react'
-import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
-import { SlideObjectType } from '../../../models/types'
+import MenuSection from "../MenuSection"
+import Button from "../Button"
+import { useState } from "react"
+import { useAppSelector, usePresentationActions } from "../../../hooks/redux"
+import { SlideObjectType } from "../../../models/types"
 
 const SectionText = () => {
   const { createObject, updateTextSettings } = usePresentationActions()
@@ -74,7 +74,7 @@ const SectionText = () => {
     <MenuSection name="Text">
       <div>
         Font:
-        <select defaultValue={'Arial'} onChange={onFontSelectChange}>
+        <select defaultValue={"Arial"} onChange={onFontSelectChange}>
           <option value="Arial">Arial</option>
           <option value="Verdana">Verdana</option>
           <option value="Tahoma">Tahoma</option>
@@ -135,7 +135,7 @@ const SectionText = () => {
           onClick={() =>
             onSettingsUpdate({
               slideId: activeSlideId,
-              align: 'left',
+              align: "left",
             })
           }
         >
@@ -146,7 +146,7 @@ const SectionText = () => {
           onClick={() =>
             onSettingsUpdate({
               slideId: activeSlideId,
-              align: 'center',
+              align: "center",
             })
           }
         >
@@ -157,7 +157,7 @@ const SectionText = () => {
           onClick={() =>
             onSettingsUpdate({
               slideId: activeSlideId,
-              align: 'right',
+              align: "right",
             })
           }
         >

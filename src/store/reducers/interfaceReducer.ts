@@ -1,4 +1,4 @@
-import { createReducer } from '../createReducer.ts'
+import { createReducer } from "../createReducer.ts"
 import {
   setActiveSlideId,
   setDragSlides,
@@ -8,8 +8,8 @@ import {
   setDragObjectsDelta,
   setSelectingArea,
   setActiveColor,
-} from '../actions/interfaceActions.ts'
-import { SlideInfo } from '../../models/types.ts'
+} from "../actions/interfaceActions.ts"
+import { SlideInfo } from "../../models/types.ts"
 
 type initialInterfaceStateType = {
   activeSlideId: string | undefined
@@ -30,7 +30,7 @@ const initialInterfaceState = {
   isDraggingObjects: false,
   dragObjectsDelta: 0,
   isSelectingArea: false,
-  activeColor: '#fa5050',
+  activeColor: "#fa5050",
 } as initialInterfaceStateType
 
 const interfaceReducer = createReducer(initialInterfaceState, {

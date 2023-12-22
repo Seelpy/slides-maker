@@ -1,5 +1,5 @@
-import { PrimType, PrimitiveType, Size } from '../../models/types.ts'
-import styles from './SlidePrimitive.module.css'
+import { PrimType, PrimitiveType, Size } from "../../models/types.ts"
+import styles from "./SlidePrimitive.module.css"
 
 type PrimitiveProps = {
   data: PrimType
@@ -7,16 +7,16 @@ type PrimitiveProps = {
 
 function getTrianglePoints(size: Size): string {
   return (
-    '0' +
-    ',' +
+    "0" +
+    "," +
     size.height.toString() +
-    ' ' +
+    " " +
     Math.trunc(size.width / 2).toString() +
-    ',' +
-    '0' +
-    ' ' +
+    "," +
+    "0" +
+    " " +
     size.width.toString() +
-    ',' +
+    "," +
     size.height.toString()
   )
 }

@@ -1,15 +1,15 @@
-import styles from './SlideObject.module.css'
-import { SlideObject, SlideInfo, SlideObjectType } from '../../models/types.ts'
-import SlidePrimitive from './SlidePrimitive.tsx'
-import SlideText from './SlideText.tsx'
-import SlideImage from './SlideImage.tsx'
-import { useRef } from 'react'
+import styles from "./SlideObject.module.css"
+import { SlideObject, SlideInfo, SlideObjectType } from "../../models/types.ts"
+import SlidePrimitive from "./SlidePrimitive.tsx"
+import SlideText from "./SlideText.tsx"
+import SlideImage from "./SlideImage.tsx"
+import { useRef } from "react"
 import {
   useInterfaceActions,
   usePresentationActions,
-} from '../../hooks/redux.ts'
+} from "../../hooks/redux.ts"
 
-type UserSelect = 'none'
+type UserSelect = "none"
 type SlideObjectProps = {
   slide: SlideInfo
   data: SlideObject
@@ -40,7 +40,7 @@ const EditorObject = (props: SlideObjectProps) => {
     transformOrigin: `${props.data.size.width / 2}px ${
       props.data.size.height / 2
     }px`,
-    userSelect: 'none' as UserSelect,
+    userSelect: "none" as UserSelect,
   }
 
   const { updateSlide } = usePresentationActions()

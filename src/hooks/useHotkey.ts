@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect } from "react"
 
 function useHotkey(
   hotkeys: string[],
@@ -7,16 +7,16 @@ function useHotkey(
   // Разделяет строку по первому '+' после конца слова
   const hotkeyArrays = hotkeys.map((hotkey) =>
     Array.from(
-      new Set(hotkey.toLocaleLowerCase().replace(/\s+/g, '').split(/\b\+/g)),
+      new Set(hotkey.toLocaleLowerCase().replace(/\s+/g, "").split(/\b\+/g)),
     ),
   )
 
   const getActiveKeysArray = (event: KeyboardEvent) => {
     const activeKeys: Set<string> = new Set()
     activeKeys.add(event.key.toLocaleLowerCase())
-    if (event.ctrlKey) activeKeys.add('ctrl')
-    if (event.altKey) activeKeys.add('alt')
-    if (event.shiftKey) activeKeys.add('shift')
+    if (event.ctrlKey) activeKeys.add("ctrl")
+    if (event.altKey) activeKeys.add("alt")
+    if (event.shiftKey) activeKeys.add("shift")
     return Array.from(activeKeys)
   }
 
@@ -25,7 +25,7 @@ function useHotkey(
 
     for (let i = 0; i < hotkeyArrays.length; i++) {
       // Случай с символом '*' - любая клавиша вызывает коллбек
-      if (hotkeyArrays[i].length === 1 && hotkeyArrays[i][0] === '*') {
+      if (hotkeyArrays[i].length === 1 && hotkeyArrays[i][0] === "*") {
         return true
       }
 
@@ -48,10 +48,10 @@ function useHotkey(
       }
     }
 
-    document.addEventListener('keydown', onKeyDown)
+    document.addEventListener("keydown", onKeyDown)
 
     return () => {
-      document.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener("keydown", onKeyDown)
     }
   }, [hotkeys, callback])
 }

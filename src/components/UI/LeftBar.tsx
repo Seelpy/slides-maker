@@ -1,13 +1,13 @@
-import styles from './LeftBar.module.css'
-import SlidePreview from '../Slide/SlidePreview'
-import useMoveSelectedSlides from '../../hooks/useMoveSelectedSlides'
+import styles from "./LeftBar.module.css"
+import SlidePreview from "../Slide/SlidePreview"
+import useMoveSelectedSlides from "../../hooks/useMoveSelectedSlides"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
-} from '../../hooks/redux'
-import { useRef } from 'react'
-import { SlideInfo } from '../../models/types'
+} from "../../hooks/redux"
+import { useRef } from "react"
+import { SlideInfo } from "../../models/types"
 
 const LeftBar = () => {
   const slides = useAppSelector((state) => state.presentationReducer.slides)

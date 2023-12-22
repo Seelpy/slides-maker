@@ -4,8 +4,8 @@ import {
   SlideObject,
   SlideObjectType,
   TextObject,
-} from '../models/types'
-import { v4 as uuidv4 } from 'uuid'
+} from "../models/types"
+import { v4 as uuidv4 } from "uuid"
 
 class SlideObjectGenerator {
   public Generate(
@@ -48,11 +48,11 @@ class SlideObjectGenerator {
     return {
       id: uuidv4(),
       type: SlideObjectType.Text,
-      value: 'Text',
-      align: 'left',
+      value: "Text",
+      align: "left",
       fontSize: 14,
-      fontFamily: 'Arial',
-      color: 'black',
+      fontFamily: "Arial",
+      color: "black",
       bold: false,
       italic: false,
       underline: false,
@@ -88,7 +88,7 @@ class SlideObjectGenerator {
       id: uuidv4(),
       type: SlideObjectType.Primitive,
       primitiveType: PrimitiveType.Triangle,
-      color: '#FFF',
+      color: "#FFF",
       position: {
         x: 0,
         y: 0,
@@ -108,7 +108,7 @@ class SlideObjectGenerator {
       id: uuidv4(),
       type: SlideObjectType.Primitive,
       primitiveType: PrimitiveType.Circle,
-      color: '#FFF',
+      color: "#FFF",
       position: {
         x: 0,
         y: 0,
@@ -128,7 +128,7 @@ class SlideObjectGenerator {
       id: uuidv4(),
       type: SlideObjectType.Primitive,
       primitiveType: PrimitiveType.Square,
-      color: '#FFF',
+      color: "#FFF",
       position: {
         x: 0,
         y: 0,

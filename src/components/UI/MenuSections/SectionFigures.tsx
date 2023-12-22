@@ -1,8 +1,8 @@
-import MenuSection from '../MenuSection'
-import Button from '../Button'
-import { useState } from 'react'
-import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
-import { PrimitiveType, SlideObjectType } from '../../../models/types'
+import MenuSection from "../MenuSection"
+import Button from "../Button"
+import { useState } from "react"
+import { useAppSelector, usePresentationActions } from "../../../hooks/redux"
+import { PrimitiveType, SlideObjectType } from "../../../models/types"
 
 const SectionFigures = () => {
   const slides = useAppSelector((state) => state.presentationReducer.slides)

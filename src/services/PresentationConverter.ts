@@ -1,4 +1,4 @@
-import { Presentaion } from '../models/types'
+import { Presentaion } from "../models/types"
 
 class PresentationConverter {
   public ConvertToJson(presentaion: Presentaion): string {
@@ -9,7 +9,7 @@ class PresentationConverter {
     try {
       jsonObj = JSON.parse(json)
     } catch (e) {
-      console.error('Ошибка при загрузке JSON: ' + e)
+      console.error("Ошибка при загрузке JSON: " + e)
     }
     return jsonObj as Presentaion
   }

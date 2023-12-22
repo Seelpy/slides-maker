@@ -1,12 +1,12 @@
-import MenuSection from '../MenuSection'
-import Button from '../Button'
-import ColorButton from '../ColorButton'
-import { useRef } from 'react'
+import MenuSection from "../MenuSection"
+import Button from "../Button"
+import ColorButton from "../ColorButton"
+import { useRef } from "react"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
-} from '../../../hooks/redux.ts'
+} from "../../../hooks/redux.ts"
 
 const SectionColors = () => {
   const colorPickerRef = useRef<HTMLInputElement | null>(null)
@@ -65,7 +65,7 @@ const SectionColors = () => {
           ref={colorPickerRef}
           value={activeColor}
           onChange={(e) => setActiveColor(e.target.value)}
-          style={{ visibility: 'hidden', position: 'absolute' }}
+          style={{ visibility: "hidden", position: "absolute" }}
         />
 
         <Button onClick={() => colorPickerRef.current?.click()}>

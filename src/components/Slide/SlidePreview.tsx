@@ -1,8 +1,8 @@
-import styles from './SlidePreview.module.css'
-import EditorObject from './SlideObject'
-import { SlideInfo } from '../../models/types'
-import { useRef } from 'react'
-import useDragSlide from '../../hooks/useDragSlide'
+import styles from "./SlidePreview.module.css"
+import EditorObject from "./SlideObject"
+import { SlideInfo } from "../../models/types"
+import { useRef } from "react"
+import useDragSlide from "../../hooks/useDragSlide"
 
 type SlidePreviewProps = {
   active: boolean

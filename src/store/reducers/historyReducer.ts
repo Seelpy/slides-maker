@@ -1,12 +1,12 @@
-import { createReducer } from '../createReducer.ts'
-import { HistoryOperation, History } from '../../models/types.ts'
+import { createReducer } from "../createReducer.ts"
+import { HistoryOperation, History } from "../../models/types.ts"
 import {
   pushHistoryState,
   clearHistoryAfterIndex,
   moveCurrentIndex,
   setLastOperationType,
   setShouldSaveState,
-} from '../actions/historyActions.ts'
+} from "../actions/historyActions.ts"
 
 type initialHistoryStateType = {
   history: History[]

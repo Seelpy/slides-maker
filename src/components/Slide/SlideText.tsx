@@ -1,16 +1,16 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect } from "react"
 import {
   Size,
   TextObject,
   SlideInfo,
   HistoryOperation,
-} from '../../models/types.ts'
-import styles from './SlideText.module.css'
+} from "../../models/types.ts"
+import styles from "./SlideText.module.css"
 import {
   useAppSelector,
   useHistoryActions,
   usePresentationActions,
-} from '../../hooks/redux.ts'
+} from "../../hooks/redux.ts"
 
 type TextAlign = any
 type TextProps = {
@@ -22,12 +22,12 @@ const SlideText = (props: TextProps) => {
   const data = props.data
   const textStyle = {
     textAlign: data.align as TextAlign,
-    fontSize: data.fontSize + 'px',
+    fontSize: data.fontSize + "px",
     fontFamily: data.fontFamily,
     color: data.color,
-    fontStyle: data.italic ? 'italic' : '',
-    fontWeight: data.bold ? 'bold' : '',
-    textDecoration: data.underline ? 'underline' : '',
+    fontStyle: data.italic ? "italic" : "",
+    fontWeight: data.bold ? "bold" : "",
+    textDecoration: data.underline ? "underline" : "",
   }
 
   const textRef = useRef<HTMLDivElement | null>(null)

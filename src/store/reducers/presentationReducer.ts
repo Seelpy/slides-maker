@@ -1,4 +1,4 @@
-import { createReducer } from '../createReducer.ts'
+import { createReducer } from "../createReducer.ts"
 import {
   changeName,
   createObject,
@@ -11,11 +11,11 @@ import {
   updatePresentation,
   updateSlide,
   updateTextSettings,
-} from '../actions/presentationActions.ts'
-import { presentation } from '../../models/example/high.ts'
-import ObjectGenerator from '../../services/ObjectGenerator.ts'
-import { SlideInfo, SlideObjectType, TextAlign } from '../../models/types.ts'
-import objectGenerator from '../../services/ObjectGenerator.ts'
+} from "../actions/presentationActions.ts"
+import { presentation } from "../../models/example/high.ts"
+import ObjectGenerator from "../../services/ObjectGenerator.ts"
+import { SlideInfo, SlideObjectType, TextAlign } from "../../models/types.ts"
+import objectGenerator from "../../services/ObjectGenerator.ts"
 
 const presentationReducer = createReducer(presentation, {
   [changeName.type]: (state, action: typeof changeName.actionInstance) => {

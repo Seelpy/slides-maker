@@ -1,7 +1,7 @@
-import { combineReducers, createStore } from 'redux'
-import presentationReducer from './reducers/presentationReducer'
-import interfaceReducer from './reducers/interfaceReducer'
-import historyReducer from './reducers/historyReducer'
+import { combineReducers, createStore } from "redux"
+import presentationReducer from "./reducers/presentationReducer"
+import interfaceReducer from "./reducers/interfaceReducer"
+import historyReducer from "./reducers/historyReducer"
 
 const rootReducer = combineReducers({
   presentationReducer,
@@ -15,4 +15,4 @@ export const setupStore = () => {
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof setupStore>
-export type AppDispatch = AppStore['dispatch']
+export type AppDispatch = AppStore["dispatch"]

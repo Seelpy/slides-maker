@@ -1,10 +1,10 @@
-import styles from './SlideEditor.module.css'
-import EditorObject from './SlideObject'
-import useSelectObjects from '../../hooks/useSelectObjects'
-import useDragObjects from '../../hooks/useDragObjects'
-import { useAppSelector } from '../../hooks/redux'
-import { useInterfaceActions } from '../../hooks/redux'
-import { useRef } from 'react'
+import styles from "./SlideEditor.module.css"
+import EditorObject from "./SlideObject"
+import useSelectObjects from "../../hooks/useSelectObjects"
+import useDragObjects from "../../hooks/useDragObjects"
+import { useAppSelector } from "../../hooks/redux"
+import { useInterfaceActions } from "../../hooks/redux"
+import { useRef } from "react"
 
 const SlideEditor = () => {
   const editorAreaRef = useRef<HTMLDivElement | null>(null)

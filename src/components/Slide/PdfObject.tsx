@@ -1,10 +1,10 @@
-import styles from './SlideObject.module.css'
-import { SlideObject, SlideInfo, SlideObjectType } from '../../models/types.ts'
-import SlideImage from './SlideImage.tsx'
-import PdfText from './PdfText.tsx'
-import SlidePrimitive from './SlidePrimitive.tsx'
+import styles from "./SlideObject.module.css"
+import { SlideObject, SlideInfo, SlideObjectType } from "../../models/types.ts"
+import SlideImage from "./SlideImage.tsx"
+import PdfText from "./PdfText.tsx"
+import SlidePrimitive from "./SlidePrimitive.tsx"
 
-type UserSelect = 'none'
+type UserSelect = "none"
 type SlideObjectProps = {
   slide: SlideInfo
   data: SlideObject
@@ -35,7 +35,7 @@ const PdfObject = (props: SlideObjectProps) => {
     transformOrigin: `${props.data.size.width / 2}px ${
       props.data.size.height / 2
     }px`,
-    userSelect: 'none' as UserSelect,
+    userSelect: "none" as UserSelect,
   }
 
   return (
