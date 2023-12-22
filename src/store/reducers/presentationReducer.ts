@@ -12,10 +12,9 @@ import {
   updateSlide,
   updateTextSettings,
 } from "../actions/presentationActions.ts"
+import GenerateObject from "../../services/ObjectGenerator.ts"
 import { presentation } from "../../models/example/high.ts"
-import ObjectGenerator from "../../services/ObjectGenerator.ts"
 import { SlideInfo, SlideObjectType, TextAlign } from "../../models/types.ts"
-import objectGenerator from "../../services/ObjectGenerator.ts"
 
 const presentationReducer = createReducer(presentation, {
   [changeName.type]: (state, action: typeof changeName.actionInstance) => {
@@ -125,7 +124,7 @@ const presentationReducer = createReducer(presentation, {
       (slide) => slide.id == action.payload.slideId,
     )
 
-    const object = ObjectGenerator.Generate(
+    const object = GenerateObject(
       action.payload.type,
       action.payload.subtype,
     )
@@ -209,7 +208,7 @@ const presentationReducer = createReducer(presentation, {
       return { ...state }
     }
 
-    const image = objectGenerator.Generate(
+    const image = GenerateObject(
       SlideObjectType.Image,
       undefined,
       action.payload.data,
