@@ -6,7 +6,7 @@ import {
 } from "../../../hooks/redux"
 // eslint-disable-next-line no-duplicate-imports
 import { ImportJson, ExportJson, ExportPdf } from "../../../services/FileHandler.ts"
-import PresentationConverter from "../../../services/PresentationConverter"
+import { ConvertFromJson, ConvertToJson } from "../../../services/PresentationConverter"
 import MenuSection from "../MenuSection"
 import Button from "../Button"
 
@@ -18,8 +18,7 @@ const SectionInfo = () => {
 
   const importFromJson = (file: File) => {
     ImportJson(file).then((stringJson) => {
-      const importedPresentation =
-        PresentationConverter.ConvertFromJson(stringJson)
+      const importedPresentation = ConvertFromJson(stringJson)
       if ("name" in importedPresentation && "slides" in importedPresentation) {
         updatePresentation(importedPresentation)
         setActiveSlideId(
@@ -47,7 +46,7 @@ const SectionInfo = () => {
           onClick={() =>
             ExportJson(
               presentation.name,
-              PresentationConverter.ConvertToJson(presentation),
+              ConvertToJson(presentation),
             )
           }
         >
