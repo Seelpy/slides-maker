@@ -5,6 +5,7 @@ import SlideText from "./SlideText.tsx"
 import SlideImage from "./SlideImage.tsx"
 import { useRef } from "react"
 import {
+  useHistoryActions,
   useInterfaceActions,
   usePresentationActions,
 } from "../../hooks/redux.ts"
@@ -45,20 +46,23 @@ const EditorObject = (props: SlideObjectProps) => {
 
   const { updateSlide } = usePresentationActions()
   const { setDragObjects, setDragObjectsDelta } = useInterfaceActions()
+  const { setShouldSaveState } = useHistoryActions()
   const slideObject = useRef<HTMLDivElement | null>(null)
 
-  const handleMouseDown = (event: React.MouseEvent) => {
-    if (!props.data.selected) {
-      if (!event.ctrlKey) {
-        // снимаем выделение со всех объектов
-        props.slide.slide.map((obj) =>
-          updateSlide({
-            slideId: props.slide.id,
-            oldSlideObject: obj,
-            newSlideObject: { ...obj, selected: false },
-          }),
-        )
+  const handleMouseClick = (event: React.MouseEvent, isFromDrag: boolean) => {
+    if (!props.data.selected && !event.ctrlKey) {
+      if (!isFromDrag) {
+        setShouldSaveState(false)
       }
+
+      // снимаем выделение со всех объектов
+      props.slide.slide.map((obj) =>
+        updateSlide({
+          slideId: props.slide.id,
+          oldSlideObject: obj,
+          newSlideObject: { ...obj, selected: false },
+        }),
+      )
 
       // Выделяем текущий
       updateSlide({
@@ -67,7 +71,22 @@ const EditorObject = (props: SlideObjectProps) => {
         newSlideObject: { ...props.data, selected: true },
       })
     }
+    else if (event.ctrlKey) {
+      if (!isFromDrag) {
+        setShouldSaveState(false)
+      }
 
+      // Переключаем текущий
+      updateSlide({
+        slideId: props.slide.id,
+        oldSlideObject: props.data,
+        newSlideObject: { ...props.data, selected: !props.data.selected },
+      })   
+    }
+  }
+
+  const handleMouseDrag = (event: React.MouseEvent) => {
+    handleMouseClick(event, true)
     setDragObjects(true)
     setDragObjectsDelta(0)
   }
@@ -80,7 +99,9 @@ const EditorObject = (props: SlideObjectProps) => {
         styles.slideObject +
         (props.data.selected && !props.preview ? ` ${styles.activeObject}` : ``)
       }
-      onMouseDown={!props.preview ? (e) => handleMouseDown(e) : () => {}}
+      draggable={true}
+      onClick={!props.preview ? (e) => handleMouseClick(e, false) : () => {}}
+      onDragStart={!props.preview ? (e) => handleMouseDrag(e) : () => {}}
     >
       {getObject(data, props.slide)}
     </div>
