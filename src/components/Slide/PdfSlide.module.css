@@ -4,7 +4,6 @@
     align-items: center;
     width: 1284px;
     height: 724px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .slide {
@@ -13,4 +12,5 @@
     width: 1284px;
     height: 724px;
     border: 2px solid rgb(24 24 24 / 18%);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }

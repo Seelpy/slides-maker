@@ -42,8 +42,7 @@ const PdfObject = (props: SlideObjectProps) => {
     <div
       style={style}
       className={
-        styles.slideObject +
-        (props.data.selected && !props.preview ? ` ${styles.activeObject}` : ``)
+        styles.slideObject
       }
     >
       {getObject(data, props.slide)}
