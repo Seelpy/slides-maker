@@ -124,10 +124,7 @@ const presentationReducer = createReducer(presentation, {
       (slide) => slide.id == action.payload.slideId,
     )
 
-    const object = GenerateObject(
-      action.payload.type,
-      action.payload.subtype,
-    )
+    const object = GenerateObject(action.payload.type, action.payload.subtype)
     if (object === undefined) {
       return { ...state }
     }

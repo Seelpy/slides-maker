@@ -5,8 +5,15 @@ import {
   usePresentationActions,
 } from "../../../hooks/redux"
 // eslint-disable-next-line no-duplicate-imports
-import { ImportJson, ExportJson, ExportPdf } from "../../../services/FileHandler.ts"
-import { ConvertFromJson, ConvertToJson } from "../../../services/PresentationConverter"
+import {
+  ImportJson,
+  ExportJson,
+  ExportPdf,
+} from "../../../services/FileHandler.ts"
+import {
+  ConvertFromJson,
+  ConvertToJson,
+} from "../../../services/PresentationConverter"
 import MenuSection from "../MenuSection"
 import Button from "../Button"
 
@@ -44,10 +51,7 @@ const SectionInfo = () => {
         <Button
           width="5.4rem"
           onClick={() =>
-            ExportJson(
-              presentation.name,
-              ConvertToJson(presentation),
-            )
+            ExportJson(presentation.name, ConvertToJson(presentation))
           }
         >
           Export json
@@ -69,9 +73,7 @@ const SectionInfo = () => {
       </div>
       <Button
         width="5.4rem"
-        onClick={() =>
-          ExportPdf(presentation.slides, presentation.name)
-        }
+        onClick={() => ExportPdf(presentation.slides, presentation.name)}
       >
         Export pdf
       </Button>

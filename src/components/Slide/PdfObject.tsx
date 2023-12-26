@@ -39,12 +39,7 @@ const PdfObject = (props: SlideObjectProps) => {
   }
 
   return (
-    <div
-      style={style}
-      className={
-        styles.slideObject
-      }
-    >
+    <div style={style} className={styles.slideObject}>
       {getObject(data, props.slide)}
     </div>
   )

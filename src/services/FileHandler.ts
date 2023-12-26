@@ -1,13 +1,10 @@
-import html2pdf from "html2pdf.js"
+import jsPDF from "jspdf"
+import html2canvas from "html2canvas"
 import PDFSlide from "../components/Slide/PdfSlide.tsx"
 import { renderToStaticMarkup } from "react-dom/server"
 import { SlideInfo } from "../models/types.ts"
 
-const pdfMargin = 0
-const pdfWidth = 963
-const pdfHeight = 543
-
-export function ExportJson(filename: string, data:string ) {
+export function ExportJson(filename: string, data: string) {
   const link = document.createElement("a")
   const file = new Blob([data], { type: "application/json" })
   link.href = URL.createObjectURL(file)
@@ -33,19 +30,28 @@ export function ImportImage(file: File): Promise<string> {
   })
 }
 
-export function ExportPdf(slides: SlideInfo[], filename: string) {
-  let result: string = ""
-  for (const slide of slides) {
-    result += renderToStaticMarkup(PDFSlide(slide))
-  }
-  const opt = {
-    margin: pdfMargin,
-    filename: filename + ".pdf",
-    jsPDF: {
-      format: [pdfWidth, (pdfHeight - pdfMargin) * slides.length],
-      orientation: "p",
-    },
+export async function ExportPdf(slides: SlideInfo[], filename: string) {
+  const pdf = new jsPDF("l", "pt", [1280, 720], true)
+
+  for (let i = 0; i < slides.length; i++) {
+    const slideStr = renderToStaticMarkup(PDFSlide(slides[i]))
+    const slideContainer = document.createElement("div")
+
+    slideContainer.innerHTML = slideStr
+    const slide = slideContainer.firstChild! as HTMLElement
+    document.body.appendChild(slide)
+
+    const canvas = await html2canvas(slide)
+    if (i != 0) {
+      pdf.addPage([1280, 720])
+      pdf.setPage(i + 1)
+    }
+
+    const img = canvas.toDataURL("image/png")
+    pdf.addImage(img, "PNG", 0, 0, canvas.width, canvas.height, "", "FAST")
+
+    document.body.removeChild(slide)
   }
 
-  html2pdf().from(result).set(opt).save()
+  pdf.save(filename + ".pdf")
 }

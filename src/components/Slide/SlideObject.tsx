@@ -48,12 +48,12 @@ const EditorObject = (props: SlideObjectProps) => {
   const { setDragObjects, setDragObjectsDelta } = useInterfaceActions()
   const { setShouldSaveState } = useHistoryActions()
   const slideObject = useRef<HTMLDivElement | null>(null)
+  const isMouseDown = useRef<boolean>(false)
+  const isDragging = useRef<boolean>(false)
 
-  const handleMouseClick = (event: React.MouseEvent, isFromDrag: boolean) => {
+  const handleMouseDown = (event: React.MouseEvent) => {
     if (!props.data.selected && !event.ctrlKey) {
-      if (!isFromDrag) {
-        setShouldSaveState(false)
-      }
+      setShouldSaveState(false)
 
       // снимаем выделение со всех объектов
       props.slide.slide.map((obj) =>
@@ -70,25 +70,27 @@ const EditorObject = (props: SlideObjectProps) => {
         oldSlideObject: props.data,
         newSlideObject: { ...props.data, selected: true },
       })
-    }
-    else if (event.ctrlKey) {
-      if (!isFromDrag) {
-        setShouldSaveState(false)
-      }
+    } else if (event.ctrlKey) {
+      setShouldSaveState(false)
 
       // Переключаем текущий
       updateSlide({
         slideId: props.slide.id,
         oldSlideObject: props.data,
         newSlideObject: { ...props.data, selected: !props.data.selected },
-      })   
+      })
     }
+
+    isMouseDown.current = true
+    isDragging.current = false
   }
 
-  const handleMouseDrag = (event: React.MouseEvent) => {
-    handleMouseClick(event, true)
-    setDragObjects(true)
-    setDragObjectsDelta(0)
+  const handleMouseMove = () => {
+    if (isMouseDown.current && !isDragging.current) {
+      isDragging.current = true
+      setDragObjects(true)
+      setDragObjectsDelta(0)
+    }
   }
 
   return (
@@ -99,9 +101,9 @@ const EditorObject = (props: SlideObjectProps) => {
         styles.slideObject +
         (props.data.selected && !props.preview ? ` ${styles.activeObject}` : ``)
       }
-      draggable={true}
-      onClick={!props.preview ? (e) => handleMouseClick(e, false) : () => {}}
-      onDragStart={!props.preview ? (e) => handleMouseDrag(e) : () => {}}
+      onMouseDown={!props.preview ? (e) => handleMouseDown(e) : () => {}}
+      onMouseUp={() => (isMouseDown.current = false)}
+      onMouseMove={() => handleMouseMove()}
     >
       {getObject(data, props.slide)}
     </div>

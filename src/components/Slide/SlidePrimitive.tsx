@@ -59,7 +59,9 @@ const SlidePrimitive = (props: PrimitiveProps) => {
 
   return (
     <div className={styles.primitive}>
-      <svg style={style}>{getSVGPrimitive(props.data)}</svg>
+      <svg xmlns="http://www.w3.org/2000/svg" style={style}>
+        {getSVGPrimitive(props.data)}
+      </svg>
     </div>
   )
 }
