@@ -17,21 +17,22 @@ const SectionColors = () => {
   const { updateColor } = usePresentationActions()
   const { setActiveColor } = useInterfaceActions()
 
-  const clickUpdateColorHandler = (
-    slideId: string | undefined,
-    color: string,
-  ) => {
-    if (slideId === undefined) {
+  const handleColorClick = (color: string, isPalette: boolean = true) => {
+    if (activeSlideId === undefined) {
       return
     }
-    updateColor({ slideId: slideId, color: color })
+    if (isPalette) {
+      setActiveColor(color)
+    }
+    updateColor({ slideId: activeSlideId, color: color })
   }
+
 
   return (
     <MenuSection name="Colors">
       <div>
         <Button
-          onClick={() => clickUpdateColorHandler(activeSlideId, activeColor)}
+          onClick={() => handleColorClick(activeColor, false)}
         >
           <i
             className="fa-solid fa-square"
@@ -43,20 +44,20 @@ const SectionColors = () => {
 
         <div style={{ display: `flex`, flexDirection: `column` }}>
           <div>
-            <ColorButton onClick={setActiveColor} color="#ffffff" />
-            <ColorButton onClick={setActiveColor} color="#66ff66" />
-            <ColorButton onClick={setActiveColor} color="#ccff33" />
-            <ColorButton onClick={setActiveColor} color="#ffcc66" />
-            <ColorButton onClick={setActiveColor} color="#ccffcc" />
-            <ColorButton onClick={setActiveColor} color="#33ccff" />
+            <ColorButton onClick={handleColorClick} color="#ffffff" />
+            <ColorButton onClick={handleColorClick} color="#66ff66" />
+            <ColorButton onClick={handleColorClick} color="#ccff33" />
+            <ColorButton onClick={handleColorClick} color="#ffcc66" />
+            <ColorButton onClick={handleColorClick} color="#ccffcc" />
+            <ColorButton onClick={handleColorClick} color="#33ccff" />
           </div>
           <div>
-            <ColorButton onClick={setActiveColor} color="black" />
-            <ColorButton onClick={setActiveColor} color="#ff9999" />
-            <ColorButton onClick={setActiveColor} color="#ff5050" />
-            <ColorButton onClick={setActiveColor} color="#ff66cc" />
-            <ColorButton onClick={setActiveColor} color="#9966ff" />
-            <ColorButton onClick={setActiveColor} color="#33cccc" />
+            <ColorButton onClick={handleColorClick} color="black" />
+            <ColorButton onClick={handleColorClick} color="#ff9999" />
+            <ColorButton onClick={handleColorClick} color="#ff5050" />
+            <ColorButton onClick={handleColorClick} color="#ff66cc" />
+            <ColorButton onClick={handleColorClick} color="#9966ff" />
+            <ColorButton onClick={handleColorClick} color="#33cccc" />
           </div>
         </div>
 
