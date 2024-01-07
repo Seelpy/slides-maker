@@ -34,6 +34,7 @@ function useHotkey(
         hotkeyArrays[i].length === activeKeys.length &&
         hotkeyArrays[i].every((key) => activeKeys.includes(key))
       ) {
+        event.preventDefault()
         return true
       }
     }
