@@ -18,7 +18,7 @@ function ConvertThemeToCSS(theme: Themes): string {
   }
 }
 
-const ThemeProvider = ({ children }) => {
+const ThemeProvider = ({ children } : { children: React.ReactNode }) => {
   const { theme } = useAppSelector((state) => state.themeReducer)
 
   useEffect(() => {

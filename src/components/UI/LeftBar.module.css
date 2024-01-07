@@ -9,6 +9,5 @@
     gap: 12px;
     width: auto;
     height: auto;
-    border-right: 1px solid rgb(24 24 24 / 18%);
-    background: var(--sidebar-backround-color);
+    border-right: 1px solid var(--border-color);
 }

@@ -12,23 +12,23 @@
 }
 
 :root[data-theme="light"] {
-  --background-color: rgba(235, 235, 235);
-  --menu-backround-color: rgba(215, 215, 215);
-  --sidebar-backround-color: rgba(225, 225, 225);
-  --text-color: rgba(0, 0, 0, 0.6);
-  --button-color: rgba(225, 225, 225);
+  --background-color: rgb(230, 230, 230);
+  --border-color: rgba(24, 24, 24, 0.18);
+  --menu-backround-color: rgb(242, 242, 242);
+  --text-color: rgb(12, 12, 12);
+  --button-color: rgb(255, 255, 255);
   --icon-color: #4c88f0;
-  --editor-backround: rgba(225, 225, 225);
+  --slide-editor-backround: rgb(230, 230, 230);
 }
 
 :root[data-theme="dark"] {
-  --background-color: rgba(0, 0, 0, 0.6);
-  --menu-backround-color: rgba(0, 0, 0, 0.45);
-  --sidebar-backround-color: rgba(0, 0, 0, 0.3);
-  --text-color: rgb(241, 238, 238);
-  --button-color: rgba(255, 255, 255, 0.3);
-  --icon-color: rgb(255, 241, 199);
-  --editor-backround: rgb(148, 144, 144);
+  --background-color: rgb(26, 27, 30);
+  --border-color: rgba(70, 70, 74, 0.7);
+  --menu-backround-color: rgb(33, 34, 36);
+  --text-color: rgb(220, 221, 229);
+  --button-color: rgb(48, 50, 54);
+  --icon-color: #4c88f0;
+  --slide-editor-backround: rgb(33, 34, 36);
 }
 
 
