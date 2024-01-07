@@ -27,7 +27,7 @@ function KeyHandler() {
 
   const { deleteSlides, updateSlide, updatePresentation, createSlide } =
     usePresentationActions()
-  const { moveCurrentIndex, setLastOperationType } = useHistoryActions()
+  const { moveCurrentIndex, setLastOperationType, setShouldSaveState } = useHistoryActions()
   const { setActiveSlideId } = useInterfaceActions()
 
   const handleDeleteKey = () => {
@@ -115,7 +115,28 @@ function KeyHandler() {
     }
   }
 
+  const selectAll = () => {
+    if (slides.length === 0) return
+    setShouldSaveState(false)
+
+    const selectedSlides = slides.filter((s) => s.selected)
+    if (selectedSlides.length > 0 || !activeSlide) {
+      slides.map((s) => 
+        updateSlide({slideId: s.id, selected: true})
+      )
+    } else {
+      activeSlide.slide.map((obj) =>
+        updateSlide({
+          slideId: activeSlideId!, 
+          oldSlideObject: obj,
+          newSlideObject: {...obj, selected: true}
+        })
+      )
+    }
+  }
+
   useHotkey(["Delete"], () => handleDeleteKey())
+  useHotkey(["Ctrl+A", "Ctrl+Ф"], () => selectAll())
   useHotkey(["Ctrl+C", "Ctrl+С"], () => copyObjects())
   useHotkey(["Ctrl+V", "Ctrl+М"], () => pasteObjects())
   useHotkey(["Ctrl+Z", "Ctrl+Я"], () => moveHistory(-1))
