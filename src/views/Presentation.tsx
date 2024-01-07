@@ -40,7 +40,7 @@ function Presentation() {
       if (currentIndex !== history.length - 1) {
         clearHistoryAfterIndex()
       }
-      console.log("Saved:", shouldSaveState)
+
       if (shouldSaveState) {
         pushHistoryState({
           presentation: presentation,
