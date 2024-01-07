@@ -23,7 +23,6 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     document.documentElement.dataset.theme = ConvertThemeToCSS(theme)
-    console.log(theme)
   }, [ theme ])
 
   return (

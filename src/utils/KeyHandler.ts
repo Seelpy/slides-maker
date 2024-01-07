@@ -80,6 +80,13 @@ function keyHandler() {
     }
   }
 
+  const moveActiveSlideIndex = (move: number) => {
+    const newActiveSlideIndex = slides.findIndex((s) => s.id == activeSlideId) + move
+    if (newActiveSlideIndex >= 0 && newActiveSlideIndex < slides.length ) {
+      setActiveSlideId(slides[newActiveSlideIndex].id)
+    }
+  }
+
   const pasteObjects = () => {
     if (copiedObjects.length === 0) return;
 
@@ -105,6 +112,8 @@ function keyHandler() {
   useHotkey({hotkey: "Ctrl+Shift+Z", callback: () => moveHistory(1)})
   useHotkey({hotkey: "Ctrl+Y", callback: () => moveHistory(1)})
   useHotkey({hotkey: "Delete", callback: () => handleDeleteKey()})
+  useHotkey({hotkey: "ArrowLeft", callback: () => moveActiveSlideIndex(-1)})
+  useHotkey({hotkey: "ArrowRight", callback: () => moveActiveSlideIndex(1)})
 }
 
 export default keyHandler
