@@ -149,8 +149,8 @@ function KeyHandler() {
   useHotkey(["Ctrl+Y", "Ctrl+Н", "Ctrl+Shift+Z", "Ctrl+Shift+Я"], () =>
     moveHistory(1),
   )
-  useHotkey(["ArrowLeft"], () => moveActiveSlideIndex(-1))
-  useHotkey(["ArrowRight"], () => moveActiveSlideIndex(1))
+  useHotkey(["ArrowLeft", "ArrowUp"], () => moveActiveSlideIndex(-1))
+  useHotkey(["ArrowRight", "ArrowDown"], () => moveActiveSlideIndex(1))
 }
 
 export default KeyHandler
