@@ -5,6 +5,17 @@
     gap: 6px;
     padding: 0 12px;
     border-right: 1px solid rgb(24 24 24 / 18%);
+    color: var(--text-color);
+}
+
+.menuSection input{
+    background: var(--button-color);
+    color: var(--text-color);
+}
+
+.menuSection select{
+    background: var(--button-color);
+    color: var(--text-color);
 }
 
 .menuSectionContent {

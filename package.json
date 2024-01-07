@@ -38,6 +38,6 @@
     "stylelint-order": "^6.0.3",
     "stylelint-prettier": "^4.0.2",
     "typescript": "^5.2.2",
-    "vite": "^4.4.5"
+    "vite": "^4.5.1"
   }
 }

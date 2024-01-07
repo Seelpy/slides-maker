@@ -5,5 +5,6 @@ import SectionInfo from "./SectionInfo";
 import SectionText from "./SectionText";
 import SectionSlides from "./SectionSlides";
 import SectionHistory from "./SectionHistory";
+import SectionTheme from './SectionTheme.tsx'
 
-export {SectionColors, SectionFigures, SectionImages, SectionInfo, SectionText, SectionSlides, SectionHistory}
+export {SectionColors, SectionFigures, SectionImages, SectionInfo, SectionText, SectionSlides, SectionHistory, SectionTheme}

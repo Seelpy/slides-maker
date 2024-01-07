@@ -4,6 +4,6 @@
     width: 100%;
     box-sizing: border-box;
     padding: 6px 12px;
-    background-color: rgb(242 242 242 / 25500%);
+    background-color: var(--menu-backround-color);
     box-shadow: rgb(0 0 0 / 25%) 0 0 15px 0;
 }

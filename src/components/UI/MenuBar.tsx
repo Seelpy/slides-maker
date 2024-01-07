@@ -7,6 +7,7 @@ import {
   SectionText,
   SectionSlides,
   SectionHistory,
+  SectionTheme
 } from './MenuSections'
 
 const MenuBar = () => {
@@ -19,6 +20,7 @@ const MenuBar = () => {
       <SectionColors />
       <SectionSlides />
       <SectionHistory />
+      <SectionTheme />
     </div>
   )
 }

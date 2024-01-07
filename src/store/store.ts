@@ -2,11 +2,13 @@ import { combineReducers, createStore } from 'redux'
 import presentationReducer from './reducers/presentationReducer'
 import interfaceReducer from './reducers/interfaceReducer'
 import historyReducer from './reducers/historyReducer'
+import themeReducer from './reducers/themeReducer.ts'
 
 const rootReducer = combineReducers({
   presentationReducer,
   interfaceReducer,
-  historyReducer
+  historyReducer,
+  themeReducer,
 })
 
 export const setupStore = () => {

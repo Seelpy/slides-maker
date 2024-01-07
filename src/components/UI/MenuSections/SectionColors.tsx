@@ -67,7 +67,7 @@ const SectionColors = () => {
         <Button onClick={() => colorPickerRef.current?.click()}>
           <i
             className="fa-solid fa-palette "
-            style={{ color: `#4c88f0`, fontSize: `1.5rem` }}
+            style={{ color: `var(--icon-color)`, fontSize: `1.5rem` }}
           />
           <br />
           Edit

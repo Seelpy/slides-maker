@@ -11,6 +11,27 @@
   text-size-adjust: 100%;
 }
 
+:root[data-theme="light"] {
+  --background-color: rgba(235, 235, 235);
+  --menu-backround-color: rgba(215, 215, 215);
+  --sidebar-backround-color: rgba(225, 225, 225);
+  --text-color: rgba(0, 0, 0, 0.6);
+  --button-color: rgba(225, 225, 225);
+  --icon-color: #4c88f0;
+  --editor-backround: rgba(225, 225, 225);
+}
+
+:root[data-theme="dark"] {
+  --background-color: rgba(0, 0, 0, 0.6);
+  --menu-backround-color: rgba(0, 0, 0, 0.45);
+  --sidebar-backround-color: rgba(0, 0, 0, 0.3);
+  --text-color: rgb(241, 238, 238);
+  --button-color: rgba(255, 255, 255, 0.3);
+  --icon-color: rgb(255, 241, 199);
+  --editor-backround: rgb(148, 144, 144);
+}
+
+
 body {
   margin: 0;
   padding: 0;

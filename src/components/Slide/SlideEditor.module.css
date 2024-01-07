@@ -5,6 +5,7 @@
     width: 100%;
     height: 100%;
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    background-color: var(--editor-backround);
 }
 
 .slideEditor {
@@ -13,6 +14,7 @@
     width: 1284px;
     height: 724px;
     border: 2px solid rgb(24 24 24 / 18%);
+    background: rgb(230, 230, 230);
 }
 
 .selectionArea {

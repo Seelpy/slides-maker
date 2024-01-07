@@ -98,11 +98,16 @@ enum HistoryOperation {
   update = `HISTORY_UPDATE`
 }
 
+enum Themes {
+  dark = `DARK`,
+  light = `LIGHT`
+}
 
 export { 
   SlideObjectType, 
   PrimitiveType, 
   HistoryOperation,
+  Themes
 }
 
 export type {

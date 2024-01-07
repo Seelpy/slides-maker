@@ -55,7 +55,7 @@ const SectionSlides = () => {
     <MenuSection name="Slides">
       <div>    
         <Button onClick={() => handleNewSlide()}>
-          <i className="fa-solid fa-plus" style={{ color: `#4c88f0` }} /> New
+          <i className="fa-solid fa-plus" style={{ color: `var(--icon-color)` }} /> New
           Slide
         </Button>
       </div>
@@ -75,7 +75,7 @@ const SectionSlides = () => {
           />
           <i
             className="fa-solid fa-file-image"
-            style={{ color: `#4c88f0` }}
+            style={{ color: `var(--icon-color)` }}
           /> Background
         </Button>
 

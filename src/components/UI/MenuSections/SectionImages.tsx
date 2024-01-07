@@ -40,7 +40,7 @@ const SectionImages = () => {
           />
           <i
             className="fa-solid fa-file-image"
-            style={{ color: `#4c88f0`, fontSize: `1.5rem` }}
+            style={{ color: `var(--icon-color)`, fontSize: `1.5rem` }}
           />
           <br />
           Upload <br />

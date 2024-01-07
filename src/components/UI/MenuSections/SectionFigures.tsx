@@ -56,7 +56,7 @@ const SectionFigures = () => {
         >
           <i
             className="fa-solid fa-circle fa-2xl"
-            style={{ color: `#4c88f0` }}
+            style={{ color: `var(--icon-color)` }}
           />
         </Button>
 
@@ -73,7 +73,7 @@ const SectionFigures = () => {
         >
           <i
             className="fa-solid fa-square fa-2xl"
-            style={{ color: `#4c88f0` }}
+            style={{ color: `var(--icon-color)` }}
           />
         </Button>
         <Button
@@ -89,7 +89,7 @@ const SectionFigures = () => {
         >
           <i
             className="fa-solid fa-caret-up fa-2xl"
-            style={{ color: `#4c88f0` }}
+            style={{ color: `var(--icon-color)` }}
           />
         </Button>
       </div>

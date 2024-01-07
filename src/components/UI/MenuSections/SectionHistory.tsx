@@ -27,13 +27,13 @@ const SectionHistory = () => {
     <MenuSection name="History">
       <div>    
         <Button onClick={() => moveHistory(-1)}>
-          <i className="fa-solid fa-rotate-left" style={{ color: `#4c88f0`, fontSize: `1.5rem` }} />
+          <i className="fa-solid fa-rotate-left" style={{ color: `var(--icon-color)`, fontSize: `1.5rem` }} />
           <br/>
           Undo
         </Button>
 
         <Button onClick={() => moveHistory(1)}>
-          <i className="fa-solid fa-rotate-right" style={{ color: `#4c88f0`, fontSize: `1.5rem` }} />
+          <i className="fa-solid fa-rotate-right" style={{ color: `var(--icon-color)`, fontSize: `1.5rem` }} />
           <br/>
           Redo
         </Button>
