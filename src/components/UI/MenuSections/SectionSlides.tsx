@@ -12,12 +12,13 @@ import { SlideInfo } from "../../../models/types"
 import { v4 as uuidv4 } from "uuid"
 
 const SectionSlides = () => {
+  const slides = useAppSelector((state) => state.presentationReducer.slides)
   const activeSlideId = useAppSelector(
     (state) => state.interfaceReducer.activeSlideId,
   )
   const { createSlide, updateBackground } = usePresentationActions()
   const { setShouldSaveState } = useHistoryActions()
-  const [backgroundColor, setBackgroundColor] = useState<string>("#e6e6e6")
+  const [ backgroundColor, setBackgroundColor ] = useState<string>("#e6e6e6")
 
   const colorDelayTimer = useRef<number | null>(null)
   const colorInputRef = useRef<HTMLInputElement | null>(null)
@@ -29,10 +30,18 @@ const SectionSlides = () => {
       return
     }
     ImportImage(file).then((base64) => {
-      updateBackground({
-        slideId: slideId,
-        data: `url('${base64}') no-repeat center center / contain`,
-      })
+      const selectedSlides = slides.filter((s) => s.selected)
+
+      if (selectedSlides.length === 0) {
+        updateBackground({
+          slideId: slideId,
+          data: `url('${base64}') no-repeat center center / contain`,
+        })
+      } else {
+        selectedSlides.map((s) =>
+          updateBackground({slideId: s.id, data: `url('${base64}') no-repeat center center / contain`})
+        )
+      }
     })
   }
 
@@ -81,7 +90,14 @@ const SectionSlides = () => {
         // Если инпут ещё открыт - не сохраняем действие в историю
         setShouldSaveState(false)
       }
-      updateBackground({ slideId: activeSlideId, data: backgroundColor })
+      const selectedSlides = slides.filter((s) => s.selected)
+      if (selectedSlides.length === 0) {
+        updateBackground({ slideId: activeSlideId, data: backgroundColor })
+      } else {
+        selectedSlides.map((s) =>
+          updateBackground({ slideId: s.id, data: backgroundColor })
+        )
+      }
     }, 1)
   }, [backgroundColor, colorInputOpenState.current])
 
