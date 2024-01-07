@@ -4,7 +4,6 @@ import {
   useInterfaceActions,
   usePresentationActions,
 } from '../../../hooks/redux'
-// eslint-disable-next-line no-duplicate-imports
 import FileHandler from '../../../services/FileHandler.ts'
 import PresentationConverter from '../../../services/PresentationConverter'
 import MenuSection from '../MenuSection'
