@@ -1,11 +1,13 @@
 import MenuSection from "../MenuSection"
 import Button from "../Button"
 import ColorButton from "../ColorButton"
+import ColorPicker from "../ColorPicker.tsx"
 import { useRef } from "react"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
+  useHistoryActions
 } from "../../../hooks/redux.ts"
 
 const SectionColors = () => {
@@ -14,17 +16,31 @@ const SectionColors = () => {
   const { activeSlideId, activeColor } = useAppSelector(
     (state) => state.interfaceReducer,
   )
+  const slides = useAppSelector((state) => state.presentationReducer.slides)
+  const activeSlide = slides.find((s) => s.id === activeSlideId)
+
   const { updateColor } = usePresentationActions()
   const { setActiveColor } = useInterfaceActions()
+  const { setShouldSaveState } = useHistoryActions()
 
   const handleColorClick = (color: string, isPalette: boolean = true) => {
-    if (activeSlideId === undefined) {
-      return
-    }
+    if (activeSlideId === undefined) return
+    
     if (isPalette) {
       setActiveColor(color)
     }
-    updateColor({ slideId: activeSlideId, color: color })
+    if (activeSlide!.slide.filter((obj) => obj.selected).length > 0) {
+      updateColor({ slideId: activeSlideId, color: color })
+    }
+  }
+
+  const onActiveColorUpdated = (color: string, inputOpened: boolean) => {
+    if (activeSlideId === undefined) return
+    
+    if (activeSlide!.slide.filter((obj) => obj.selected).length > 0) {
+      setShouldSaveState(!inputOpened)
+      updateColor({ slideId: activeSlideId, color: color })
+    }
   }
 
   return (
@@ -58,12 +74,11 @@ const SectionColors = () => {
           </div>
         </div>
 
-        <input
-          type="color"
-          ref={colorPickerRef}
-          value={activeColor}
-          onChange={(e) => setActiveColor(e.target.value)}
-          style={{ visibility: "hidden", position: "absolute" }}
+        <ColorPicker
+          colorInputRef={colorPickerRef}
+          color={activeColor}
+          setColor={setActiveColor}
+          onColorUpdated={onActiveColorUpdated}
         />
 
         <Button onClick={() => colorPickerRef.current?.click()}>

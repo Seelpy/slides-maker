@@ -1,8 +1,9 @@
 import MenuSection from "../MenuSection"
 import Button from "../Button"
 import ColorButton from "../ColorButton.tsx"
+import ColorPicker from "../ColorPicker.tsx"
 import { ImportImage } from "../../../services/FileHandler.ts"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState } from "react"
 import {
   useAppSelector,
   useHistoryActions,
@@ -20,9 +21,7 @@ const SectionSlides = () => {
   const { setShouldSaveState } = useHistoryActions()
   const [backgroundColor, setBackgroundColor] = useState<string>("#e6e6e6")
 
-  const colorDelayTimer = useRef<number | null>(null)
   const colorInputRef = useRef<HTMLInputElement | null>(null)
-  const colorInputOpenState = useRef<boolean>(false)
   const importImageFile = useRef<HTMLInputElement | null>(null)
 
   const importFromImage = (slideId: string | undefined, file: File) => {
@@ -58,51 +57,20 @@ const SectionSlides = () => {
     createSlide(emptySlide)
   }
 
-  const handleColorUpdate = (color: string) => {
-    if (activeSlideId) {
-      setBackgroundColor(color)
+  const onBackoundColorUpdated = (color: string, inputOpened: boolean) => {
+    if (activeSlideId === undefined) return
+    
+    setShouldSaveState(!inputOpened)
+    
+    const selectedSlides = slides.filter((s) => s.selected)
+    if (selectedSlides.length === 0) {
+      updateBackground({ slideId: activeSlideId, data: color })
+    } else {
+      selectedSlides.map((s) =>
+        updateBackground({ slideId: s.id, data: color }),
+      )
     }
   }
-
-  // Отслеживаем состояние колор инпута (закрыто/открыто)
-  useEffect(() => {
-    if (!activeSlideId) {
-      return
-    }
-
-    const colorInput = colorInputRef.current
-    const onInput = () => (colorInputOpenState.current = true)
-    const onChange = () => (colorInputOpenState.current = false)
-
-    colorInput?.addEventListener("input", onInput)
-    colorInput?.addEventListener("change", onChange)
-
-    return () => {
-      colorInput?.removeEventListener("input", onInput)
-      colorInput?.removeEventListener("change", onChange)
-    }
-  }, [activeSlideId, colorInputRef])
-
-  // Мера предосторожности при быстром изменении цвета
-  useEffect(() => {
-    if (!activeSlideId) return
-    if (colorDelayTimer.current) clearTimeout(colorDelayTimer.current)
-
-    colorDelayTimer.current = setTimeout(() => {
-      if (colorInputOpenState.current === true) {
-        // Если инпут ещё открыт - не сохраняем действие в историю
-        setShouldSaveState(false)
-      }
-      const selectedSlides = slides.filter((s) => s.selected)
-      if (selectedSlides.length === 0) {
-        updateBackground({ slideId: activeSlideId, data: backgroundColor })
-      } else {
-        selectedSlides.map((s) =>
-          updateBackground({ slideId: s.id, data: backgroundColor }),
-        )
-      }
-    }, 1)
-  }, [backgroundColor, colorInputOpenState.current])
 
   return (
     <MenuSection name="Slides">
@@ -130,13 +98,11 @@ const SectionSlides = () => {
           Background
         </Button>
 
-        <input
-          type="color"
-          ref={colorInputRef}
-          value={backgroundColor}
-          onChange={(e) => handleColorUpdate(e.target.value)}
-          style={{ visibility: "hidden", position: "absolute" }}
-          tabIndex={-1}
+        <ColorPicker
+          colorInputRef={colorInputRef}
+          color={backgroundColor}
+          setColor={setBackgroundColor}
+          onColorUpdated={onBackoundColorUpdated}
         />
         <ColorButton
           color={backgroundColor}
