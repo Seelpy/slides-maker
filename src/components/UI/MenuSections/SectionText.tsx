@@ -1,14 +1,18 @@
 import MenuSection from "../MenuSection"
 import Button from "../Button"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAppSelector, usePresentationActions } from "../../../hooks/redux"
 import { SlideObjectType } from "../../../models/types"
 
 const SectionText = () => {
-  const { createObject, updateTextSettings } = usePresentationActions()
   const { activeSlideId, activeColor } = useAppSelector(
     (state) => state.interfaceReducer,
   )
+  const slides = useAppSelector((state) => state.presentationReducer.slides)
+  const activeSlide = slides.find((s) => s.id === activeSlideId)
+  const { createObject, updateTextSettings } = usePresentationActions()
+
+  const [fontFamily, setFontFamily] = useState<string>("Arial")
   const [fontSize, setFontSize] = useState<number>(14)
 
   type UpdateSettingsPayload = {
@@ -52,6 +56,7 @@ const SectionText = () => {
     if (activeSlideId === undefined) {
       return
     }
+    setFontFamily(event.target.value)
     updateTextSettings({
       slideId: activeSlideId,
       font: event.target.value,
@@ -70,11 +75,21 @@ const SectionText = () => {
     }
   }
 
+  useEffect(() => {
+    const selectedObjects = activeSlide?.slide.filter((obj) => obj.selected)
+
+    if (!selectedObjects || selectedObjects.length != 1) return
+    if (selectedObjects[0].type != SlideObjectType.Text) return
+
+    setFontFamily(selectedObjects[0].fontFamily)
+    setFontSize(selectedObjects[0].fontSize)
+  }, [activeSlide])
+
   return (
     <MenuSection name="Text">
       <div>
         Font:
-        <select defaultValue={"Arial"} onChange={onFontSelectChange}>
+        <select value={fontFamily} onChange={onFontSelectChange}>
           <option value="Arial">Arial</option>
           <option value="Verdana">Verdana</option>
           <option value="Tahoma">Tahoma</option>

@@ -2,13 +2,14 @@ import MenuSection from "../MenuSection"
 import Button from "../Button"
 import ColorButton from "../ColorButton"
 import ColorPicker from "../ColorPicker.tsx"
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
   useHistoryActions
 } from "../../../hooks/redux.ts"
+import { SlideObjectType } from "../../../models/types.ts"
 
 const SectionColors = () => {
   const colorPickerRef = useRef<HTMLInputElement | null>(null)
@@ -18,6 +19,7 @@ const SectionColors = () => {
   )
   const slides = useAppSelector((state) => state.presentationReducer.slides)
   const activeSlide = slides.find((s) => s.id === activeSlideId)
+  const selectedObjects = activeSlide?.slide.filter((obj) => obj.selected)
 
   const { updateColor } = usePresentationActions()
   const { setActiveColor } = useInterfaceActions()
@@ -29,7 +31,7 @@ const SectionColors = () => {
     if (isPalette) {
       setActiveColor(color)
     }
-    if (activeSlide!.slide.filter((obj) => obj.selected).length > 0) {
+    if (selectedObjects!.length > 0) {
       updateColor({ slideId: activeSlideId, color: color })
     }
   }
@@ -37,11 +39,18 @@ const SectionColors = () => {
   const onActiveColorUpdated = (color: string, inputOpened: boolean) => {
     if (activeSlideId === undefined) return
     
-    if (activeSlide!.slide.filter((obj) => obj.selected).length > 0) {
+    if (selectedObjects!.length > 0) {
       setShouldSaveState(!inputOpened)
       updateColor({ slideId: activeSlideId, color: color })
     }
   }
+
+  useEffect(() => {
+    if (!selectedObjects || selectedObjects.length != 1) return
+    if (selectedObjects[0].type === SlideObjectType.Image) return
+
+    setActiveColor(selectedObjects[0].color)
+  }, [activeSlide])
 
   return (
     <MenuSection name="Colors">

@@ -1,6 +1,6 @@
 import MenuSection from "../MenuSection"
 import Button from "../Button"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAppSelector, usePresentationActions } from "../../../hooks/redux"
 import { PrimitiveType, SlideObjectType } from "../../../models/types"
 
@@ -9,6 +9,7 @@ const SectionFigures = () => {
   const { activeSlideId, activeColor } = useAppSelector(
     (state) => state.interfaceReducer,
   )
+  const activeSlide = slides.find((s) => s.id === activeSlideId)
   const { createObject, updateSlide } = usePresentationActions()
   const [rounding, setRounding] = useState<number>(0)
 
@@ -45,6 +46,15 @@ const SectionFigures = () => {
       color: activeColor,
     })
   }
+
+  useEffect(() => {
+    const selectedObjects = activeSlide?.slide.filter((obj) => obj.selected)
+
+    if (!selectedObjects || selectedObjects.length != 1) return
+    if (selectedObjects[0].type != SlideObjectType.Primitive) return
+
+    setRounding(selectedObjects[0].rounding)
+  }, [activeSlide])
 
   return (
     <MenuSection name="Figures">
