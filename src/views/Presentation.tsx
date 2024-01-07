@@ -1,18 +1,31 @@
-import styles from './Presentation.module.css'
-import MenuBar from '../components/UI/MenuBar'
-import LeftBar from '../components/UI/LeftBar'
-import SlideEditor from '../components/Slide/SlideEditor'
-import keyHandler from '../utils/KeyHandler'
-import textKeyHandler from '../utils/TextKeyHandler'
-import { useEffect } from 'react'
-import { useAppSelector, useHistoryActions, useInterfaceActions } from '../hooks/redux'
+import styles from "./Presentation.module.css"
+import MenuBar from "../components/UI/MenuBar"
+import LeftBar from "../components/UI/LeftBar"
+import SlideEditor from "../components/Slide/SlideEditor"
+import KeyHandler from "../utils/KeyHandler"
+import TextKeyHandler from "../utils/TextKeyHandler"
+import { useEffect } from "react"
+import {
+  useAppSelector,
+  useHistoryActions,
+  useInterfaceActions,
+} from "../hooks/redux"
 
 function Presentation() {
   const presentation = useAppSelector((state) => state.presentationReducer)
-  const { activeSlideId, isDraggingObjects } = useAppSelector((state) => state.interfaceReducer)
-  const { history, lastHistoryOperation, currentIndex } = useAppSelector((state) => state.historyReducer)
-  const { pushHistoryState, clearHistoryAfterIndex, setLastOperationType } = useHistoryActions()
-  const { setDragObjects, setDragSlides, setSelectingArea } = useInterfaceActions()
+  const { activeSlideId, isDraggingObjects } = useAppSelector(
+    (state) => state.interfaceReducer,
+  )
+  const { history, lastHistoryOperation, currentIndex, shouldSaveState } =
+    useAppSelector((state) => state.historyReducer)
+  const {
+    pushHistoryState,
+    clearHistoryAfterIndex,
+    setLastOperationType,
+    setShouldSaveState,
+  } = useHistoryActions()
+  const { setDragObjects, setDragSlides, setSelectingArea } =
+    useInterfaceActions()
 
   useEffect(() => {
     window.onmouseup = () => {
@@ -28,15 +41,21 @@ function Presentation() {
         clearHistoryAfterIndex()
       }
 
-      pushHistoryState({presentation: presentation, activeSlideId: activeSlideId})
-    }
-    else {
+      if (shouldSaveState) {
+        pushHistoryState({
+          presentation: presentation,
+          activeSlideId: activeSlideId,
+        })
+      } else {
+        setShouldSaveState(true)
+      }
+    } else {
       setLastOperationType(undefined)
     }
   }, [presentation, activeSlideId, isDraggingObjects])
 
-  keyHandler()
-  textKeyHandler()
+  KeyHandler()
+  TextKeyHandler()
 
   return (
     <div className={styles.presentation}>

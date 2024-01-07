@@ -1,13 +1,13 @@
 enum SlideObjectType {
-  Text = 'TEXT',
-  Image = 'IMAGE',
-  Primitive = 'PRIMITIVE',
+  Text = "TEXT",
+  Image = "IMAGE",
+  Primitive = "PRIMITIVE",
 }
 
 enum PrimitiveType {
-  Circle = 'CIRCLE',
-  Square = 'SQUARE',
-  Triangle = 'TRIANGLE',
+  Circle = "CIRCLE",
+  Square = "SQUARE",
+  Triangle = "TRIANGLE",
 }
 
 type TextAlign = "left" | "center" | "right"
@@ -95,19 +95,19 @@ type History = {
 enum HistoryOperation {
   backward = `HISTORY_BACKWARD`,
   forward = `HISTORY_FORWARD`,
-  update = `HISTORY_UPDATE`
+  update = `HISTORY_UPDATE`,
 }
 
 enum Themes {
   dark = `DARK`,
-  light = `LIGHT`
+  light = `LIGHT`,
 }
 
-export { 
-  SlideObjectType, 
-  PrimitiveType, 
+export {
+  SlideObjectType,
+  PrimitiveType,
   HistoryOperation,
-  Themes
+  Themes,
 }
 
 export type {
@@ -126,5 +126,5 @@ export type {
   Presentaion,
   PrimType,
   SlideInfo,
-  History
+  History,
 }

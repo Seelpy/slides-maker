@@ -1,13 +1,21 @@
-import { useRef } from 'react'
+import { useRef } from "react"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
-} from '../../../hooks/redux'
-import FileHandler from '../../../services/FileHandler.ts'
-import PresentationConverter from '../../../services/PresentationConverter'
-import MenuSection from '../MenuSection'
-import Button from '../Button'
+} from "../../../hooks/redux"
+// eslint-disable-next-line no-duplicate-imports
+import {
+  ImportJson,
+  ExportJson,
+  ExportPdf,
+} from "../../../services/FileHandler.ts"
+import {
+  ConvertFromJson,
+  ConvertToJson,
+} from "../../../services/PresentationConverter"
+import MenuSection from "../MenuSection"
+import Button from "../Button"
 
 const SectionInfo = () => {
   const importJsonFile = useRef<HTMLInputElement | null>(null)
@@ -16,10 +24,9 @@ const SectionInfo = () => {
   const { setActiveSlideId } = useInterfaceActions()
 
   const importFromJson = (file: File) => {
-    FileHandler.ImportJson(file).then((stringJson) => {
-      const importedPresentation =
-        PresentationConverter.ConvertFromJson(stringJson)
-      if ('name' in importedPresentation && 'slides' in importedPresentation) {
+    ImportJson(file).then((stringJson) => {
+      const importedPresentation = ConvertFromJson(stringJson)
+      if ("name" in importedPresentation && "slides" in importedPresentation) {
         updatePresentation(importedPresentation)
         setActiveSlideId(
           importedPresentation.slides.length > 0
@@ -27,7 +34,7 @@ const SectionInfo = () => {
             : undefined,
         )
       } else {
-        alert('Error on import: `name` or `slides` keys are undefined')
+        alert("Error on import: `name` or `slides` keys are undefined")
       }
     })
   }
@@ -44,10 +51,7 @@ const SectionInfo = () => {
         <Button
           width="5.4rem"
           onClick={() =>
-            FileHandler.ExportJson(
-              presentation.name,
-              PresentationConverter.ConvertToJson(presentation),
-            )
+            ExportJson(presentation.name, ConvertToJson(presentation))
           }
         >
           Export json
@@ -59,22 +63,17 @@ const SectionInfo = () => {
           type="file"
           id="importJsonFile"
           ref={importJsonFile}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             const files = event.currentTarget.files
             if (files && files.length > 0) importFromJson(files[0])
-            importJsonFile.current!.value = ''
+            importJsonFile.current!.value = ""
           }}
         />
       </div>
       <Button
         width="5.4rem"
-        onClick={() =>
-          FileHandler.ExportPdf(
-            presentation.slides,
-            presentation.name
-          )
-        }
+        onClick={() => ExportPdf(presentation.slides, presentation.name)}
       >
         Export pdf
       </Button>

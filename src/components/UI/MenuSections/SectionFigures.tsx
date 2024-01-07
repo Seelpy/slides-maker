@@ -1,17 +1,20 @@
-import MenuSection from '../MenuSection'
-import Button from '../Button'
-import { useState } from 'react'
-import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
-import { PrimitiveType, SlideObjectType } from '../../../models/types'
+import MenuSection from "../MenuSection"
+import Button from "../Button"
+import { useState, useEffect } from "react"
+import { useAppSelector, usePresentationActions } from "../../../hooks/redux"
+import { PrimitiveType, SlideObjectType } from "../../../models/types"
 
 const SectionFigures = () => {
   const slides = useAppSelector((state) => state.presentationReducer.slides)
-  const { activeSlideId, activeColor } = useAppSelector((state) => state.interfaceReducer)
+  const { activeSlideId, activeColor } = useAppSelector(
+    (state) => state.interfaceReducer,
+  )
+  const activeSlide = slides.find((s) => s.id === activeSlideId)
   const { createObject, updateSlide } = usePresentationActions()
-  const [ rounding, setRounding ] = useState<number>(0)
+  const [rounding, setRounding] = useState<number>(0)
 
   const onRoundingChange = (event: any) => {
-    const value = Math.max(0, Math.min(999, event.target.value));
+    const value = Math.max(0, Math.min(999, event.target.value))
     setRounding(value)
 
     if (activeSlideId !== undefined) {
@@ -21,11 +24,10 @@ const SectionFigures = () => {
           updateSlide({
             slideId: activeSlideId,
             oldSlideObject: obj,
-            newSlideObject: {...obj, rounding: value}
+            newSlideObject: { ...obj, rounding: value },
           })
         }
       })
-
     }
   }
 
@@ -37,8 +39,22 @@ const SectionFigures = () => {
     if (slideId === undefined) {
       return
     }
-    createObject({ slideId: slideId, type: type, subtype: subtype, color: activeColor })
+    createObject({
+      slideId: slideId,
+      type: type,
+      subtype: subtype,
+      color: activeColor,
+    })
   }
+
+  useEffect(() => {
+    const selectedObjects = activeSlide?.slide.filter((obj) => obj.selected)
+
+    if (!selectedObjects || selectedObjects.length != 1) return
+    if (selectedObjects[0].type != SlideObjectType.Primitive) return
+
+    setRounding(selectedObjects[0].rounding)
+  }, [activeSlide])
 
   return (
     <MenuSection name="Figures">

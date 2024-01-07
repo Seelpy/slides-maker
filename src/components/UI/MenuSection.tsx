@@ -1,4 +1,4 @@
-import styles from './MenuSection.module.css'
+import styles from "./MenuSection.module.css"
 
 type MenuSectionProps = {
   name: string

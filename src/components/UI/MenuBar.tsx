@@ -1,4 +1,4 @@
-import styles from './MenuBar.module.css'
+import styles from "./MenuBar.module.css"
 import {
   SectionColors,
   SectionFigures,
@@ -7,8 +7,7 @@ import {
   SectionText,
   SectionSlides,
   SectionHistory,
-  SectionTheme
-} from './MenuSections'
+} from "./MenuSections"
 
 const MenuBar = () => {
   return (
@@ -16,7 +15,7 @@ const MenuBar = () => {
       <SectionInfo />
       <SectionFigures />
       <SectionText />
-      <SectionImages  />
+      <SectionImages />
       <SectionColors />
       <SectionSlides />
       <SectionHistory />

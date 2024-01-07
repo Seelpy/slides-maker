@@ -1,4 +1,4 @@
-import styles from './Button.module.css'
+import styles from "./Button.module.css"
 
 type ButtonProps = {
   width?: string
@@ -8,8 +8,8 @@ type ButtonProps = {
 }
 
 const Button = (props: ButtonProps) => {
-  const width = props.width ?? 'auto'
-  const height = props.height ?? 'auto'
+  const width = props.width ?? "auto"
+  const height = props.height ?? "auto"
   const onClick = props.onClick
 
   const buttonSizes = {

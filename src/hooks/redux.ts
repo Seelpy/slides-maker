@@ -1,10 +1,10 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../store/store'
-import { bindActionCreators } from 'redux'
-import * as interfaceActions from '../store/actions/interfaceActions'
-import * as presentationActions from '../store/actions/presentationActions'
-import * as historyActions from '../store/actions/historyActions'
-import * as themeActions from '../store/actions/themeActions'
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../store/store"
+import { bindActionCreators } from "redux"
+import * as interfaceActions from "../store/actions/interfaceActions"
+import * as presentationActions from "../store/actions/presentationActions"
+import * as historyActions from "../store/actions/historyActions"
+import * as themeActions from "../store/actions/themeActions"
 
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

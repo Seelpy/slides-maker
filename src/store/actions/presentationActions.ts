@@ -1,18 +1,18 @@
-import { createAction } from '../createAction'
-import { Presentaion, SlideInfo, SlideObject } from '../../models/types'
+import { createAction } from "../createAction"
+import { Presentaion, SlideInfo, SlideObject } from "../../models/types"
 
 enum PresentationActions {
-  changeName = 'CHANGE_NAME',
-  createSlide = 'CREATE_SLIDE',
-  moveSlides = 'MOVE_SLIDES',
-  deleteSlides = 'DELETE_SLIDES',
-  updateSlide = 'UPDATE_SLIDE',
-  updatePresentation = 'UPDATE_PRESENTATION',
-  createObject = 'CREATE_OBJECT',
-  updateTextSettings = 'UPDATE_TEXT_SETTINGS',
-  updateColor = 'UPDATE_COLOR',
-  importImage = 'IMPORT_IMAGE',
-  updateBackground = 'UPDATE_BACKGROUND'
+  changeName = "CHANGE_NAME",
+  createSlide = "CREATE_SLIDE",
+  moveSlides = "MOVE_SLIDES",
+  deleteSlides = "DELETE_SLIDES",
+  updateSlide = "UPDATE_SLIDE",
+  updatePresentation = "UPDATE_PRESENTATION",
+  createObject = "CREATE_OBJECT",
+  updateTextSettings = "UPDATE_TEXT_SETTINGS",
+  updateColor = "UPDATE_COLOR",
+  importImage = "IMPORT_IMAGE",
+  updateBackground = "UPDATE_BACKGROUND",
 }
 
 type MoveSlidesPayload = {

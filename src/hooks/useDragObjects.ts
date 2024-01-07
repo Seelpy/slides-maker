@@ -1,28 +1,37 @@
-import { useEffect, useRef } from 'react'
-import { Position, SlideInfo, SlideObject, Size, SlideObjectType, PrimitiveType } from '../models/types'
+import { useEffect, useRef } from "react"
+import {
+  Position,
+  SlideInfo,
+  SlideObject,
+  Size,
+  SlideObjectType,
+  PrimitiveType,
+} from "../models/types"
 import {
   useAppSelector,
   useInterfaceActions,
   usePresentationActions,
-} from '../hooks/redux'
+} from "../hooks/redux"
 
 function useDragObjects(
   areaRef: React.MutableRefObject<HTMLDivElement | null>,
   slide: SlideInfo | undefined,
 ) {
-  const selectedObjects = useRef<SlideObject[]>([]);
-  const isDraggingObjects = useAppSelector(state => state.interfaceReducer.isDraggingObjects)
+  const selectedObjects = useRef<SlideObject[]>([])
+  const isDraggingObjects = useAppSelector(
+    (state) => state.interfaceReducer.isDraggingObjects,
+  )
 
   const { updateSlide } = usePresentationActions()
   const { setDragObjectsDelta } = useInterfaceActions()
 
   const coords = useRef<{
-    selectedArea: {position: Position, size: Size}
+    selectedArea: { position: Position; size: Size }
     startMouse: Position
     lastMouse: Position
     currentMouse: Position
   }>({
-    selectedArea: { position: {x: 0, y: 0}, size: {width: 0, height: 0} },
+    selectedArea: { position: { x: 0, y: 0 }, size: { width: 0, height: 0 } },
     startMouse: { x: 0, y: 0 },
     lastMouse: { x: 0, y: 0 },
     currentMouse: { x: 0, y: 0 },
@@ -36,12 +45,24 @@ function useDragObjects(
   useEffect(() => {
     if (!slide) return
     selectedObjects.current = slide.slide.filter((obj) => obj.selected)
-    
+
     if (selectedObjects.current.length > 0) {
-      const minX = Math.min(...selectedObjects.current.map((obj) => obj.position.x))
-      const minY = Math.min(...selectedObjects.current.map((obj) => obj.position.y))
-      const maxX = Math.max(...selectedObjects.current.map((obj) => obj.position.x + obj.size.width))
-      const maxY = Math.max(...selectedObjects.current.map((obj) => obj.position.y + obj.size.height))
+      const minX = Math.min(
+        ...selectedObjects.current.map((obj) => obj.position.x),
+      )
+      const minY = Math.min(
+        ...selectedObjects.current.map((obj) => obj.position.y),
+      )
+      const maxX = Math.max(
+        ...selectedObjects.current.map(
+          (obj) => obj.position.x + obj.size.width,
+        ),
+      )
+      const maxY = Math.max(
+        ...selectedObjects.current.map(
+          (obj) => obj.position.y + obj.size.height,
+        ),
+      )
 
       coords.current.selectedArea.position.x = minX
       coords.current.selectedArea.position.y = minY
@@ -57,8 +78,8 @@ function useDragObjects(
     if (!area) return
 
     if (isDraggingObjects) {
-      coords.current.startMouse = {...coords.current.currentMouse}
-      coords.current.lastMouse = {...coords.current.currentMouse}
+      coords.current.startMouse = { ...coords.current.currentMouse }
+      coords.current.lastMouse = { ...coords.current.currentMouse }
     }
 
     const onMouseMove = (e: MouseEvent) => {
@@ -80,9 +101,10 @@ function useDragObjects(
             let nextWidth = Math.max(10, obj.size.width * scaleX)
             let nextHeight = Math.max(10, obj.size.height * scaleY)
 
-            if (obj.type === SlideObjectType.Primitive &&
-                obj.primitiveType === PrimitiveType.Circle) 
-            {
+            if (
+              obj.type === SlideObjectType.Primitive &&
+              obj.primitiveType === PrimitiveType.Circle
+            ) {
               const medium = (nextWidth + nextHeight) / 2
               nextWidth = nextHeight = medium
             }
@@ -90,13 +112,16 @@ function useDragObjects(
             updateSlide({
               slideId: slide.id,
               oldSlideObject: obj,
-              newSlideObject: { ...obj, size: {width: nextWidth, height: nextHeight} },
+              newSlideObject: {
+                ...obj,
+                size: { width: nextWidth, height: nextHeight },
+              },
             })
           }
         })
       } else if (e.altKey) {
         // Вращение
-        const rotateAngle = (deltaX + deltaY)
+        const rotateAngle = deltaX + deltaY
         selectedObjects.current.map((obj) => {
           updateSlide({
             slideId: slide.id,
@@ -110,7 +135,13 @@ function useDragObjects(
           updateSlide({
             slideId: slide.id,
             oldSlideObject: obj,
-            newSlideObject: { ...obj, position: { x: obj.position.x + deltaX, y: obj.position.y + deltaY } },
+            newSlideObject: {
+              ...obj,
+              position: {
+                x: obj.position.x + deltaX,
+                y: obj.position.y + deltaY,
+              },
+            },
           })
         })
       }
@@ -119,10 +150,10 @@ function useDragObjects(
       coords.current.lastMouse.y = e.clientY
     }
 
-    area.addEventListener('mousemove', onMouseMove)
+    area.addEventListener("mousemove", onMouseMove)
 
     return () => {
-      area.removeEventListener('mousemove', onMouseMove)
+      area.removeEventListener("mousemove", onMouseMove)
     }
   }, [isDraggingObjects, slide])
 }

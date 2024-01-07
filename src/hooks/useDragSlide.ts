@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
-import { SlideInfo } from '../models/types'
-import { useAppSelector, useInterfaceActions } from './redux'
+import { useEffect, useRef } from "react"
+import { SlideInfo } from "../models/types"
+import { useAppSelector, useInterfaceActions } from "./redux"
 
 function useDragSlide(
   elementRef: React.MutableRefObject<HTMLDivElement | null>,
@@ -34,7 +34,7 @@ function useDragSlide(
 
   useEffect(() => {
     const element = elementRef.current
-    if (!element) throw new Error('Slide is undefined!')
+    if (!element) throw new Error("Slide is undefined!")
 
     const area = element.parentElement
     if (!area)
@@ -62,12 +62,12 @@ function useDragSlide(
       setDragSlidesDelta(deltaHeight)
     }
 
-    element.addEventListener('mousedown', onMouseDown)
-    area.addEventListener('mousemove', onMouseMove)
+    element.addEventListener("mousedown", onMouseDown)
+    area.addEventListener("mousemove", onMouseMove)
 
     return () => {
-      element.removeEventListener('mousedown', onMouseDown)
-      area.removeEventListener('mousemove', onMouseMove)
+      element.removeEventListener("mousedown", onMouseDown)
+      area.removeEventListener("mousemove", onMouseMove)
     }
   }, [slide])
 }

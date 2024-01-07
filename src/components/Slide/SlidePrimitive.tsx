@@ -1,5 +1,5 @@
-import { PrimType, PrimitiveType, Size } from '../../models/types.ts'
-import styles from './SlidePrimitive.module.css'
+import { PrimType, PrimitiveType, Size } from "../../models/types.ts"
+import styles from "./SlidePrimitive.module.css"
 
 type PrimitiveProps = {
   data: PrimType
@@ -7,16 +7,16 @@ type PrimitiveProps = {
 
 function getTrianglePoints(size: Size): string {
   return (
-    '0' +
-    ',' +
+    "0" +
+    "," +
     size.height.toString() +
-    ' ' +
+    " " +
     Math.trunc(size.width / 2).toString() +
-    ',' +
-    '0' +
-    ' ' +
+    "," +
+    "0" +
+    " " +
     size.width.toString() +
-    ',' +
+    "," +
     size.height.toString()
   )
 }
@@ -54,12 +54,14 @@ const SlidePrimitive = (props: PrimitiveProps) => {
     color: data.color,
     width: data.size.width,
     height: data.size.height,
-    borderRadius: `${data.rounding}px`
+    borderRadius: `${data.rounding}px`,
   }
 
   return (
     <div className={styles.primitive}>
-      <svg style={style}>{getSVGPrimitive(props.data)}</svg>
+      <svg xmlns="http://www.w3.org/2000/svg" style={style}>
+        {getSVGPrimitive(props.data)}
+      </svg>
     </div>
   )
 }

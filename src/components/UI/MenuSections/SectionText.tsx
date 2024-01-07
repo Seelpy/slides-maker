@@ -1,22 +1,28 @@
-import MenuSection from '../MenuSection'
-import Button from '../Button'
-import { useState } from 'react'
-import { useAppSelector, usePresentationActions } from '../../../hooks/redux'
-import { SlideObjectType } from '../../../models/types'
+import MenuSection from "../MenuSection"
+import Button from "../Button"
+import { useState, useEffect } from "react"
+import { useAppSelector, usePresentationActions } from "../../../hooks/redux"
+import { SlideObjectType } from "../../../models/types"
 
 const SectionText = () => {
+  const { activeSlideId, activeColor } = useAppSelector(
+    (state) => state.interfaceReducer,
+  )
+  const slides = useAppSelector((state) => state.presentationReducer.slides)
+  const activeSlide = slides.find((s) => s.id === activeSlideId)
   const { createObject, updateTextSettings } = usePresentationActions()
-  const { activeSlideId, activeColor } = useAppSelector((state) => state.interfaceReducer)
-  const [ fontSize, setFontSize ] = useState<number>(14)
+
+  const [fontFamily, setFontFamily] = useState<string>("Arial")
+  const [fontSize, setFontSize] = useState<number>(14)
 
   type UpdateSettingsPayload = {
-    slideId?: string,
-    align?: string,
-    italic?: boolean,
-    bold?: boolean,
-    underline?: boolean,
-    size?: number,
-    fontFamily?: string,
+    slideId?: string
+    align?: string
+    italic?: boolean
+    bold?: boolean
+    underline?: boolean
+    size?: number
+    fontFamily?: string
   }
 
   const onSettingsUpdate = (data: UpdateSettingsPayload) => {
@@ -34,20 +40,23 @@ const SectionText = () => {
     })
   }
 
-  const onNewText = (
-    slideId: string | undefined,
-    type: string,
-  ) => {
+  const onNewText = (slideId: string | undefined, type: string) => {
     if (slideId === undefined) {
       return
     }
-    createObject({ slideId: slideId, type: type, subtype: undefined, color: activeColor })
+    createObject({
+      slideId: slideId,
+      type: type,
+      subtype: undefined,
+      color: activeColor,
+    })
   }
 
   const onFontSelectChange = (event: any) => {
     if (activeSlideId === undefined) {
       return
     }
+    setFontFamily(event.target.value)
     updateTextSettings({
       slideId: activeSlideId,
       font: event.target.value,
@@ -55,7 +64,7 @@ const SectionText = () => {
   }
 
   const onFontSizeChange = (event: any) => {
-    const value = Math.max(1, Math.min(999, event.target.value));
+    const value = Math.max(1, Math.min(999, event.target.value))
     setFontSize(value)
 
     if (activeSlideId !== undefined) {
@@ -66,11 +75,21 @@ const SectionText = () => {
     }
   }
 
+  useEffect(() => {
+    const selectedObjects = activeSlide?.slide.filter((obj) => obj.selected)
+
+    if (!selectedObjects || selectedObjects.length != 1) return
+    if (selectedObjects[0].type != SlideObjectType.Text) return
+
+    setFontFamily(selectedObjects[0].fontFamily)
+    setFontSize(selectedObjects[0].fontSize)
+  }, [activeSlide])
+
   return (
     <MenuSection name="Text">
       <div>
         Font:
-        <select defaultValue={'Arial'} onChange={onFontSelectChange}>
+        <select value={fontFamily} onChange={onFontSelectChange}>
           <option value="Arial">Arial</option>
           <option value="Verdana">Verdana</option>
           <option value="Tahoma">Tahoma</option>
@@ -91,19 +110,15 @@ const SectionText = () => {
       </div>
 
       <div>
-        <Button
-          onClick={() => onNewText(
-            activeSlideId,
-            SlideObjectType.Text,
-          )}
-        >
-          <i className="fa-solid fa-plus" style={{ color: `#4c88f0` }} /> New Text
+        <Button onClick={() => onNewText(activeSlideId, SlideObjectType.Text)}>
+          <i className="fa-solid fa-plus" style={{ color: `#4c88f0` }} /> New
+          Text
         </Button>
         <Button
           onClick={() =>
             onSettingsUpdate({
               slideId: activeSlideId,
-              italic: true
+              italic: true,
             })
           }
         >
@@ -113,7 +128,7 @@ const SectionText = () => {
           onClick={() =>
             onSettingsUpdate({
               slideId: activeSlideId,
-              bold: true
+              bold: true,
             })
           }
         >
@@ -123,7 +138,7 @@ const SectionText = () => {
           onClick={() =>
             onSettingsUpdate({
               slideId: activeSlideId,
-              underline: true
+              underline: true,
             })
           }
         >
@@ -131,24 +146,36 @@ const SectionText = () => {
         </Button>
       </div>
       <div>
-        <Button onClick={() => onSettingsUpdate({
-          slideId: activeSlideId,
-          align: "left"
-        })}>
+        <Button
+          onClick={() =>
+            onSettingsUpdate({
+              slideId: activeSlideId,
+              align: "left",
+            })
+          }
+        >
           Left
         </Button>
 
-        <Button onClick={() => onSettingsUpdate({
-          slideId: activeSlideId,
-          align: "center"
-        })}>
+        <Button
+          onClick={() =>
+            onSettingsUpdate({
+              slideId: activeSlideId,
+              align: "center",
+            })
+          }
+        >
           Center
         </Button>
 
-        <Button onClick={() => onSettingsUpdate({
-          slideId: activeSlideId,
-          align: "right"
-        })}>
+        <Button
+          onClick={() =>
+            onSettingsUpdate({
+              slideId: activeSlideId,
+              align: "right",
+            })
+          }
+        >
           Right
         </Button>
       </div>

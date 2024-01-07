@@ -1,10 +1,10 @@
-import styles from './SlideObject.module.css'
-import { SlideObject, SlideInfo, SlideObjectType } from '../../models/types.ts'
-import SlideImage from './SlideImage.tsx'
-import PdfText from "./PdfText.tsx";
-import SlidePrimitive from "./SlidePrimitive.tsx";
+import styles from "./SlideObject.module.css"
+import { SlideObject, SlideInfo, SlideObjectType } from "../../models/types.ts"
+import SlideImage from "./SlideImage.tsx"
+import PdfText from "./PdfText.tsx"
+import SlidePrimitive from "./SlidePrimitive.tsx"
 
-type UserSelect = 'none'
+type UserSelect = "none"
 type SlideObjectProps = {
   slide: SlideInfo
   data: SlideObject
@@ -17,7 +17,7 @@ function getObject(data: SlideObject, slide: SlideInfo) {
       return <SlidePrimitive data={data} />
 
     case SlideObjectType.Text:
-      return <PdfText data={data} slide={slide}/>
+      return <PdfText data={data} slide={slide} />
 
     case SlideObjectType.Image:
       return <SlideImage data={data} />
@@ -35,17 +35,11 @@ const PdfObject = (props: SlideObjectProps) => {
     transformOrigin: `${props.data.size.width / 2}px ${
       props.data.size.height / 2
     }px`,
-    userSelect: 'none' as UserSelect,
+    userSelect: "none" as UserSelect,
   }
 
   return (
-    <div
-      style={style}
-      className={
-        styles.slideObject +
-        (props.data.selected && !props.preview ? ` ${styles.activeObject}` : ``)
-      }
-    >
+    <div style={style} className={styles.slideObject}>
       {getObject(data, props.slide)}
     </div>
   )

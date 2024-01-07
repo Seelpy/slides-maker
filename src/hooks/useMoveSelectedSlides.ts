@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { useAppSelector, usePresentationActions } from './redux'
+import { useEffect } from "react"
+import { useAppSelector, usePresentationActions } from "./redux"
 
 function useMoveSelectedSlides() {
   const { isDraggingSlides, dragSlidesOrigin, dragSlidesDelta } =
