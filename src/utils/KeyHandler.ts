@@ -27,7 +27,8 @@ function KeyHandler() {
 
   const { deleteSlides, updateSlide, updatePresentation, createSlide } =
     usePresentationActions()
-  const { moveCurrentIndex, setLastOperationType, setShouldSaveState } = useHistoryActions()
+  const { moveCurrentIndex, setLastOperationType, setShouldSaveState } =
+    useHistoryActions()
   const { setActiveSlideId } = useInterfaceActions()
 
   const handleDeleteKey = () => {
@@ -121,16 +122,14 @@ function KeyHandler() {
 
     const selectedSlides = slides.filter((s) => s.selected)
     if (selectedSlides.length > 0 || !activeSlide) {
-      slides.map((s) => 
-        updateSlide({slideId: s.id, selected: true})
-      )
+      slides.map((s) => updateSlide({ slideId: s.id, selected: true }))
     } else {
       activeSlide.slide.map((obj) =>
         updateSlide({
-          slideId: activeSlideId!, 
+          slideId: activeSlideId!,
           oldSlideObject: obj,
-          newSlideObject: {...obj, selected: true}
-        })
+          newSlideObject: { ...obj, selected: true },
+        }),
       )
     }
   }

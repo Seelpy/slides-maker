@@ -27,13 +27,10 @@ const SectionColors = () => {
     updateColor({ slideId: activeSlideId, color: color })
   }
 
-
   return (
     <MenuSection name="Colors">
       <div>
-        <Button
-          onClick={() => handleColorClick(activeColor, false)}
-        >
+        <Button onClick={() => handleColorClick(activeColor, false)}>
           <i
             className="fa-solid fa-square"
             style={{ color: activeColor, fontSize: `1.5rem` }}

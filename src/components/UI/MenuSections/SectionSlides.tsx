@@ -18,7 +18,7 @@ const SectionSlides = () => {
   )
   const { createSlide, updateBackground } = usePresentationActions()
   const { setShouldSaveState } = useHistoryActions()
-  const [ backgroundColor, setBackgroundColor ] = useState<string>("#e6e6e6")
+  const [backgroundColor, setBackgroundColor] = useState<string>("#e6e6e6")
 
   const colorDelayTimer = useRef<number | null>(null)
   const colorInputRef = useRef<HTMLInputElement | null>(null)
@@ -39,7 +39,10 @@ const SectionSlides = () => {
         })
       } else {
         selectedSlides.map((s) =>
-          updateBackground({slideId: s.id, data: `url('${base64}') no-repeat center center / contain`})
+          updateBackground({
+            slideId: s.id,
+            data: `url('${base64}') no-repeat center center / contain`,
+          }),
         )
       }
     })
@@ -95,7 +98,7 @@ const SectionSlides = () => {
         updateBackground({ slideId: activeSlideId, data: backgroundColor })
       } else {
         selectedSlides.map((s) =>
-          updateBackground({ slideId: s.id, data: backgroundColor })
+          updateBackground({ slideId: s.id, data: backgroundColor }),
         )
       }
     }, 1)
