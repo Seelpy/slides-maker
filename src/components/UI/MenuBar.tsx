@@ -7,6 +7,7 @@ import {
   SectionText,
   SectionSlides,
   SectionHistory,
+  SectionTheme,
 } from "./MenuSections"
 
 const MenuBar = () => {

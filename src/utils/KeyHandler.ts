@@ -153,4 +153,4 @@ function KeyHandler() {
   useHotkey(["ArrowRight"], () => moveActiveSlideIndex(1))
 }
 
-export default keyHandler
+export default KeyHandler

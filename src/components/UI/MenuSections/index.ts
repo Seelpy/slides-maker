@@ -15,4 +15,5 @@ export {
   SectionText,
   SectionSlides,
   SectionHistory,
+  SectionTheme
 }
