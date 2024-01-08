@@ -17,6 +17,7 @@ function useHotkey(
     if (event.ctrlKey) activeKeys.add("ctrl")
     if (event.altKey) activeKeys.add("alt")
     if (event.shiftKey) activeKeys.add("shift")
+    if (event.metaKey) activeKeys.add("cmd")
     return Array.from(activeKeys)
   }
 
