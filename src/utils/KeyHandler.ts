@@ -142,6 +142,7 @@ function KeyHandler() {
   }
 
   useHotkey(["Delete"], () => handleDeleteKey())
+  useHotkey(["Backspace"], () => handleDeleteKey())
   useHotkey(["Ctrl+A", "Ctrl+Ф"], () => selectAll())
   useHotkey(["Ctrl+C", "Ctrl+С"], () => copyObjects())
   useHotkey(["Ctrl+V", "Ctrl+М"], () => pasteObjects())
