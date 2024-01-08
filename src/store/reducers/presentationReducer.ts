@@ -1,5 +1,4 @@
 import { createReducer } from "../createReducer.ts"
-import { Presentaion } from "../../models/types.ts"
 import {
   changeName,
   createObject,
@@ -14,11 +13,16 @@ import {
   updateTextSettings,
 } from "../actions/presentationActions.ts"
 import GenerateObject from "../../services/ObjectGenerator.ts"
-import { SlideInfo, SlideObjectType, TextAlign } from "../../models/types.ts"
+import { ConvertFromJson } from "../../services/PresentationConverter.ts"
+import { Presentaion, SlideInfo, SlideObjectType, TextAlign } from "../../models/types.ts"
 
-const initialPresentationState: Presentaion = {
+let initialPresentationState: Presentaion = {
   name: "presentation",
   slides: [],
+}
+
+if (localStorage.getItem("lastPresentation") != null) {
+  initialPresentationState = ConvertFromJson(localStorage.getItem("lastPresentation")!)
 }
 
 const presentationReducer = createReducer(initialPresentationState, {
