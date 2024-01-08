@@ -52,7 +52,7 @@ const EditorObject = (props: SlideObjectProps) => {
   const isDragging = useRef<boolean>(false)
 
   const handleMouseDown = (event: React.MouseEvent) => {
-    if (!props.data.selected && !event.ctrlKey &&!event.metaKey) {
+    if (!props.data.selected && !event.ctrlKey) {
       setShouldSaveState(false)
 
       // снимаем выделение со всех объектов
@@ -70,7 +70,7 @@ const EditorObject = (props: SlideObjectProps) => {
         oldSlideObject: props.data,
         newSlideObject: { ...props.data, selected: true },
       })
-    } else if (event.ctrlKey || event.metaKey) {
+    } else if (event.ctrlKey) {
       setShouldSaveState(false)
 
       // Переключаем текущий
