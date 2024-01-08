@@ -33,6 +33,7 @@ function Presentation() {
       setDragSlides(false)
       setSelectingArea(false)
     }
+    window.oncontextmenu = (event) => event.preventDefault()
   }, [])
 
   useEffect(() => {
