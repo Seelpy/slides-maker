@@ -14,6 +14,7 @@
 :root[data-theme="light"] {
   --background-color: rgb(230, 230, 230);
   --border-color: rgba(24, 24, 24, 0.18);
+  --border-active-color: rgba(24, 24, 24, 0.88);
   --menu-backround-color: rgb(242, 242, 242);
   --text-color: rgb(12, 12, 12);
   --button-color: rgb(255, 255, 255);
@@ -24,6 +25,7 @@
 :root[data-theme="dark"] {
   --background-color: rgb(26, 27, 30);
   --border-color: rgba(70, 70, 74, 0.7);
+  --border-active-color: rgba(180, 180, 184, 0.7);
   --menu-backround-color: rgb(33, 34, 36);
   --text-color: rgb(220, 221, 229);
   --button-color: rgb(48, 50, 54);

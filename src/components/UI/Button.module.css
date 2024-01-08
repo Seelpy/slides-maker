@@ -4,12 +4,12 @@
     cursor: pointer;
     padding: 6px;
     border-radius: 5px;
-    border: 1px solid rgb(24 24 24 / 38%);
+    border: 1px solid var(--border-color);
     transition : border 180ms ease-in-out;
     background-color: var(--button-color);
     color: var(--text-color);
 }
 
 .button:hover {
-    border: 1px solid rgb(24 24 24 / 88%);
+    border: 1px solid var(--border-active-color);
 }
