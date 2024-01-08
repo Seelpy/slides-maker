@@ -31,7 +31,7 @@ export function ImportImage(file: File): Promise<string> {
 }
 
 export async function ExportPdf(slides: SlideInfo[], filename: string) {
-  const pdf = new jsPDF("l", "pt", [1280, 720], true)
+  const pdf = new jsPDF("l", "pt", [1280*1.5, 720*1.5], true)
 
   for (let i = 0; i < slides.length; i++) {
     const slideStr = renderToStaticMarkup(PDFSlide(slides[i]))
@@ -43,7 +43,7 @@ export async function ExportPdf(slides: SlideInfo[], filename: string) {
 
     const canvas = await html2canvas(slide)
     if (i != 0) {
-      pdf.addPage([1280, 720])
+      pdf.addPage([1280*1.5, 720*1.5])
       pdf.setPage(i + 1)
     }
 
