@@ -1,4 +1,5 @@
 import { createReducer } from "../createReducer.ts"
+import { Presentaion } from "../../models/types.ts"
 import {
   changeName,
   createObject,
@@ -13,10 +14,14 @@ import {
   updateTextSettings,
 } from "../actions/presentationActions.ts"
 import GenerateObject from "../../services/ObjectGenerator.ts"
-import { presentation } from "../../models/example/high.ts"
 import { SlideInfo, SlideObjectType, TextAlign } from "../../models/types.ts"
 
-const presentationReducer = createReducer(presentation, {
+const initialPresentationState: Presentaion = {
+  name: "presentation",
+  slides: [],
+}
+
+const presentationReducer = createReducer(initialPresentationState, {
   [changeName.type]: (state, action: typeof changeName.actionInstance) => {
     return { ...state, name: action.payload }
   },
