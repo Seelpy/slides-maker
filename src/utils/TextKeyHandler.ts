@@ -34,6 +34,23 @@ function TextKeyHandler() {
     }
   }
 
+  const handleOnCtrlDelete = () => {
+    if (activeSlide) {
+      selectedText.map((text) => {
+        const words = text.value.split("\u00A0")
+        words.pop()
+        updateSlide({
+          slideId: activeSlide.id,
+          oldSlideObject: text,
+          newSlideObject: {
+            ...text,
+            value: words.join("\u00A0")
+          },
+        })
+      })
+    }
+  }
+
   const handleKey = (key: string) => {
     if (activeSlide) {
       selectedText.map((text) => {
@@ -52,7 +69,11 @@ function TextKeyHandler() {
   const mapKeyToFunc = (event: KeyboardEvent) => {
     switch (event.key) {
       case "Backspace": {
-        handleOnDelete()
+        if (event.ctrlKey) {
+          handleOnCtrlDelete()
+        } else {
+          handleOnDelete()
+        }
         break
       }
       case "Enter": {
