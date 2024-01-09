@@ -31,7 +31,17 @@ export function ImportImage(file: File): Promise<string> {
 }
 
 export async function ExportPdf(slides: SlideInfo[], filename: string) {
-  const pdf = new jsPDF("l", "pt", [1280, 720], true)
+  const expectedSizePixels = [1280, 720]
+  const convertedSizePoints = expectedSizePixels.map((a) => a * 0.75)
+
+  const pdf = new jsPDF({
+    orientation: "landscape",
+    unit: "pt",
+    format: convertedSizePoints,
+  })
+  
+  const width = pdf.internal.pageSize.getWidth()
+  const height = pdf.internal.pageSize.getHeight()
 
   for (let i = 0; i < slides.length; i++) {
     const slideStr = renderToStaticMarkup(PDFSlide(slides[i]))
@@ -43,12 +53,12 @@ export async function ExportPdf(slides: SlideInfo[], filename: string) {
 
     const canvas = await html2canvas(slide)
     if (i != 0) {
-      pdf.addPage([1280, 720])
+      pdf.addPage(convertedSizePoints)
       pdf.setPage(i + 1)
     }
 
     const img = canvas.toDataURL("image/png")
-    pdf.addImage(img, "PNG", 0, 0, canvas.width, canvas.height, "", "FAST")
+    pdf.addImage(img, "PNG", 0, 0, width, height, "", "FAST")
 
     document.body.removeChild(slide)
   }
