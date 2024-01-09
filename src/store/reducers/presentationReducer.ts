@@ -145,6 +145,12 @@ const presentationReducer = createReducer(initialPresentationState, {
         object.color = action.payload.color
       }
     }
+    if (action.payload.font && object.type === SlideObjectType.Text) {
+      object.fontFamily = action.payload.font
+    }
+    if (action.payload.fontSize && object.type === SlideObjectType.Text) {
+      object.fontSize = action.payload.fontSize
+    }
     newSlides[index] = {
       ...newSlides[index],
       slide: [...newSlides[index].slide, object],

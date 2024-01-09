@@ -49,6 +49,8 @@ const SectionText = () => {
       type: type,
       subtype: undefined,
       color: activeColor,
+      font: fontFamily,
+      fontSize: fontSize,
     })
   }
 

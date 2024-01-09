@@ -32,6 +32,8 @@ type CreateObjectPayload = {
   type: string
   subtype?: string
   color?: string
+  font?: string
+  fontSize?: number
 }
 
 type UpdateTextSettingsPayload = {
