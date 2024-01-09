@@ -12,6 +12,7 @@
 }
 
 :root[data-theme="light"] {
+  color-scheme: light;
   --background-color: rgb(230, 230, 230);
   --border-color: rgba(24, 24, 24, 0.18);
   --border-active-color: rgba(24, 24, 24, 0.88);
@@ -23,6 +24,7 @@
 }
 
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --background-color: rgb(26, 27, 30);
   --border-color: rgba(70, 70, 74, 0.7);
   --border-active-color: rgba(180, 180, 184, 0.7);
