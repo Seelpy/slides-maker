@@ -50,8 +50,6 @@ function TextKeyHandler() {
   }
 
   const mapKeyToFunc = (event: KeyboardEvent) => {
-    if (document.activeElement?.tagName === "INPUT") return
-
     switch (event.key) {
       case "Backspace": {
         handleOnDelete()

@@ -44,6 +44,8 @@ function useHotkey(
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (document.activeElement?.tagName === "INPUT") return
+      
       if (isSameHotkeys(event)) {
         callback(event)
       }
