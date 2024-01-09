@@ -17,17 +17,18 @@ function TextKeyHandler() {
   const selectedText =
     activeSlide?.slide.filter(
       (obj) => obj.selected && obj.type === SlideObjectType.Text,
-    ) ?? []
+    ) as TextObject[] ?? []
 
   const handleOnDelete = () => {
     if (activeSlide) {
       selectedText.map((text) => {
-        const tmpText = structuredClone(text) as TextObject
-        tmpText.value = tmpText.value.slice(0, -1)
         updateSlide({
-          slideId: activeSlide!.id,
+          slideId: activeSlide.id,
           oldSlideObject: text,
-          newSlideObject: tmpText,
+          newSlideObject: {
+            ...text,
+            value: text.value.slice(0, -1)
+          },
         })
       })
     }
@@ -36,12 +37,13 @@ function TextKeyHandler() {
   const handleKey = (key: string) => {
     if (activeSlide) {
       selectedText.map((text) => {
-        const tmpText = structuredClone(text) as TextObject
-        tmpText.value += key
         updateSlide({
-          slideId: activeSlide!.id,
+          slideId: activeSlide.id,
           oldSlideObject: text,
-          newSlideObject: tmpText,
+          newSlideObject: {
+            ...text,
+            value: text.value + key
+          },
         })
       })
     }
