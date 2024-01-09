@@ -51,7 +51,7 @@ function Presentation() {
       } else {
         setShouldSaveState(true)
       }
-    } else {
+    } else if (lastHistoryOperation !== undefined) {
       setLastOperationType(undefined)
       localStorage.setItem("lastPresentation", JSON.stringify(presentation))
     }
