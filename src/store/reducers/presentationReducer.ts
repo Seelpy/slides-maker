@@ -13,16 +13,11 @@ import {
   updateTextSettings,
 } from "../actions/presentationActions.ts"
 import GenerateObject from "../../services/ObjectGenerator.ts"
-import { ConvertFromJson } from "../../services/PresentationConverter.ts"
 import { Presentaion, SlideInfo, SlideObjectType, TextAlign } from "../../models/types.ts"
 
 let initialPresentationState: Presentaion = {
   name: "presentation",
   slides: [],
-}
-
-if (localStorage.getItem("lastPresentation") != null) {
-  initialPresentationState = ConvertFromJson(localStorage.getItem("lastPresentation")!)
 }
 
 const presentationReducer = createReducer(initialPresentationState, {

@@ -47,13 +47,11 @@ function Presentation() {
           presentation: presentation,
           activeSlideId: activeSlideId,
         })
-        localStorage.setItem("lastPresentation", JSON.stringify(presentation))
       } else {
         setShouldSaveState(true)
       }
     } else if (lastHistoryOperation !== undefined) {
       setLastOperationType(undefined)
-      localStorage.setItem("lastPresentation", JSON.stringify(presentation))
     }
   }, [presentation, activeSlideId, isDraggingObjects])
 
