@@ -13,6 +13,7 @@ enum PresentationActions {
   updateColor = "UPDATE_COLOR",
   importImage = "IMPORT_IMAGE",
   updateBackground = "UPDATE_BACKGROUND",
+  moveObjectsInArray = "MOVE_OBJECTS_IN_ARRAY",
 }
 
 type MoveSlidesPayload = {
@@ -58,6 +59,11 @@ type ImportImagePayload = {
   height?: number
 }
 
+type MoveObjectsInArrayPayload = {
+  slideId: string
+  moveBy: number
+}
+
 export const changeName = createAction<string>(PresentationActions.changeName)
 export const createSlide = createAction<SlideInfo>(
   PresentationActions.createSlide,
@@ -88,4 +94,7 @@ export const importImage = createAction<ImportImagePayload>(
 )
 export const updateBackground = createAction<ImportImagePayload>(
   PresentationActions.updateBackground,
+)
+export const moveObjectsInArray = createAction<MoveObjectsInArrayPayload>(
+  PresentationActions.moveObjectsInArray,
 )

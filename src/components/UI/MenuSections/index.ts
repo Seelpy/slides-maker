@@ -6,6 +6,7 @@ import SectionText from "./SectionText"
 import SectionSlides from "./SectionSlides"
 import SectionHistory from "./SectionHistory"
 import SectionTheme from "./SectionTheme.tsx"
+import SectionLayers from "./SectionLayers.tsx"
 
 export {
   SectionColors,
@@ -15,5 +16,6 @@ export {
   SectionText,
   SectionSlides,
   SectionHistory,
-  SectionTheme
+  SectionTheme,
+  SectionLayers
 }

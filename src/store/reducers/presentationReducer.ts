@@ -11,6 +11,7 @@ import {
   updatePresentation,
   updateSlide,
   updateTextSettings,
+  moveObjectsInArray,
 } from "../actions/presentationActions.ts"
 import GenerateObject from "../../services/ObjectGenerator.ts"
 import { Presentaion, SlideInfo, SlideObjectType, TextAlign } from "../../models/types.ts"
@@ -248,6 +249,39 @@ const presentationReducer = createReducer(initialPresentationState, {
     }
 
     newSlides[index] = { ...newSlides[index], background: action.payload.data }
+    return { ...state, slides: newSlides }
+  },
+  [moveObjectsInArray.type]: (
+    state,
+    action: typeof moveObjectsInArray.actionInstance,
+  ) => {
+    const newSlides = [...state.slides]
+    const activeSlideIndex = state.slides.findIndex(
+      (slide) => slide.id == action.payload.slideId,
+    )
+    if (activeSlideIndex === -1) {
+      return { ...state }
+    }
+
+    const newSlide = {...newSlides[activeSlideIndex]}
+    const objectsArray = [...newSlide.slide]
+
+    if (action.payload.moveBy < 0) {
+      for (let i = 1; i < objectsArray.length; i++) {
+        if (objectsArray[i].selected && !objectsArray[i-1].selected) {
+          [objectsArray[i-1], objectsArray[i]] = [objectsArray[i], objectsArray[i-1]]
+        }
+      }
+    } else {
+      for (let i = objectsArray.length - 2; i >= 0; i--) {
+        if (objectsArray[i].selected && !objectsArray[i+1].selected) {
+          [objectsArray[i+1], objectsArray[i]] = [objectsArray[i], objectsArray[i+1]]
+        }
+      }
+    }
+
+    newSlide.slide = objectsArray
+    newSlides[activeSlideIndex] = newSlide
     return { ...state, slides: newSlides }
   },
 })

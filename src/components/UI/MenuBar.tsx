@@ -8,6 +8,7 @@ import {
   SectionSlides,
   SectionHistory,
   SectionTheme,
+  SectionLayers,
 } from "./MenuSections"
 
 const MenuBar = () => {
@@ -21,6 +22,7 @@ const MenuBar = () => {
       <SectionSlides />
       <SectionHistory />
       <SectionTheme />
+      <SectionLayers />
     </div>
   )
 }
