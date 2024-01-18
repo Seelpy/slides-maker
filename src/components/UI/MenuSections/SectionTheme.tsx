@@ -13,7 +13,7 @@ const ThemeIcon = (theme: Themes) => {
   }
 }
 
-const SectionText = () => {
+const SectionTheme = () => {
   const { changeTheme } = useThemeActions()
   const { theme } = useAppSelector((state) => state.themeReducer)
 
@@ -42,4 +42,4 @@ const SectionText = () => {
   )
 }
 
-export default SectionText
+export default SectionTheme
